@@ -2,7 +2,13 @@ html, body {
   height: 100%;
   width: 100%;
 }
-#Playercss{
+#Player{
   position: absolute;
-  left: 0px;
+  z-index: 10;
+}
+#Background{
+  position: absolute;
+  z-index: 0;
+  width: auto;
+  height: 100%;
 }
