@@ -1,13 +1,15 @@
-import {player} from "./script.js";
+import { player, background } from "./script.js";
 
+// this is called from script.js in the run function
 export function tick() {
   Player.style.left = player.x + "px";
   Player.style.bottom = player.y + "px";
+  console.log("x= "+ background.x + "y= " + background.y);
 }
-
+//Player is only for the css, player is the numbers
 function move(xc, yc) {
-    player.x += xc;
-    player.y += yc;  
+    background.x -= xc;
+    background.y -= yc;  
   }
 
 document.addEventListener("keydown", event => {

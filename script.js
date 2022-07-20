@@ -6,8 +6,8 @@ class moveable {
     this.y = y;
   }
 }
-export const player = new moveable(0, 0);
-export const background = new moveable(0, 0);
+export const player = new moveable(100, 100);
+export const background = new moveable(-2500, -2500);
 
 function run() {
   Playertick();
@@ -16,4 +16,3 @@ function run() {
 }
 
 run();
-//test comment
