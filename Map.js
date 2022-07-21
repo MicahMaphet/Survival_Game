@@ -7,7 +7,8 @@ export function tick() {
   Goblin.style.bottom =  background.y + goblin.y + "px";
   twoardplayer(goblin);
 }
-function move(xc, yc, moveable) {
+// gonna add goblins
+function move(xc, yc, moveable) { 
 
     moveable.x += xc;   
 
