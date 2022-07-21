@@ -3,7 +3,7 @@ var x_limit = [window.innerWidth / 5, window.innerWidth - 50 - window.innerWidth
 // can go, it accounts for the available screen size
 var y_limit = [window.innerHeight / 5, window.innerHeight - window.innerHeight / 5];
 
-import { player, background, goblin } from "./script.js";
+import { player, background, goblin, goblin2 } from "./script.js";
 var tracktick = "begin"; // this variable keeps the 
                          // key inputs in sync
 var past_x;
@@ -17,49 +17,13 @@ export function tick() {
   }
   Player.style.left = player.x + "px";
   Player.style.bottom = player.y + "px";
+  console.log("x= "+ player.x + " y= " + player.y);
   console.log("x= "+ goblin.x + " y= " + goblin.y);
-  goto();
   tracktick = true;
 }
 //Player is only for the css, player is the numbers
 
-let mouseDown = false;
 
-function goto() {
-document.body.onmousedown = () => {
-  mouseDown = true;
-};
-document.body.onmouseup = () => {
-  mouseDown = false;
-};
-  if(mouseDown) {
-    if (mouse_pos()[0] > player.x + 20) {
-      if(mouse_pos()[1] < player.y - 20) {
-        move(10, 10);
-      } else if (mouse_pos()[1] > player.y + 20) {
-        move(10, -10);
-      } else {
-        move(20, 0);
-      }
-    }
-    if (mouse_pos()[0] < player.x - 20) {
-      if(mouse_pos()[1] < player.y - 20) {
-        move(-10, 10);
-      } else if (mouse_pos()[1] > player.y + 20) {
-        move(-10, -10);
-      } else {
-        move(-20, 0);
-      }
-    }
-  }
-}
-  var mouse_position_xy;
-function mouse_pos(event){
-document.addEventListener('mousemove', (event) => {
-  mouse_position_xy = [event.pageX, event.pageY];
-});
- return mouse_position_xy;
-}
 
 function move(xc, yc) {
   if(tracktick) {
