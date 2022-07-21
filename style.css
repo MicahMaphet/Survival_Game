@@ -5,6 +5,7 @@ html, body {
 #Player{
   position: fixed;
   z-index: 10;
+  width: 100px;
 }
 #Background{
   position: fixed;

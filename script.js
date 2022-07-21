@@ -7,7 +7,8 @@ class moveable {
     this.y = y;
   }
 }
-export const player = new moveable(100, 100);
+// The middle of the avaiable window
+export const player = new moveable(window.innerWidth / 2, window.innerHeight / 2);
 export const background = new moveable(-2500, -2500);
 
 function run() {
