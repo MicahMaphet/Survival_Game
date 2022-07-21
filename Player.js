@@ -1,10 +1,9 @@
 var x_limit = [window.innerWidth / 5, window.innerWidth - 50 - window.innerWidth / 5]; 
 // these limit how far off the screen the character 
 // can go, it accounts for the available screen size
-// 150 accounts for the width of the character
 var y_limit = [window.innerHeight / 5, window.innerHeight - window.innerHeight / 5];
 
-import { player, background } from "./script.js";
+import { player, background, goblin } from "./script.js";
 var tracktick = "begin"; // this variable keeps the 
                          // key inputs in sync
 var past_x;
@@ -18,7 +17,7 @@ export function tick() {
   }
   Player.style.left = player.x + "px";
   Player.style.bottom = player.y + "px";
-  console.log("x= "+ player.x + " y= " + player.y);
+  console.log("x= "+ goblin.x + " y= " + goblin.y);
   goto();
   tracktick = true;
 }
@@ -33,7 +32,6 @@ document.body.onmousedown = () => {
 document.body.onmouseup = () => {
   mouseDown = false;
 };
-  console.log(mouse_pos());
   if(mouseDown) {
     if (mouse_pos()[0] > player.x + 20) {
       if(mouse_pos()[1] < player.y - 20) {
@@ -102,16 +100,16 @@ function move(xc, yc) {
 
 document.addEventListener("keydown", event => {
   if (event.key === "ArrowRight") {
-  move(20, 0);
+  move(player.speed, 0);
   }  
   if (event.key === "ArrowLeft") {
-  move(-20, 0);
+  move(player.speed * -1, 0);
   }
   if (event.key === "ArrowDown") {
-  move(0, -20);
+  move(0, player.speed * -1);
   }  
   if (event.key === "ArrowUp") {
-  move(0, 20);
+  move(0, player.speed);
   }
 
 });

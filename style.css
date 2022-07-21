@@ -7,6 +7,11 @@ html, body {
   z-index: 10;
   width: 100px;
 }
+#Goblin{
+  position: fixed;
+  z-index: 1;
+  width: 100px;
+}
 #Background{
   position: fixed;
   z-index: 0;
