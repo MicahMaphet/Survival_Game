@@ -7,14 +7,29 @@ body {
   z-index: 1;
   width: 100px;
 }
-.Goblin{
+#Goblin{
+  width: 50000px;
+  height: 50000px;
+  color: solid red;
   position: fixed;
-  z-index: 2;
-  width: 100px;
+  z-index: 100;
+  left: 0px;
+  bottom: 0px;
 }
+
+#test22{
+  width: 50000px;
+  height: 50000px;
+  barckground-color: rgb(0, 0, 0);
+  position: absolute;
+  z-index: 100;
+  left: 0px;
+  bottom: 0px;
+}
+
 #Background{
   position: fixed;
   z-index: -1;
   width: auto;
-  height: 5000px;
+  height: 50px;
 }
