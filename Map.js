@@ -23,7 +23,7 @@ export function tick() {
 function drawgoblins() {
 for(var i=0; i<5; i++) {
   var goblin_image = new Image();
-  goblin_image.src = 'Goblin.svg';
+  goblin_image.src = "Goblin.svg";
   goblin_image.id="Goblin" + i;
   goblin_image.style.position = "fixed";
   goblin_image.style.width = "100px";
@@ -41,7 +41,6 @@ function move(xc, yc, moveable) {
 
   }
 function twoardplayer(moveable) {
-  console.log(player.x - background.x, player.y - background.y);
     if (moveable.x > player.x - background.x  + 20) {
       if(moveable.y < player.y - background.y - 20) {
         move(moveable.speed * -0.5, moveable.speed * 0.5, moveable);

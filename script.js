@@ -2,11 +2,26 @@ import {tick as Playertick} from "./Player.js";
 import {tick as Maptick} from "./Map.js";
 
 export class moveable {
-  constructor(x = 0, y = 0, speed = 0) {
+  constructor(x = 0, y = 0, speed = 0, hurt_width = 50, hurt_height = 50) {
     this.x = x;
     this.y = y;
+    this.hurt_width = hurt_width;
+    this.hurt_height = hurt_height;
     this.speed = speed;
   }
+    corner1() {
+    return [this.x, this.y]
+  }
+    corner2() {
+    return [this.x, this.y + this.hurt_height]
+  }
+    corner3() {
+    return [this.x + this.hurtwidth, this.y + this.hurt_height]
+  }
+    corner4() {
+    return [this.x + this.hurt_width, this.y]
+  }
+  
 }
 // The middle of the avaiable window
 
@@ -14,8 +29,8 @@ export const player = new moveable(window.innerWidth / 2, window.innerHeight / 2
 
 export const background = new moveable(-2500, -2500);
 
-export const Goblins_x = [2000, 1000, 4000];
-export const Goblins_y = [2000, 1500, 3000];
+export const Goblins_x = [2000, 1000, 4000, 4500];
+export const Goblins_y = [2000, 1500, 3000, 3500];
 
 var goblinspeed = 1.5;
 

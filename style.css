@@ -2,10 +2,6 @@ body {
   height: 100%;
   width: 100%;
 }
-#Player{
-  position: fixed;
-  z-index: 10;
-}
 
 #Background{
   position: fixed;
