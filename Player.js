@@ -156,6 +156,5 @@ document.addEventListener("keyup", event => {
 function renderIMG(IMG_ = "Player.svg") {
       Playerimg.src = IMG_;
 /* having this script in a function stops this file 
-from getting out of sync with the image and the 
-position while images are changing in animations */  
+from getting out of sync with the image */  
 }

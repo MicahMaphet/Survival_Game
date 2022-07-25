@@ -42,10 +42,23 @@ export const goblin3 = new moveable(Goblins_x[2], Goblins_y[2], goblinspeed);
 
 export const goblin4 = new moveable(Goblins_x[3], Goblins_y[3], goblinspeed);
 
+
+///////////////////////////////////
+
+///////////////////////////////////
+
+///////////////////////////////////
+
+///////////////////////////////////
+
+
 // up to here is just setting values
+
 
 // the background width is 5000, this is so the player
 // is in the center of the map
+
+
 function run() {
  Playertick();
  Maptick();
@@ -55,3 +68,19 @@ function run() {
 
 run();
 // run() starts the infinited loop
+var panic_ = false;
+function panic() {
+  if (panic_) {
+    panic_ = false
+  } else {
+    document.querySelector("link[rel*='icon']").href = "heheheheha.png";
+    panic_ = true;
+  }
+}
+
+document.addEventListener("keyup", event => {
+  if (event.code === "8") {
+    panic();
+    console.log("\n\n\n\n\n\\n\n\n");
+  }
+});
