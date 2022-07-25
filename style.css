@@ -1,4 +1,4 @@
-html, body {
+body {
   height: 100%;
   width: 100%;
 }
@@ -6,6 +6,7 @@ html, body {
   position: fixed;
   z-index: 10;
 }
+
 #Background{
   position: fixed;
   z-index: 0;
