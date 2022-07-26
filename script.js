@@ -43,20 +43,16 @@ export const goblin3 = new moveable(Goblins_x[2], Goblins_y[2], goblinspeed);
 export const goblin4 = new moveable(Goblins_x[3], Goblins_y[3], goblinspeed);
 
 
-///////////////////////////////////
-
-///////////////////////////////////
-
-///////////////////////////////////
-
-///////////////////////////////////
-
+  ///////////////////////
+ ///GARBAGE ENDS HERE///
+///////////////////////
 
 // up to here is just setting values
 
 
 // the background width is 5000, this is so the player
 // is in the center of the map
+
 
 var panic_ = false;
 
@@ -67,6 +63,8 @@ function run() {
   }
     setTimeout(run, 10); // this controls how fast
                          // the program can run
+  // if setTimeout is blocked at all the program stops
+  // and to continue the page must reload
 }
 
 run();
@@ -77,17 +75,20 @@ function panic() {
     document.title = "Survival Game";
     Decoy.style.visibility="hidden";
     panic_ = false
+    // turns the page into a google doc, however
+    // it is not interactive
   } else {
     document.querySelector("link[rel*='icon']").href = "heheheheha.png";
     document.title = "Google Docs";
     Decoy.style.visibility="visible";
     panic_ = true;
+    // this makes the page revert back to normal
   }
+  // this can toggle back from doc to the game
 }
 
 document.addEventListener("keyup", event => {
   if (event.key === "8") {
     panic();
-    console.log("hi\n\n\n\n\n\\n\n\n");
   }
 });
