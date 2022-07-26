@@ -58,29 +58,36 @@ export const goblin4 = new moveable(Goblins_x[3], Goblins_y[3], goblinspeed);
 // the background width is 5000, this is so the player
 // is in the center of the map
 
+var panic_ = false;
 
 function run() {
+  if (!panic_) {
  Playertick();
  Maptick();
+  }
     setTimeout(run, 10); // this controls how fast
                          // the program can run
 }
 
 run();
 // run() starts the infinited loop
-var panic_ = false;
 function panic() {
   if (panic_) {
+    document.querySelector("link[rel*='icon']").href = "Icon.svg";
+    document.title = "Survival Game";
+    Decoy.style.visibility="hidden";
     panic_ = false
   } else {
     document.querySelector("link[rel*='icon']").href = "heheheheha.png";
+    document.title = "Google Docs";
+    Decoy.style.visibility="visible";
     panic_ = true;
   }
 }
 
 document.addEventListener("keyup", event => {
-  if (event.code === "8") {
+  if (event.key === "8") {
     panic();
-    console.log("\n\n\n\n\n\\n\n\n");
+    console.log("hi\n\n\n\n\n\\n\n\n");
   }
 });
