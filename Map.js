@@ -1,4 +1,4 @@
-import { background, player, Goblins_x, Goblins_y, goblin, goblin2, goblin3, goblin4 } from "./script.js"
+import { background, player, Goblins_x, Goblins_y, goblin } from "./script.js"
 // moveable is called from script.js in the run function
 
 var tick_ = 0;
@@ -9,19 +9,21 @@ export function tick() {
   
   Background.style.left = background.x + "px";
   Background.style.bottom = background.y + "px";
-  
-  twoardplayer(goblin);
-  twoardplayer(goblin2);
-  twoardplayer(goblin3);
-  twoardplayer(goblin4);
-  
+
+  for (var i = 0; i < goblin.length; i++) {
+    twoardplayer(goblin[i]);
+/* this loops through all the goblins and moves them closer
+to the player, it is scalable */
+  }
+
   RenderGoblins();
+  
   tick_++;
 }
 
 
 function drawgoblins() {
-for(var i=0; i<5; i++) {
+for(var i=0; i<goblin.length; i++) {
   var goblin_image = new Image();
   goblin_image.src = "Goblin.svg";
   goblin_image.id="Goblin" + i;
@@ -31,6 +33,10 @@ for(var i=0; i<5; i++) {
   goblin_image.style.bottom = Goblins_x[i] + "px"; 
   document.body.appendChild(goblin_image);  
   }
+/* This creates all the goblin images, it only draws them 
+one time the RenderGoblins() function places them as the 
+program advances. The images are just a bunch of variables,
+not an array */
 }
 
 function move(xc, yc, moveable) { 
@@ -73,17 +79,12 @@ function twoardplayer(moveable) {
   }
 }
 function RenderGoblins() {
-  Goblin1.style.left = goblin.x + background.x + "px";
-  Goblin1.style.bottom = goblin.y + background.y + "px";
-
-  Goblin2.style.left = goblin2.x + background.x + "px";
-  Goblin2.style.bottom = goblin2.y + background.y + "px";
-
-  Goblin3.style.left = goblin3.x + background.x + "px";
-  Goblin3.style.bottom = goblin3.y + background.y + "px";
-
-  Goblin4.style.left = goblin4.x + background.x + "px";
-  Goblin4.style.bottom = goblin4.y + background.y + "px";
-
-
+  for(var i=0; i<goblin.length;i++) {
+    document.getElementById("Goblin" + i).style.left=goblin[i].x + background.x + "px";
+    document.getElementById("Goblin" + i).style.bottom=goblin[i].y + background.y + "px";
+  }
+/* This places all the goblin images everything else is just a lot
+of math determining where to place the images, it is scaleable,
+this code does not care how many goblins their are, it will place
+all of them */
 }

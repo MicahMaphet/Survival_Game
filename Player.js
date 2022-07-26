@@ -4,9 +4,9 @@ var x_limit = [window.innerWidth / 5, window.innerWidth - 50 - window.innerWidth
 var y_limit = [window.innerHeight / 4, window.innerHeight - window.innerHeight / 3];
 
 import { player, background } from "./script.js";
-var tracktick = "begin"; // if its begin, then it is the first tick loop
-// track tick is read, but it is in the exported tick function
-// so typescript thinks that it is not read
+var tracktick = "begin"; // if its begin, then it is 
+// the first tick loop
+// track tick is read
 
 var past_x;
 var past_y;

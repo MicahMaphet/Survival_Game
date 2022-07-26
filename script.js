@@ -23,24 +23,30 @@ export class moveable {
   }
   
 }
-// The middle of the avaiable window
+
+export const Goblins_x = [2000, 1000, 4000, 4500, 2500];
+export const Goblins_y = [2000, 1500, 3000, 3500, 2500];
+/* all you need to do to add more goblins is to add to 
+these arrays, they must be the same length */
+
+var goblinspeed = 1.5;
+export var goblin = new Array(Goblins_x);
+for(var i = 0; i < Goblins_x.length; i++) {
+  goblin[i] = new moveable(Goblins_x[i], Goblins_y[i], goblinspeed);
+}
+/* each index of the goblin array is an object of the 
+moveable class, even though this is like a multidimentional 
+array, the sytax will never be goblin[i][0]. It will be
+goblin[i].x. The goblin[i].x access the Gobins_x array
+with the index of the goblin number. It doesn't matter if
+the for loop reads the Goblins_x or Goblins_y because
+they should be the same length. The value of goblin is
+mulstiple moveable objects, try console.log(goblin)*/
 
 export const player = new moveable(window.innerWidth / 2, window.innerHeight / 2, 2.5);
 
 export const background = new moveable(-2500, -2500);
-
-export const Goblins_x = [2000, 1000, 4000, 4500];
-export const Goblins_y = [2000, 1500, 3000, 3500];
-
-var goblinspeed = 1.5;
-
-export const goblin = new moveable(Goblins_x[0], Goblins_y[0], goblinspeed);
-
-export const goblin2 = new moveable(Goblins_x[1], Goblins_y[1], goblinspeed);
-
-export const goblin3 = new moveable(Goblins_x[2], Goblins_y[2], goblinspeed);
-
-export const goblin4 = new moveable(Goblins_x[3], Goblins_y[3], goblinspeed);
+  
 
 
   ///////////////////////
@@ -79,7 +85,7 @@ function panic() {
     // it is not interactive
   } else {
     document.querySelector("link[rel*='icon']").href = "heheheheha.png";
-    document.title = "Google Docs";
+    document.title = "Untitled document";
     Decoy.style.visibility="visible";
     panic_ = true;
     // this makes the page revert back to normal
