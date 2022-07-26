@@ -3,10 +3,7 @@ var x_limit = [window.innerWidth / 5, window.innerWidth - 50 - window.innerWidth
 // can go, it accounts for the available screen size
 var y_limit = [window.innerHeight / 4, window.innerHeight - window.innerHeight / 3];
 
-import { player, background } from "./script.js";
-var tracktick = "begin"; // if its begin, then it is 
-// the first tick loop
-// track tick is read
+import { player, background, goblin, hurtbox } from "./script.js";
 
 var past_x;
 var past_y;
@@ -15,8 +12,8 @@ var ArrowLeft = false;
 var ArrowDown = false;
 var ArrowUp = false;
 var space = false;
-var ImageBufferX = -220;
-var ImageBufferY = -170;
+var ImageBufferX = -206;
+var ImageBufferY = -150;
 var IMG = "Player.svg";
 /*the ImageBuffer variables stop the player images from
 changing the viewed position of the character without
@@ -27,22 +24,45 @@ var Player_ = new Image();
 Player_.src = 'Player.svg';
 Player_.id="Playerimg";
 Player_.style.position = "fixed";
+Player_.style.zIndex = 10;
 document.body.appendChild(Player_);
 
 
+var tracktick = "begin"; // if its begin, then it is 
+// the first tick loop
+
 // this is called from script.js in the run function
+
+
 export function tick() {
-  if(tracktick = "begin") {
+
+  if(tracktick == "begin") {
     past_x = player.x;
     past_y = player.y;
+
+    tracktick = 0;
   }
-  
+  if (player.corner1[0] - background.x > goblin[0].corner1[0]&&
+     player.corner1[0] - background.x < goblin[0].corner2[0]&&
+     player.corner1[1] - background.y > goblin[0].corner1[1]) {
+    
+document.getElementById("positions").innerHTML = 
+"\n" + player.corner1[0] - background.x + " " + goblin[0].corner1[0] + "!!!";
+  } else {
+document.getElementById("positions").innerHTML = "\n" + player.corner1[0] - background.x + " " + goblin[0].corner1[0] + "|||";
+  }
+  // goblin[0].x < player.x - background.x + player.hurt_width
+
   renderIMG(IMG);
 
   ReadInputs();
+  DetermineCorners();
   Playerimg.style.left = player.x + ImageBufferX + "px";
   Playerimg.style.bottom = player.y + ImageBufferY + "px";
-  tracktick = true; // this goes at the end of tick
+  hurtbox.style.left = player.x + "px";
+  hurtbox.style.bottom = player.y  + "px";
+  
+  tracktick++; // this goes at the end of tick
 }
 function ReadInputs() {
   if (ArrowRight === true) {
@@ -83,6 +103,14 @@ function ReadInputs() {
 // game such as the map
 
 }
+
+function DetermineCorners() {
+  player.corner1 = [player.x + 15, player.y];
+  player.corner2 = [player.x + player.hurt_width + 15, player.y];
+  player.corner3 = [player.x + 15, player.y + player.hurt_height];
+  player.corner4 = [player.x + player.hurt_width + 15, player.y + player.hurt_width];
+}
+
 //Player is only for the css, player is the numbers
 function move(xc, yc) {
 
@@ -116,7 +144,7 @@ function move(xc, yc) {
   past_x = player.x;
   past_y = player.y;
   }
-
+var remspd;
 document.addEventListener("keydown", event => {
   if (event.key === "ArrowRight") {
     ArrowRight = true;
@@ -133,7 +161,12 @@ document.addEventListener("keydown", event => {
   if (event.code === "Space") {
     space = true;
   }
-
+  if (event.shiftKey) {
+    if (player.speed < 50) {
+      remspd = player.speed;
+    }
+    player.speed = 50;
+  }
 });
 
 document.addEventListener("keyup", event => {
@@ -151,6 +184,10 @@ document.addEventListener("keyup", event => {
   }
   if (event.code === "Space") {
     space = false;
+  }
+  if (event.shiftKey) {
+
+    player.speed = remspd;
   }
 });
 function renderIMG(IMG_ = "Player.svg") {
