@@ -3,7 +3,7 @@ var x_limit = [window.innerWidth / 5, window.innerWidth - 50 - window.innerWidth
 // can go, it accounts for the available screen size
 var y_limit = [window.innerHeight / 4, window.innerHeight - window.innerHeight / 3];
 
-import { player, background, goblin, hurtbox } from "./script.js";
+import { player, background, goblin, hurtbox, player_hitbox } from "./script.js";
 
 var past_x;
 var past_y;
@@ -42,16 +42,10 @@ export function tick() {
 
     tracktick = 0;
   }
-  if (player.corner1[0] - background.x > goblin[0].corner1[0]&&
-     player.corner1[0] - background.x < goblin[0].corner2[0]&&
-     player.corner1[1] - background.y > goblin[0].corner1[1]) {
-    
-document.getElementById("positions").innerHTML = 
-"\n" + player.corner1[0] - background.x + " " + goblin[0].corner1[0] + "!!!";
-  } else {
-document.getElementById("positions").innerHTML = "\n" + player.corner1[0] - background.x + " " + goblin[0].corner1[0] + "|||";
-  }
-  // goblin[0].x < player.x - background.x + player.hurt_width
+
+document.getElementById("positions").innerHTML = player.health;
+  
+  goblin[0].x < player.x - background.x + player.hurt_width
 
   renderIMG(IMG);
 
@@ -64,25 +58,67 @@ document.getElementById("positions").innerHTML = "\n" + player.corner1[0] - back
   
   tracktick++; // this goes at the end of tick
 }
+
+function collide() {
+  for (var i=0; i<goblin.length; i++) {
+    if (Ccollsion(player, goblin[i])) {
+    return true;
+    }
+  }
+  return false;
+}
+
+export function Ccollsion(moveable1, moveable2) {
+  if(Ccheck(moveable1.corner1, moveable2)||
+     Ccheck(moveable1.corner2, moveable2)||
+     Ccheck(moveable1.corner3, moveable2)||
+     Ccheck(moveable1.corner4, moveable2)) {
+
+    return true;
+  }
+  if(Ccheck(moveable2.corner1, moveable1)||
+     Ccheck(moveable2.corner2, moveable1)||
+     Ccheck(moveable2.corner3, moveable1)||
+     Ccheck(moveable2.corner4, moveable1)) {
+    return true;
+  }
+  return false;
+}
+
+
+function Ccheck(corner, moveable_) {
+  if (corner[0] > moveable_.corner1[0]&&
+      corner[0] < moveable_.corner2[0]&&
+      corner[1] > moveable_.corner1[1]&&
+      corner[1] < moveable_.corner3[1]) {
+  return true;
+  }
+  return false;
+}
+
 function ReadInputs() {
   if (ArrowRight === true) {
     if(space) {
       IMG = "Player right slap1.svg";
+      player.state = "right slap";
     } else {
       move(player.speed, 0);
       if (IMG === "Player right slap1.svg") {
         IMG = "Player.svg";
+        player.state = "right";
       }
     }
   }
   if (ArrowLeft === true) {
     if(space) {
       IMG = "Player left slap1.svg";
+      player.state = "left slap";
     } else {
       move(player.speed * -1, 0);
   // I don't want the player to move if he is attacking
     if (IMG === "Player left slap1.svg") {
         IMG = "Player.svg";
+        player.state = "left";
       }
     }
   }
@@ -95,9 +131,7 @@ function ReadInputs() {
     
   }
 
-    if(!space) {
-      IMG = 'Player.svg';   
-    }
+
 // the value of player.speed is in the script.js file, as well
 // as the initial position, this applies to most things in the 
 // game such as the map
@@ -105,10 +139,40 @@ function ReadInputs() {
 }
 
 function DetermineCorners() {
-  player.corner1 = [player.x + 15, player.y];
-  player.corner2 = [player.x + player.hurt_width + 15, player.y];
-  player.corner3 = [player.x + 15, player.y + player.hurt_height];
-  player.corner4 = [player.x + player.hurt_width + 15, player.y + player.hurt_width];
+  player.corner1 = [player.x + 15 - background.x, player.y - background.y];
+  player.corner2 = [player.x + player.hurt_width + 15 - background.x, player.y - background.y];
+  player.corner3 = [player.x + 15 - background.x, player.y + player.hurt_height - background.y];
+  player.corner4 = [player.x + player.hurt_width + 15 - background.x, player.y + player.hurt_hieght - background.y];
+
+/////////////////
+///LEFT HITBOX///
+/////////////////
+  
+  player_hitbox[0].x = player.corner1[0] - 50;
+  player_hitbox[0].y = player.corner1[1] + 30;
+  
+player_hitbox[0].corner1 = [player_hitbox[0].x, player_hitbox[0].y];
+
+player_hitbox[0].corner2 = [player_hitbox[0].x + player_hitbox[0].hurt_width, player_hitbox[0].y];
+
+player_hitbox[0].corner3 = [player_hitbox[0].x, player_hitbox[0].y + player_hitbox[0].hurt_height];
+
+player_hitbox[0].corner4 = [player_hitbox[0].x + player_hitbox[0].hurt_width, player_hitbox[0].y + player_hitbox[0].hurt_width];
+
+//////////////////
+///RIGHT HITBOX///
+//////////////////
+  
+player_hitbox[1].x = player.corner1[0] + 60;
+player_hitbox[1].y = player.corner1[1] + 30;
+  
+player_hitbox[1].corner1 = [player_hitbox[1].x, player_hitbox[1].y];
+
+player_hitbox[1].corner2 = [player_hitbox[1].x + player_hitbox[1].hurt_width, player_hitbox[1].y];
+
+player_hitbox[1].corner3 = [player_hitbox[1].x, player_hitbox[1].y + player_hitbox[1].hurt_height];
+
+player_hitbox[1].corner4 = [player_hitbox[1].x + player_hitbox[1].hurt_width, player_hitbox[1].y + player_hitbox[1].hurt_width];
 }
 
 //Player is only for the css, player is the numbers
@@ -140,11 +204,9 @@ function move(xc, yc) {
         player.x = past_x;
 
       }
-    
   past_x = player.x;
   past_y = player.y;
   }
-var remspd;
 document.addEventListener("keydown", event => {
   if (event.key === "ArrowRight") {
     ArrowRight = true;
@@ -160,12 +222,6 @@ document.addEventListener("keydown", event => {
   }
   if (event.code === "Space") {
     space = true;
-  }
-  if (event.shiftKey) {
-    if (player.speed < 50) {
-      remspd = player.speed;
-    }
-    player.speed = 50;
   }
 });
 
@@ -184,10 +240,6 @@ document.addEventListener("keyup", event => {
   }
   if (event.code === "Space") {
     space = false;
-  }
-  if (event.shiftKey) {
-
-    player.speed = remspd;
   }
 });
 function renderIMG(IMG_ = "Player.svg") {
