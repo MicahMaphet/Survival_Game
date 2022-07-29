@@ -15,6 +15,6 @@ body {
   position: absolute;
   left: 0px;
   top: 0px;
-  z-index: 100;
+  z-index: 10000;
   visibility: hidden;
 }

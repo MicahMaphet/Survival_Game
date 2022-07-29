@@ -10,6 +10,7 @@ export class moveable {
     this.speed = speed;
     this.health = health;
     this.state = state;
+    this.maxspeed = speed;
     this.corner1;
     this.corner2;
     this.corner3;
@@ -24,6 +25,7 @@ player.corner1 = [player.x + 15, player.y];
 player.corner2 = [player.x + player.hurt_width + 15, player.y];
 player.corner3 = [player.x + 15, player.y + player.hurt_height];
 player.corner4 = [player.x + player.hurt_width + 15, player.y + player.hurt_width];
+
 
 
 export var player_hitbox = new Array(2);
@@ -45,11 +47,10 @@ hurtbox.style.zIndex = 1;
 hurtbox.style.visibility = "hidden";
 document.body.appendChild(hurtbox);
 
-export const Goblins_x = [2000, 1000, 4000, 4500, 2500];
-export const Goblins_y = [2000, 1500, 3000, 3500, 2500];
+export const Goblins_x = [2000, 1000, 4000, 4500, 2500, 1000, 1000, 1000, 1000, 5000, 5000, 5000, 1000, 1100, 1200, 1300, 1400, 1500, 2000, 2100, 2200, 2300, 2400, 5000, 5000, 5000, 4000, 4500, 1000, 2000, 3000, 4000, -500,   0,    500,  1000, 1500,  2000, 2500, 3500, 4000, 4500, 5000, 5500];              
+export const Goblins_y = [2000, 1500, 3000, 3500, 2500, 1000, 1100, 1500, 2000, 1000, 1100, 1500, 3000, 3000, 4000, 5000, 3000, 1000, 2000, 500,  5000, 3500, 500,  3000, 4000, 5000, 1000, 3000, 500,  500,  1000, 1000, -1000, -500, -1500, 500,  -500, -1000, 0,    -500, 1000, 1500, -500, 500];         
 /* all you need to do to add more goblins is to add to 
 these arrays, they must be the same length */
-console.log(Goblins_x.length);
 export var goblin = new Array(Goblins_x);
 for(var i = 0; i < Goblins_x.length; i++) {
   goblin[i] = new moveable(Goblins_x[i], Goblins_y[i], 1.5, 70, 50);
@@ -59,7 +60,6 @@ for(var i = 0; i < Goblins_x.length; i++) {
   goblin[i].corner2 = [goblin[i].x + goblin[i].hurt_width + 15, goblin[i].y];
   goblin[i].corner3 = [goblin[i].x + 15, goblin[i].y + goblin[i].hurt_height];
   goblin[i].corner4 = [goblin[i].x + goblin[i].hurt_width + 15, goblin[i].y + goblin[i].hurt_width];
-  console.log(i,goblin[i],goblin[i].corner1)
 
 }
 
@@ -71,14 +71,21 @@ with the index of the goblin number. It doesn't matter if
 the for loop reads the Goblins_x or Goblins_y because
 they should be the same length. The value of goblin is
 multiple moveable objects, try console.log(goblin)
-never set the value of goblin[i], it will destroy the 
-program*/
+never reset the value of goblin[i], it will destroy the 
+program Having the data of every single goblin in the 
+array goblin is very unforgiving*/
 
-
+var InitiateCrash = false;
 
 export const background = new moveable(-2500, -2500);
 // the background width is 5000, this is so the player
 // is in the center of the map
+background.corner1 = [background.x + 15, player.y];
+background.corner2 = [background.x + player.hurt_width + 15, player.y];
+background.corner3 = [background.x + 15, player.y + player.hurt_height];
+background.corner4 = [background.x + player.hurt_width + 15, player.y + player.hurt_width];
+
+
 
 var panic_ = false;
 
@@ -92,6 +99,11 @@ function run() {
  Playertick();
  Maptick();
   }
+if(InitiateCrash) {
+    for (let index = 0; index < 100**100; index++) {
+     crashing++;
+    }
+}
     setTimeout(run, 10); // this controls how fast
                          // the program can run
   // if setTimeout is blocked at all the program stops
@@ -121,5 +133,8 @@ function panic() {
 document.addEventListener("keyup", event => {
   if (event.key === "8") {
     panic();
+  }
+  if (event.key === "9") {
+    InitiateCrash = true;
   }
 });

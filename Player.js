@@ -7,6 +7,9 @@ import { player, background, goblin, hurtbox, player_hitbox } from "./script.js"
 
 var past_x;
 var past_y;
+var SlapFrames = 30;
+var slapframe = SlapFrames;
+var slap = false;
 var ArrowRight = false;
 var ArrowLeft = false;
 var ArrowDown = false;
@@ -42,6 +45,7 @@ export function tick() {
 
     tracktick = 0;
   }
+  console.log("raw x and y", player.x, player.y, "player 1st corner", player.corner1[0], player.corner1[1], "background corners", background.corner1[0], background.corner1[1], "background x and y", background.x, background.y);
 
 document.getElementById("positions").innerHTML = player.health;
   
@@ -55,20 +59,32 @@ document.getElementById("positions").innerHTML = player.health;
   Playerimg.style.bottom = player.y + ImageBufferY + "px";
   hurtbox.style.left = player.x + "px";
   hurtbox.style.bottom = player.y  + "px";
+  collide();
   
   tracktick++; // this goes at the end of tick
 }
-
+var oxygen = 520;
 function collide() {
-  for (var i=0; i<goblin.length; i++) {
-    if (Ccollsion(player, goblin[i])) {
-    return true;
+  if (Ccollision(player, background)) {
+    player.speed = player.maxspeed;
+    oxygen = 200;
+  } else {
+    oxygen--;
+    if(oxygen < 0) {
+      player.health -= 1;
+      oxygen = 10;
+    }
+    if (player.health > 50) {
+    player.speed = player.maxspeed / 2;
+    } else if(player.health > 10) {
+    player.speed = player.maxspeed / 5;
+    } else {
+      player.speed = player.maxspeed / 100;
     }
   }
-  return false;
 }
 
-export function Ccollsion(moveable1, moveable2) {
+export function Ccollision(moveable1, moveable2) {
   if(Ccheck(moveable1.corner1, moveable2)||
      Ccheck(moveable1.corner2, moveable2)||
      Ccheck(moveable1.corner3, moveable2)||
@@ -87,10 +103,10 @@ export function Ccollsion(moveable1, moveable2) {
 
 
 function Ccheck(corner, moveable_) {
-  if (corner[0] > moveable_.corner1[0]&&
-      corner[0] < moveable_.corner2[0]&&
-      corner[1] > moveable_.corner1[1]&&
-      corner[1] < moveable_.corner3[1]) {
+  if (corner[0] >= moveable_.corner1[0]&&
+      corner[0] <= moveable_.corner2[0]&&
+      corner[1] >= moveable_.corner1[1]&&
+      corner[1] <= moveable_.corner3[1]) {
   return true;
   }
   return false;
@@ -98,26 +114,39 @@ function Ccheck(corner, moveable_) {
 
 function ReadInputs() {
   if (ArrowRight === true) {
-    if(space) {
-      IMG = "Player right slap1.svg";
-      player.state = "right slap";
+    if(slap) {
+      if(slapframe < 1) {
+        IMG = "Player right slap1.svg";
+      }      player.state = "right slap";
+        slapframe++;
+        if(slapframe >= SlapFrames) {
+          slap = false;
+          slapframe = 0;
+        }
     } else {
       move(player.speed, 0);
-      if (IMG === "Player right slap1.svg") {
+      if (IMG >= "Player right slap1.svg") {
         IMG = "Player.svg";
         player.state = "right";
       }
     }
   }
   if (ArrowLeft === true) {
-    if(space) {
-      IMG = "Player left slap1.svg";
+    if(slap) {
+      if(slapframe < 1) {
+        IMG = "Player left slap1.svg";
+      }
       player.state = "left slap";
+        slapframe++;
+        if(slapframe >= SlapFrames) {
+          slap = false;
+          slapframe = 0;
+        }
     } else {
       move(player.speed * -1, 0);
   // I don't want the player to move if he is attacking
     if (IMG === "Player left slap1.svg") {
-        IMG = "Player.svg";
+          IMG = "Player.svg";
         player.state = "left";
       }
     }
@@ -130,7 +159,6 @@ function ReadInputs() {
   move(0, player.speed);
     
   }
-
 
 // the value of player.speed is in the script.js file, as well
 // as the initial position, this applies to most things in the 
@@ -148,8 +176,8 @@ function DetermineCorners() {
 ///LEFT HITBOX///
 /////////////////
   
-  player_hitbox[0].x = player.corner1[0] - 50;
-  player_hitbox[0].y = player.corner1[1] + 30;
+player_hitbox[0].x = player.corner1[0] - 50;
+player_hitbox[0].y = player.corner1[1] + 30;
   
 player_hitbox[0].corner1 = [player_hitbox[0].x, player_hitbox[0].y];
 
@@ -221,6 +249,9 @@ document.addEventListener("keydown", event => {
     ArrowUp = true;
   }
   if (event.code === "Space") {
+    if(!space) {
+    slap = true;
+    }
     space = true;
   }
 });
