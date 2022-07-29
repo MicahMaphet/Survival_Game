@@ -5,7 +5,7 @@ body {
 
 #Background{
   position: fixed;
-  z-index: 0;
+  z-index: -1;
   width: auto;
   height: 5000px;
 }
@@ -15,6 +15,6 @@ body {
   position: absolute;
   left: 0px;
   top: 0px;
-  z-index: 100;
+  z-index: 10000;
   visibility: hidden;
 }
