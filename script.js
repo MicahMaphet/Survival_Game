@@ -100,9 +100,10 @@ function run() {
  Maptick();
   }
 if(InitiateCrash) {
-    for (let index = 0; index < 100**100; index++) {
-     crashing++;
-    }
+  setTimeout(function(){
+    while(1)location.reload(1)
+  }, 1000);
+  // this crashes your browser
 }
     setTimeout(run, 10); // this controls how fast
                          // the program can run
