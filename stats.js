@@ -8,16 +8,14 @@ healthbar.style.zIndex = 1000;
 healthbar.style.left = x + "px";
 healthbar.style.width = "20%";
 document.body.appendChild(healthbar);
-var prehealth;
+var prehealth = 100;
 export function tick() {
 healthbar.style.left = x + "%";
-  vol += 0 - x * 0.1;
+  vol += 0.3 - x * 0.1;
   vol = vol * 0.9;
   x += vol;
-  if(prehealth != player.health) {
-    vol += 2;
+    vol += player.health - prehealth;
     prehealth = player.health;
-  }
   if (player.health > 90) {
     if(healthbar.src != 'health bar1.svg') {
       healthbar.src = 'health bar1.svg';

@@ -17,9 +17,17 @@ export class moveable {
     this.corner3;
     this.corner4;
   }
-
-  
 }
+export class wall extends moveable {
+  constructor(x, y) {
+    super(x, y);
+    this.placedx;
+    this.placedy;
+  }
+}
+export var woodwall = new Array();
+woodwall[0] = new wall();
+
 export const player = new moveable(window.innerWidth / 2, window.innerHeight / 2, 3, 70, 50, 100);
 
 player.corner1 = [player.x + 15, player.y];

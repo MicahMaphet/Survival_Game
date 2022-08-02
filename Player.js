@@ -3,11 +3,11 @@ var x_limit = [window.innerWidth / 5, window.innerWidth - 50 - window.innerWidth
 // can go, it accounts for the available screen size
 var y_limit = [window.innerHeight / 4, window.innerHeight - window.innerHeight / 3];
 
-import { player, background, goblin, hurtbox, player_hitbox } from "./script.js";
+import { player, background, goblin, hurtbox, player_hitbox, woodwall } from "./script.js";
 
 var past_x;
 var past_y;
-var SlapFrames = 30;
+var SlapFrames = 15;
 var slapframe = SlapFrames;
 var slap = false;
 var ArrowRight = false;
@@ -30,12 +30,20 @@ Player_.style.position = "fixed";
 Player_.style.zIndex = 10;
 document.body.appendChild(Player_);
 
+var woodwall_ = new Image();
+woodwall_.id = "woodwall" + 1;
+woodwall_.src = 'wooden block.svg';
+woodwall_.style.position = "fixed";
+woodwall_.style.width = "100px";
+woodwall_.style.zIndex = 10;
+document.body.appendChild(woodwall_);
 
 var tracktick = "begin"; // if its begin, then it is 
 // the first tick loop
 
 // this is called from script.js in the run function
 
+var place = false;
 
 export function tick() {
 
@@ -51,10 +59,26 @@ export function tick() {
   DetermineCorners();
   Playerimg.style.left = player.x + ImageBufferX + "px";
   Playerimg.style.bottom = player.y + ImageBufferY + "px";
+
   hurtbox.style.left = player.x + "px";
   hurtbox.style.bottom = player.y  + "px";
   collide();
-  
+  if(!place) {
+    woodwall1.style.left = player.x + 100 + "px";
+    woodwall1.style.bottom = player.y + "px";
+  } else {
+    woodwall[0].x = woodwall[0].placedx + background.x;
+    woodwall[0].y = woodwall[0].placedy + background.y;
+    woodwall1.style.left = woodwall[0].x + "px";
+    woodwall1.style.bottom = woodwall[0].y + "px";
+  }
+  if(space) {
+    place = true;
+    woodwall[0].placedx = player.x + 100 - background.x;
+    woodwall[0].placedy = player.y - background.y;
+
+    
+  }
   tracktick++; // this goes at the end of tick
 }
 var oxygen = 520;
@@ -195,6 +219,17 @@ player_hitbox[1].corner2 = [player_hitbox[1].x + player_hitbox[1].hurt_width, pl
 player_hitbox[1].corner3 = [player_hitbox[1].x, player_hitbox[1].y + player_hitbox[1].hurt_height];
 
 player_hitbox[1].corner4 = [player_hitbox[1].x + player_hitbox[1].hurt_width, player_hitbox[1].y + player_hitbox[1].hurt_width];
+
+woodwall[0].x = woodwall[0].placedx;
+woodwall[0].y = woodwall[0].placedy;
+  
+woodwall[0].corner1 = [woodwall[0].x, woodwall[0].y];
+
+woodwall[0].corner2 = [woodwall[0].x + woodwall[0].hurt_width, woodwall[0].y];
+
+woodwall[0].corner3 = [woodwall[0].x, woodwall[0].y + woodwall[0].hurt_height];
+
+woodwall[0].corner4 = [woodwall[0].x + woodwall[0].hurt_width, woodwall[0].y + woodwall[0].hurt_height];
 }
 
 //Player is only for the css, player is the numbers

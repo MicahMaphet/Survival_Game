@@ -1,4 +1,4 @@
-import { background, player, Goblins_x, Goblins_y, goblin, player_hitbox } from "./script.js"
+import { background, player, Goblins_x, Goblins_y, goblin, player_hitbox, woodwall } from "./script.js"
 import { Ccollision } from "./Player.js";
 
 // moveable is called from script.js in the run function
@@ -35,7 +35,10 @@ be doing the same thing */
       if(goblin[i] != goblin[j]) {
         for (var k = 0; k < 5; k++) {
         if(Ccollision(goblin[i],goblin[j])&&
-           goblin[j].state != "inactive") {
+           goblin[j].state !== "inactive"&&
+           goblin[j].state !== "dead"&&
+           goblin[i].state !== "inactive"&&
+           goblin[i].state !== "dead") {
         bounce(goblin[i], 1, 5);      
         bounce(goblin[j], -1, 5);  
         } else {
@@ -46,15 +49,15 @@ be doing the same thing */
       j = goblin.length;
     }
   }
-    
-    if (goblin[i].state != "inactive") {
+    if (goblin[i].state != "inactive"&&
+        goblin[i].state != "dead") {
      twoardplayer(goblin[i]);
     if(Ccollision(player, goblin[i])) {
         player.health -= 1;
         bounce(goblin[i], 20);      
-
     }
-  }
+}
+
     if(Ccollision(player_hitbox[0], goblin[i])) {
       if (player.state === "left slap") {
         goblin[i].x -= goblin[i].speed * 100;
@@ -71,48 +74,36 @@ be doing the same thing */
 }
 function bounce(moveable, bounce, spread = 0) {
      if (moveable.state === "right") {
-        moveable.x -= moveable.speed * bounce;
-        moveable.y += Math.random() * -1 * spread + Math.random() * spread;
+        move(moveable.speed * -1 * bounce, Math.random() * -1 * spread + Math.random() * spread, moveable);
       }
       if (moveable.state === "left") {
-        moveable.x += moveable.speed * bounce;
-        moveable.y += Math.random() * spread;
+        move(moveable.speed * bounce * -1, Math.random() * -1 * spread + Math.random * spread, moveable);
 
       }
       if (moveable.state === "up") {
-        moveable.y -= moveable.speed * bounce;
-        moveable.x += Math.random() * -1 * spread + Math.random() * spread;
-
+        move(Math.random() * -1 * spread + Math.random() * spread, moveable.speed * bounce * -1, moveable);
       }
+
       if (moveable.state === "down") {
-        moveable.y += moveable.speed * bounce;
-        moveable.x += Math.random() * -1 * spread + Math.random() * spread;
+        move(Math.random() * -1 * spread + Math.random() * spread, moveable.speed * bounce, moveable);
       }
       if (moveable.state === "right up") {
-        moveable.x -= moveable.speed * bounce / 2;
-        moveable.y -= moveable.speed * bounce / 2;
-        moveable.y += Math.random() * -1 * spread + Math.random() * spread;
-        moveable.x += Math.random() * -1 * spread + Math.random() * spread;
-
+        move(moveable.speed * bounce / -2, moveable.speed * bounce / -2, moveable);
+        move(Math.random() * -1 * spread + Math.random() * spread, Math.random() * -1 * spread + Math.random() * spread, moveable);
 
       }
       if (moveable.state === "right down") {
-        moveable.x -= moveable.speed * bounce / 2;
-        moveable.y += moveable.speed * bounce / 2;
-        moveable.y += Math.random() * -1 * spread + Math.random() * spread;
-        moveable.x += Math.random() * -1 * spread + Math.random() * spread;
+        move(moveable.speed * bounce / -2, moveable.speed * bounce / 2, moveable);
+        move(Math.random() * -1 * spread + Math.random() * spread, Math.random() * -1 * spread + Math.random() * spread, moveable);
       }
       if (moveable.state === "left up") {
-        moveable.x += moveable.speed * bounce / 2 ;
-        moveable.y -= moveable.speed * bounce / 2;
-        moveable.y += Math.random() * -1 * spread + Math.random() * spread;
-        moveable.x += Math.random() * -1 * spread + Math.random() * spread;
-      }
+        move(moveable.speed * bounce / 2, moveable.speed * bounce / -2, moveable);
+        move(Math.random() * -1 * spread + Math.random() * spread, Math.random() * -1 * spread + Math.random() * spread, moveable);
+}
       if (moveable.state === "left down") {
-        moveable.x += moveable.speed * bounce / 2;
-        moveable.y += moveable.speed * bounce / 2;
-        moveable.y += Math.random() * -1 * spread + Math.random() * spread;
-        moveable.x += Math.random() * -1 * spread + Math.random() * spread;
+        move(moveable.speed * bounce / 2, moveable.speed * bounce / 2, moveable);
+        move(Math.random() * -1 * spread + Math.random() * spread, Math.random() * -1 * spread + Math.random() * spread, moveable);
+
       }
 
 }
@@ -147,20 +138,22 @@ not an array */
 }
 
 function move(xc, yc, moveable) { 
+  var remx = moveable.x;
+  var remy = moveable.y;
 if(moveable.state != "inactive") {
     moveable.x += xc;   
-
     moveable.y += yc;  
-  if(yc === moveable.speed) {
+
+  if(yc >= moveable.speed) {
     moveable.state = "up";
   }
-  if(yc === moveable.speed * -1) {
+  if(yc <= moveable.speed * -1) {
     moveable.state = "down";
   }
-  if(xc === moveable.speed) {
+  if(xc >= moveable.speed) {
     moveable.state = "right";
   }
-  if(xc === moveable.speed * -1) {
+  if(xc <= moveable.speed * -1) {
     moveable.state = "left";
   }
   if(yc === moveable.speed * 0.5&&
@@ -178,10 +171,31 @@ if(moveable.state != "inactive") {
   if(yc === moveable.speed * -0.5&&
      xc === moveable.speed * -0.5) {
     moveable.state = "left down";
+  } 
+    // for(let i = 0; i < moveable.speed * 2; i++) {
+    //   if(!CollideAll(moveable)) {
+    //     break;
+    //   }
+        
+    //   if(moveable.x > remx) {
+    //         moveable.x--;
+    //   } else if(moveable.x < remx) {
+    //         moveable.x++;
+    //   }
+    //   if(moveable.y > remy) {
+    //         moveable.y--;
+    //   } else if(moveable.y < remy) {
+    //         moveable.y++;
+    //   }
+    // }
   }
 }
-
+function CollideAll(moveable) {
+  if(Ccollision(moveable, woodwall[0])) {
+    return true;
   }
+  return false;
+}
 function twoardplayer(moveable) {
     if (moveable.x > player.x - background.x  + 10) {
       if(moveable.y < player.y - background.y - 10) {
@@ -227,8 +241,7 @@ function RenderGoblins() {
   for(var i=0; i<goblin.length;i++) {
     document.getElementById("Goblin" + i).style.left=goblin[i].x + background.x + "px";
     document.getElementById("Goblin" + i).style.bottom=goblin[i].y + background.y + "px";
-    document.getElementById("Goblin" + i).style.zIndex= 1000 - goblin[i].y;
-    document.getElementById("Playerimg").style.zIndex= 1000 - player.y / 5;
+    // document.getElementById("Goblin" + i).style.zIndex= 1000 - goblin[i].y;
   
 
     document.getElementById("hurtbox" + i).style.left=goblin[i].x + 15 + background.x + "px";
