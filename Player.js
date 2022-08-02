@@ -63,7 +63,7 @@ document.getElementById("positions").innerHTML = player.health;
   
   tracktick++; // this goes at the end of tick
 }
-var oxygen = 520;
+var oxygen = 500;
 function collide() {
   if (Ccollision(player, background)) {
     player.speed = player.maxspeed;
