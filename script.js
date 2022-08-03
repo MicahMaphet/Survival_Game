@@ -1,5 +1,7 @@
 import {tick as Playertick} from "./Player.js";
 import {tick as Maptick} from "./Map.js";
+import {tick as Statstick} from "./stats.js";
+import {tick as Menutick, GameState} from "./menu.js";
 
 export class moveable {
   constructor(x = 0, y = 0, speed = 0, hurt_width = 50, hurt_height = 50, health = 20, state = "idle") {
@@ -19,7 +21,7 @@ export class moveable {
 
   
 }
-export const player = new moveable(window.innerWidth / 2, window.innerHeight / 2, 3, 70, 50, 100);
+export const player = new moveable(window.innerWidth / 2, window.innerHeight / 2, 6, 70, 50, 100);
 
 player.corner1 = [player.x + 15, player.y];
 player.corner2 = [player.x + player.hurt_width + 15, player.y];
@@ -53,7 +55,7 @@ export const Goblins_y = [2000, 1500, 3000, 3500, 2500, 1000, 1100, 1500, 2000, 
 these arrays, they must be the same length */
 export var goblin = new Array(Goblins_x);
 for(var i = 0; i < Goblins_x.length; i++) {
-  goblin[i] = new moveable(Goblins_x[i], Goblins_y[i], 1.5, 70, 50);
+  goblin[i] = new moveable(Goblins_x[i], Goblins_y[i], 3, 70, 50);
 
 // this is declaring the corners of collision for the goblins
   goblin[i].corner1 = [goblin[i].x + 15, goblin[i].y];
@@ -96,16 +98,23 @@ var panic_ = false;
 
 function run() {
   if (!panic_) {
- Playertick();
- Maptick();
+    if(GameState === "gaming") {
+       Playertick();
+       Maptick();
+       Statstick();
+    }
+    if(GameState === "menu") {
+     Menutick();      
+    }
   }
 if(InitiateCrash) {
   setTimeout(function(){
     while(1)location.reload(1)
   }, 1000);
   // this crashes your browser
+  // it works best on chrome
 }
-    setTimeout(run, 10); // this controls how fast
+    setTimeout(run, 20); // this controls how fast
                          // the program can run
   // if setTimeout is blocked at all the program stops
   // and to continue the page must reload

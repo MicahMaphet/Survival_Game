@@ -3,6 +3,8 @@ import { Ccollision } from "./Player.js";
 
 // moveable is called from script.js in the run function
 var tick_ = 0;
+
+
 export function tick() {
   if (tick_ < 1) {
   drawgoblins();

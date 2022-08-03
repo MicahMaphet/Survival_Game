@@ -45,7 +45,6 @@ export function tick() {
 
     tracktick = 0;
   }
-  console.log("raw x and y", player.x, player.y, "player 1st corner", player.corner1[0], player.corner1[1], "background corners", background.corner1[0], background.corner1[1], "background x and y", background.x, background.y);
 
 document.getElementById("positions").innerHTML = player.health;
   
