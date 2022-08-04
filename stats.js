@@ -4,7 +4,7 @@ var vol = 0;
 var healthbar = new Image();
 healthbar.src = 'health bar1.svg';
 healthbar.style.position = "fixed";
-healthbar.style.zIndex = 1000;
+healthbar.style.zIndex = 500;
 healthbar.style.left = x + "px";
 healthbar.style.width = "20%";
 document.body.appendChild(healthbar);

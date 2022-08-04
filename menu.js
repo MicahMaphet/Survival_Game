@@ -1,15 +1,32 @@
-
-class Button {
+class MenuElement {
+  constructor(src = "", width = 0, height = 0, left = 0, top = 0, zIndex = 1000, visibility = "visible", wr, hr) {
+    this.src = src;
+    this.width = width;
+    this.height = height;
+    this.defaultwidth = width;
+    this.left = left;
+    this.top = top;
+    this.zIndex = zIndex;
+    this.visibility = visibility;
+    this.WidthRatio = wr;
+    this.HeightRatio = hr;
+  }
+  loadImage(image, id) {
+    if(id.src != image) {
+      id.src=image;
+    }
+  }
+  close() {
+    this.zIndex = -1;
+    this.visibility = "hidden";
+  }
+}
+class Button extends MenuElement {
   constructor() {
-    this.src;
-    this.width;
-    this.height;
-    this.defaultwidth;
-    this.left;
-    this.top;
+    super();
+    // do no put anything in the super parenthasis
+
     this.vol_ = 0;
-    this.zIndex = 1000;
-    this.visibility = "visible";
     this.shake = this.defaultwidth / 10;
   }
   
@@ -19,11 +36,6 @@ class Button {
     this.width += this.vol_;
   }
 
-  loadImage(image, id) {
-    if(id.src != image) {
-      id.src=image;
-    }
-  }
   
   Corner() {
     let corner;
@@ -40,13 +52,11 @@ class Button {
     }
     return false;
   }
-  close() {
-    this.zIndex = -1;
-    this.visibility = "hidden";
-  }
 }
 
 const playbutton = new Button();
+const menubackground = new MenuElement();
+
 
 var button = new Image();
   button.style.position = "absolute";
@@ -58,11 +68,31 @@ var button = new Image();
   button.id="PlayButton";
   document.body.appendChild(button);  
 
+var MenuBackground = new Image();
+  MenuBackground.style.position = "absolute";
+  MenuBackground.style.width;
+  MenuBackground.style.height;
+  MenuBackground.style.left; 
+  MenuBackground.style.top;
+  MenuBackground.style.zIndex;
+  MenuBackground.id="MenuBackground";
+  document.body.appendChild(MenuBackground); 
+
+  menubackground.HeightRatio = document.getElementById("MenuBackground").style.width / document.getElementById("MenuBackground").style.height;
+  menubackground.WidthRatio = document.getElementById("MenuBackground").style.height / document.getElementById("MenuBackground").style.width;
+
+  
+
 playbutton.defaultwidth = playbutton.width = 20;
 playbutton.height = document.getElementById("PlayButton").style.height;
 playbutton.left = 10;
 playbutton.top = 10;
 playbutton.zIndex = 1000;
+
+menubackground.zIndex = 900;
+menubackground.left = 0;
+menubackground.top = 0;
+menubackground.width = 100;
 
 var mouseX;
 var mouseY;
@@ -83,25 +113,44 @@ if(playbutton.mouseCollide()) {
 }
   playbutton.HoverAnimation();
 
-  
-  RenderImage("PlayButton", playbutton);
+
+  playbutton.height = playbutton.width;
+
+  RenderImage("PlayButton", playbutton, "%");
   playbutton.loadImage("PlaySign.svg", PlayButton);
+
+  // menubackground.left = 0 - window.innerWidth / 3;
+  // menubackground.top = 0 - window.innerHeight / 3;
+
+  if(window.innerWidth * menubackground.HeightRatio < window.innerHeight * menubackground.WidthRatio) {
+    menubackground.width = window.innerWidth;
+    menubackground.height = menubackground.width * menubackground.WidthRatio;
+  } else {
+    menubackground.height = window.innerHeight;
+    menubackground.width = menubackground.height * menubackground.HeightRatio;
+  }
+  
+  RenderImage("MenuBackground", menubackground, "px");
+  menubackground.loadImage("MenuBackground.png", MenuBackground);
+
+
 }
 
-function RenderImage(image, object) {
-  object.height = object.width;
-// the height is exactly half the size of the width, by the pixel!
-// I was quite supprised when I saw this
-  document.getElementById(image).style.width = object.width + "%";
-  document.getElementById(image).style.left = object.left + "%"; 
-  document.getElementById(image).style.top = object.top + "%";
+function RenderImage(image, object, measurement) {
+
+  document.getElementById(image).style.width = object.width + measurement;
+  document.getElementById(image).style.height = object.height + measurement;
+  document.getElementById(image).style.left = object.left + measurement; 
+  document.getElementById(image).style.top = object.top + measurement
   document.getElementById(image).style.zIndex = object.zIndex;
   document.getElementById(image).style.visibility = object.visibility;
 }
 
 function close() {
   playbutton.close();
+  menubackground.close();
   RenderImage("PlayButton", playbutton);
+  RenderImage("MenuBackground", menubackground, "%");
 }
 
 // from https://stackoverflow.com/questions/7790725/javascript-track-mouse-position
