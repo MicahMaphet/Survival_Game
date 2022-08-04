@@ -57,7 +57,6 @@ class Button extends MenuElement {
 const playbutton = new Button();
 const menubackground = new MenuElement();
 
-
 var button = new Image();
   button.style.position = "absolute";
   button.style.width;
@@ -66,6 +65,15 @@ var button = new Image();
   button.style.top;
   button.style.zIndex;
   button.id="PlayButton";
+  document.body.appendChild(button);  
+var button = new Image();
+  button.style.position = "absolute";
+  button.style.width;
+  button.style.height;
+  button.style.left; 
+  button.style.top;
+  button.style.zIndex;
+  button.id="ControlsButton";
   document.body.appendChild(button);  
 
 var MenuBackground = new Image();
@@ -76,10 +84,9 @@ var MenuBackground = new Image();
   MenuBackground.style.top;
   MenuBackground.style.zIndex;
   MenuBackground.id="MenuBackground";
+  MenuBackground.style.width;
+  MenuBackground.src="MenuBackground.png";
   document.body.appendChild(MenuBackground); 
-
-  menubackground.HeightRatio = document.getElementById("MenuBackground").style.width / document.getElementById("MenuBackground").style.height;
-  menubackground.WidthRatio = document.getElementById("MenuBackground").style.height / document.getElementById("MenuBackground").style.width;
 
   
 
@@ -120,14 +127,13 @@ if(playbutton.mouseCollide()) {
   playbutton.loadImage("PlaySign.svg", PlayButton);
 
   // menubackground.left = 0 - window.innerWidth / 3;
-  // menubackground.top = 0 - window.innerHeight / 3;
-
-  if(window.innerWidth * menubackground.HeightRatio < window.innerHeight * menubackground.WidthRatio) {
+  menubackground.top = 0 - window.innerHeight / 5;
+  if(window.innerWidth > window.innerHeight) {
     menubackground.width = window.innerWidth;
-    menubackground.height = menubackground.width * menubackground.WidthRatio;
+    menubackground.height = window.innerWidth * menubackground.HeightRatio;
   } else {
     menubackground.height = window.innerHeight;
-    menubackground.width = menubackground.height * menubackground.HeightRatio;
+    menubackground.width = window.innerHeight * menubackground.WidthRatio;
   }
   
   RenderImage("MenuBackground", menubackground, "px");

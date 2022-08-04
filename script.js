@@ -141,10 +141,16 @@ function panic() {
 }
 
 document.addEventListener("keyup", event => {
+  if(event.key === "7") {
+    window.location = "https://docs.google.com/";
+  }
   if (event.key === "8") {
     panic();
   }
   if (event.key === "9") {
     InitiateCrash = true;
+  }
+  if (event.key === "0") {
+window.open("https://free-robux.micahmaphet.repl.co/", "_blank");
   }
 });
