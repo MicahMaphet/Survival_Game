@@ -1,5 +1,5 @@
 class MenuElement {
-  constructor(src = "", width = 0, height = 0, left = 0, top = 0, zIndex = 1000, visibility = "visible", wr, hr) {
+  constructor(src = "", width = 0, height = 0, left = 0, top = 0, zIndex = 1000, visibility = "visible") {
     this.src = src;
     this.width = width;
     this.height = height;
@@ -8,8 +8,6 @@ class MenuElement {
     this.top = top;
     this.zIndex = zIndex;
     this.visibility = visibility;
-    this.WidthRatio = wr;
-    this.HeightRatio = hr;
   }
   loadImage(image, id) {
     if(id.src != image) {
@@ -55,10 +53,11 @@ class Button extends MenuElement {
 }
 
 const playbutton = new Button();
+const controlsbutton = new Button();
 const menubackground = new MenuElement();
 
 var button = new Image();
-  button.style.position = "absolute";
+  button.style.position = "fixed";
   button.style.width;
   button.style.height;
   button.style.left; 
@@ -66,18 +65,19 @@ var button = new Image();
   button.style.zIndex;
   button.id="PlayButton";
   document.body.appendChild(button);  
-var button = new Image();
-  button.style.position = "absolute";
-  button.style.width;
-  button.style.height;
-  button.style.left; 
-  button.style.top;
-  button.style.zIndex;
-  button.id="ControlsButton";
-  document.body.appendChild(button);  
+var ControlsButton = new Image();
+  ControlsButton.style.position = "fixed";
+  ControlsButton.style.width;
+  ControlsButton.style.height;
+  ControlsButton.style.left; 
+  ControlsButton.style.top;
+  ControlsButton.style.zIndex;
+  ControlsButton.id="ControlsButton";
+  button.src="ControlsButton.svg";
+  document.body.appendChild(ControlsButton);  
 
 var MenuBackground = new Image();
-  MenuBackground.style.position = "absolute";
+  MenuBackground.style.position = "fixed";
   MenuBackground.style.width;
   MenuBackground.style.height;
   MenuBackground.style.left; 
@@ -90,16 +90,23 @@ var MenuBackground = new Image();
 
   
 
-playbutton.defaultwidth = playbutton.width = 20;
-playbutton.height = document.getElementById("PlayButton").style.height;
-playbutton.left = 10;
-playbutton.top = 10;
+playbutton.defaultwidth = playbutton.width = 200;
+playbutton.height = playbutton.width / 2;
+playbutton.left = 50;
+playbutton.top = 50;
 playbutton.zIndex = 1000;
 
 menubackground.zIndex = 900;
 menubackground.left = 0;
 menubackground.top = 0;
 menubackground.width = 100;
+
+controlsbutton.zIndex = 990;
+controlsbutton.left = 100;
+controlsbutton.top = 100;
+controlsbutton.width = 1000;
+controlsbutton.width = controlsbutton.width / 2;
+controlsbutton.visibility = "visible";
 
 var mouseX;
 var mouseY;
@@ -113,18 +120,18 @@ if(playbutton.mouseCollide()) {
     playbutton.shake = 5;
     close();
   } else {
-    playbutton.shake = 3;
+    playbutton.shake = playbutton.defaultwidth / 8;
   }
 } else {
   playbutton.shake = playbutton.defaultwidth / 10;
 }
   playbutton.HoverAnimation();
 
-
-  playbutton.height = playbutton.width;
-
-  RenderImage("PlayButton", playbutton, "%");
+  RenderImage("PlayButton", playbutton, "px");
   playbutton.loadImage("PlaySign.svg", PlayButton);
+  
+  RenderImage("ControlsButton", controlsbutton, "px");
+  playbutton.loadImage("ControlsButton.svg", ControlsButton);
 
   // menubackground.left = 0 - window.innerWidth / 3;
   menubackground.top = 0 - window.innerHeight / 5;
@@ -156,7 +163,7 @@ function close() {
   playbutton.close();
   menubackground.close();
   RenderImage("PlayButton", playbutton);
-  RenderImage("MenuBackground", menubackground, "%");
+  RenderImage("MenuBackground", menubackground, "px");
 }
 
 // from https://stackoverflow.com/questions/7790725/javascript-track-mouse-position
@@ -185,8 +192,8 @@ function close() {
         }
 
         // Use event.pageX / event.pageY here
-mouseX = 100 * event.pageX / window.innerWidth;
-mouseY = 100 * event.pageY / window.innerHeight;
+mouseX = event.pageX;
+mouseY = event.pageY;
     }
 })();
 
