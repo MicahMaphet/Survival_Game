@@ -60,13 +60,13 @@ be doing the same thing */
     if(Ccollision(player_hitbox[0], goblin[i])) {
       if (player.state === "left slap") {
         goblin[i].x -= goblin[i].speed * 100;
-        goblin[i].health -= 5;
+        goblin[i].health -= 2;
       }
     }
     if(Ccollision(player_hitbox[1], goblin[i])) {
       if (player.state === "right slap") {
         goblin[i].x += goblin[i].speed * 100;
-        goblin[i].health -= 5;
+        goblin[i].health -= 2;
       }
     }
   }

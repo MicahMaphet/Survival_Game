@@ -32,6 +32,7 @@ class Button extends MenuElement {
     this.vol_ += this.shake - this.width * 0.1;
     this.vol_ = this.vol_ * 0.9;
     this.width += this.vol_;
+    this.height = this.width / 2;
   }
 
   
@@ -112,6 +113,7 @@ var mouseX;
 var mouseY;
 var mouseDown = false;
 export var GameState = "menu";
+  // menubackground.close();
 
 export function tick() {
 if(playbutton.mouseCollide()) {
@@ -126,7 +128,6 @@ if(playbutton.mouseCollide()) {
   playbutton.shake = playbutton.defaultwidth / 10;
 }
   playbutton.HoverAnimation();
-
   RenderImage("PlayButton", playbutton, "px");
   playbutton.loadImage("PlaySign.svg", PlayButton);
   
