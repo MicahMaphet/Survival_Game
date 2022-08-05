@@ -56,6 +56,7 @@ class Button extends MenuElement {
 const playbutton = new Button();
 const controlsbutton = new Button();
 const menubackground = new MenuElement();
+const controls = new MenuElement();
 
 var button = new Image();
   button.style.position = "fixed";
@@ -65,7 +66,8 @@ var button = new Image();
   button.style.top;
   button.style.zIndex;
   button.id="PlayButton";
-  document.body.appendChild(button);  
+  document.body.appendChild(button); 
+
 var ControlsButton = new Image();
   ControlsButton.style.position = "fixed";
   ControlsButton.style.width;
@@ -76,6 +78,17 @@ var ControlsButton = new Image();
   ControlsButton.src="ControlsButton.svg";
   ControlsButton.id="ControlsButton";
   document.body.appendChild(ControlsButton);  
+
+var Controls = new Image();
+  Controls.style.position = "fixed";
+  Controls.style.width;
+  Controls.style.height;
+  Controls.style.left; 
+  Controls.style.top;
+  Controls.style.zIndex;
+  Controls.src="Controls.svg";
+  Controls.id="Controls";
+  document.body.appendChild(Controls);  
 
 var MenuBackground = new Image();
   MenuBackground.style.position = "fixed";
@@ -100,7 +113,7 @@ playbutton.zIndex = 1000;
 menubackground.zIndex = 900;
 menubackground.left = 0;
 menubackground.top = 0;
-menubackground.width = 100;
+menubackground.visibility = "visibile";
 
 controlsbutton.zIndex = 990;
 controlsbutton.left = 300;
@@ -108,6 +121,13 @@ controlsbutton.top = 50;
 controlsbutton.width = controlsbutton.defaultwidth = 200;
 controlsbutton.height = controlsbutton.width / 2;
 controlsbutton.visibility = "visible";
+
+controls.zIndex = 990;
+controls.left = 300;
+controls.top = 50;
+controls.width = controls.defaultwidth = 200;
+controls.height = controls.width * 0.69142857142;
+controls.visibility = "hidden";
 
 var mouseX;
 var mouseY;
@@ -117,7 +137,7 @@ export var GameState = "menu";
 
 export function tick() {
 
-// console.log(controlsbutton.zIndex, controlsbutton.visibility, controlsbutton.left, controlsbutton.top, menubackground.zIndex, controlsbutton.width, controlsbutton.height);
+console.log(menubackground.zIndex, menubackground.visibility, menubackground.left, menubackground.top, menubackground.width, menubackground.height);
   
 if(playbutton.mouseCollide()) {
   if(mouseDown) {
@@ -152,14 +172,12 @@ if(controlsbutton.mouseCollide()) {
   playbutton.loadImage("ControlsButton.svg", ControlsButton);
 
   // menubackground.left = 0 - window.innerWidth / 3;
-  menubackground.top = 0 - window.innerHeight / 5;
-  if(window.innerWidth > window.innerHeight) {
     menubackground.width = window.innerWidth;
-    menubackground.height = window.innerWidth * menubackground.HeightRatio;
-  } else {
-    menubackground.height = window.innerHeight;
-    menubackground.width = window.innerHeight * menubackground.WidthRatio;
-  }
+    menubackground.height = menubackground.width * 0.75;
+
+
+  RenderImage("Controls", controls, "px");
+  menubackground.loadImage("Controls.svg", Controls);
   
   RenderImage("MenuBackground", menubackground, "px");
   menubackground.loadImage("MenuBackground.png", MenuBackground);
@@ -175,6 +193,10 @@ function RenderImage(image, object, measurement) {
   document.getElementById(image).style.top = object.top + measurement
   document.getElementById(image).style.zIndex = object.zIndex;
   document.getElementById(image).style.visibility = object.visibility;
+}
+
+function opencontrols() {
+  controls.visibility = "visibile";
 }
 
 function close() {
