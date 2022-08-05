@@ -235,16 +235,20 @@ function move(xc, yc) {
   past_y = player.y;
   }
 document.addEventListener("keydown", event => {
-  if (event.key === "ArrowRight") {
+  if (event.key === "ArrowRight" ||
+      event.key === "d") {
     ArrowRight = true;
   }  
-  if (event.key === "ArrowLeft") {
+  if (event.key === "ArrowLeft" ||
+      event.key === "a") {
     ArrowLeft = true;
   }
-  if (event.key === "ArrowDown") {
+  if (event.key === "ArrowDown" ||
+      event.key === "s") {
     ArrowDown = true;
   }  
-  if (event.key === "ArrowUp") {
+  if (event.key === "ArrowUp" ||
+      event.key === "w") {
     ArrowUp = true;
   }
   if (event.code === "Space") {
@@ -256,16 +260,20 @@ document.addEventListener("keydown", event => {
 });
 
 document.addEventListener("keyup", event => {
-  if (event.key === "ArrowRight") {
+  if (event.key === "ArrowRight" ||
+      event.key === "d") {
     ArrowRight = false;
   }  
-  if (event.key === "ArrowLeft") {
+  if (event.key === "ArrowLeft" ||
+      event.key === "a") {
     ArrowLeft = false;
   }
-  if (event.key === "ArrowDown") {
+  if (event.key === "ArrowDown" ||
+      event.key === "s") {
     ArrowDown = false;
   }  
-  if (event.key === "ArrowUp") {
+  if (event.key === "ArrowUp" ||
+      event.key === "w") {
     ArrowUp = false;
   }
   if (event.code === "Space") {

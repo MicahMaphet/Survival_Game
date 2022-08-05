@@ -73,8 +73,8 @@ var ControlsButton = new Image();
   ControlsButton.style.left; 
   ControlsButton.style.top;
   ControlsButton.style.zIndex;
+  ControlsButton.src="ControlsButton.svg";
   ControlsButton.id="ControlsButton";
-  button.src="ControlsButton.svg";
   document.body.appendChild(ControlsButton);  
 
 var MenuBackground = new Image();
@@ -83,10 +83,10 @@ var MenuBackground = new Image();
   MenuBackground.style.height;
   MenuBackground.style.left; 
   MenuBackground.style.top;
-  MenuBackground.style.zIndex;
-  MenuBackground.id="MenuBackground";
   MenuBackground.style.width;
+  MenuBackground.style.zIndex;
   MenuBackground.src="MenuBackground.png";
+  MenuBackground.id="MenuBackground";
   document.body.appendChild(MenuBackground); 
 
   
@@ -103,10 +103,10 @@ menubackground.top = 0;
 menubackground.width = 100;
 
 controlsbutton.zIndex = 990;
-controlsbutton.left = 100;
-controlsbutton.top = 100;
-controlsbutton.width = 1000;
-controlsbutton.width = controlsbutton.width / 2;
+controlsbutton.left = 300;
+controlsbutton.top = 50;
+controlsbutton.width = controlsbutton.defaultwidth = 200;
+controlsbutton.height = controlsbutton.width / 2;
 controlsbutton.visibility = "visible";
 
 var mouseX;
@@ -116,6 +116,9 @@ export var GameState = "menu";
   // menubackground.close();
 
 export function tick() {
+
+// console.log(controlsbutton.zIndex, controlsbutton.visibility, controlsbutton.left, controlsbutton.top, menubackground.zIndex, controlsbutton.width, controlsbutton.height);
+  
 if(playbutton.mouseCollide()) {
   if(mouseDown) {
     GameState = "gaming";
@@ -127,10 +130,24 @@ if(playbutton.mouseCollide()) {
 } else {
   playbutton.shake = playbutton.defaultwidth / 10;
 }
+
   playbutton.HoverAnimation();
+
   RenderImage("PlayButton", playbutton, "px");
   playbutton.loadImage("PlaySign.svg", PlayButton);
-  
+
+if(controlsbutton.mouseCollide()) {
+  if(mouseDown) {
+    GameState = "controls";
+    controlsbutton.shake = 5;
+  } else {
+    controlsbutton.shake = controlsbutton.defaultwidth / 8;
+  }
+} else {
+  controlsbutton.shake = controlsbutton.defaultwidth / 10;
+}
+  controlsbutton.HoverAnimation();
+
   RenderImage("ControlsButton", controlsbutton, "px");
   playbutton.loadImage("ControlsButton.svg", ControlsButton);
 
@@ -162,8 +179,10 @@ function RenderImage(image, object, measurement) {
 
 function close() {
   playbutton.close();
+  controlsbutton.close();
   menubackground.close();
-  RenderImage("PlayButton", playbutton);
+  RenderImage("PlayButton", playbutton, "px");
+  RenderImage("MenuBackground", menubackground, "px");
   RenderImage("MenuBackground", menubackground, "px");
 }
 
