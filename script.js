@@ -135,7 +135,8 @@ function run() {
        Maptick();
        Statstick();
     }
-    if(GameState === "menu") {
+    if(GameState === "menu"||
+       GameState === "controls") {
      Menutick();      
     }
   }
