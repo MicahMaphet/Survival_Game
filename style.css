@@ -14,7 +14,7 @@ body {
 #Decoy {
   margin: 0;
   padding: 0;
-  position: absolute;
+  position: fixed;
   left: 0px;
   top: 0px;
   z-index: 10000;

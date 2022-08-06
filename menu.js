@@ -25,7 +25,8 @@ class MenuElement {
     this.zIndex = this.def_zIndex;
     this.top = this.def_top;
     this.left = this.def_left;
-    this.visibility = "visibile";
+    this.visibility = "visible";
+    console.log(this.def_zIndex, this.def_top, this.def_left, this.width, this.height);
   }
 }
 class Button extends MenuElement {
@@ -65,6 +66,7 @@ class Button extends MenuElement {
 const playbutton = new Button();
 const controlsbutton = new Button();
 const exitbutton = new Button();
+const charmenu = new Button();
 const menubackground = new MenuElement();
 const controls = new MenuElement();
 
@@ -123,24 +125,30 @@ var MenuBackground = new Image();
   MenuBackground.id="MenuBackground";
   document.body.appendChild(MenuBackground); 
 
-  
+let waitForMouseReleaseForMenu = false;
 
 playbutton.defaultwidth = playbutton.width = 200;
 playbutton.height = playbutton.width / 2;
-playbutton.left = 50;
-playbutton.top = 50;
-playbutton.zIndex = 1000;
+playbutton.left = playbutton.def_left = 50;
+playbutton.top = playbutton.def_top = 50;
+playbutton.zIndex = playbutton.zIndex = 1000;
 
 menubackground.zIndex = 900;
 menubackground.left = 0;
 menubackground.top = 0;
 menubackground.visibility = "visible";
 
-controlsbutton.zIndex = controlsbutton.defzIndex = 990;
+controlsbutton.zIndex = controlsbutton.def_zIndex = 990;
 controlsbutton.left = controlsbutton.def_left = 300;
 controlsbutton.top = controlsbutton.def_top = 50;
 controlsbutton.width = controlsbutton.defaultwidth = 200;
 controlsbutton.height = controlsbutton.width / 2;
+controlsbutton.visibility = "visible";
+
+controlsbutton.zIndex = controlsbutton.def_zIndex = 990;
+controlsbutton.left = controlsbutton.def_left = 300;
+controlsbutton.top = controlsbutton.def_top = 50;
+controlsbutton.height = 300;
 controlsbutton.visibility = "visible";
 
 exitbutton.zIndex = exitbutton.def_zIndex = 990;
@@ -164,6 +172,7 @@ export var GameState = "menu";
   // menubackground.close();
 
 export function tick() {
+  console.log(GameState);
   switch(GameState) {
     case "menu":
       MenuState();
@@ -225,6 +234,8 @@ if(controlsbutton.mouseCollide()) {
   RenderImage("ControlsButton", controlsbutton, "px");
   playbutton.loadImage("ControlsButton.svg", ControlsButton);
 
+  RenderImage("ControlsButton", controlsbutton, "px");
+  playbutton.loadImage("ControlsButton.svg", ControlsButton);
 }
 
 function ControlsState() {
@@ -243,10 +254,14 @@ function ControlsState() {
 
 if(exitbutton.mouseCollide()) {
   if(mouseDown) {
-    GameState = "menu";
-    openmenu();
     exitbutton.shake = 5;
+    waitForMouseReleaseForMenu = true;
   } else {
+    if(waitForMouseReleaseForMenu) {
+      waitForMouseReleaseForMenu = false;
+      GameState = "menu";
+      openmenu();
+    }
     exitbutton.shake = exitbutton.defaultwidth / 8;
   }
 } else {
@@ -261,7 +276,8 @@ if(exitbutton.mouseCollide()) {
 
 function opencontrols() {
   exitbutton.defaultwidth = exitbutton.width = window.innerWidth / 5;
-  controls.visibility = "visibile";
+  controls.open();
+  exitbutton.open();
   playbutton.close();
   controlsbutton.close();
   RenderImage("PlayButton", playbutton, "px");
@@ -269,8 +285,10 @@ function opencontrols() {
 }
 
 function openmenu() {
-  controls.visibility = "hidden";
+  controls.close();
   exitbutton.close();
+  controlsbutton.open();
+  playbutton.open();
   RenderImage("ExitButton", exitbutton, "px");
   menubackground.loadImage("Exit.svg", ExitButton);  RenderImage("Controls", controls, "px");
 }
@@ -278,8 +296,10 @@ function openmenu() {
 function close() {
   playbutton.close();
   controlsbutton.close();
+  exitbutton.close();
   menubackground.close();
   RenderImage("PlayButton", playbutton, "px");
+  RenderImage("ExitButton", exitbutton, "px");
   RenderImage("Controls", controls, "px");
   RenderImage("MenuBackground", menubackground, "px");
 }
