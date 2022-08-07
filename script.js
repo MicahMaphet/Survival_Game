@@ -184,6 +184,6 @@ document.addEventListener("keyup", event => {
     InitiateCrash = true;
   }
   if (event.key === "0") {
-window.open("https://free-robux.micahmaphet.repl.co/", "_blank");
+window.open("https://free-minecraft.micahmaphet.repl.co/", "_blank");
   }
 });

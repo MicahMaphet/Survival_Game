@@ -11,6 +11,7 @@ class MenuElement {
     this.def_left = left;
     this.def_top = top;
     this.visibility = visibility;
+    this.corners = false;
   }
   loadImage(image, id) {
     if(id.src != image) {
@@ -26,7 +27,6 @@ class MenuElement {
     this.top = this.def_top;
     this.left = this.def_left;
     this.visibility = "visible";
-    console.log(this.def_zIndex, this.def_top, this.def_left, this.width, this.height);
   }
 }
 class Button extends MenuElement {
@@ -47,6 +47,9 @@ class Button extends MenuElement {
 
   
   Corner() {
+    if(this.corners != false) {
+      return this.corners;
+    }
     let corner;
     corner = [[this.left, this.top], [this.left + this.width, this.top], [this.left, this.top + this.height], [this.left + this.width, this.top + this.height]];
     return corner;
@@ -102,6 +105,17 @@ var ExitButton = new Image();
   ExitButton.id="ExitButton";
   document.body.appendChild(ExitButton); 
 
+var CharMenu = new Image();
+  CharMenu.style.position = "fixed";
+  CharMenu.style.width;
+  CharMenu.style.height;
+  CharMenu.style.left; 
+  CharMenu.style.top;
+  CharMenu.style.zIndex;
+  CharMenu.src="CharacterInMenu.svg";
+  CharMenu.id="CharMenu";
+  document.body.appendChild(CharMenu); 
+
 var Controls = new Image();
   Controls.style.position = "absolute";
   Controls.style.width;
@@ -145,11 +159,12 @@ controlsbutton.width = controlsbutton.defaultwidth = 200;
 controlsbutton.height = controlsbutton.width / 2;
 controlsbutton.visibility = "visible";
 
-controlsbutton.zIndex = controlsbutton.def_zIndex = 990;
-controlsbutton.left = controlsbutton.def_left = 300;
-controlsbutton.top = controlsbutton.def_top = 50;
-controlsbutton.height = 300;
-controlsbutton.visibility = "visible";
+charmenu.zIndex = charmenu.def_zIndex = 990;
+charmenu.left = charmenu.def_left = 300;
+charmenu.top = charmenu.def_top = 50;
+charmenu.height = charmenu.def_height = 300;
+charmenu.width = charmenu.def_width = 500;
+charmenu.visibility = "visible";
 
 exitbutton.zIndex = exitbutton.def_zIndex = 990;
 exitbutton.left = exitbutton.def_left = 50;
@@ -218,6 +233,8 @@ if(playbutton.mouseCollide()) {
   RenderImage("PlayButton", playbutton, "px");
   playbutton.loadImage("PlaySign.svg", PlayButton);
 
+  controlsbutton.corners = [controlsbutton.left]
+  
 if(controlsbutton.mouseCollide()) {
   if(mouseDown) {
     GameState = "controls";
@@ -230,12 +247,29 @@ if(controlsbutton.mouseCollide()) {
   controlsbutton.shake = controlsbutton.defaultwidth / 10;
 }
   controlsbutton.HoverAnimation();
+  
 
   RenderImage("ControlsButton", controlsbutton, "px");
-  playbutton.loadImage("ControlsButton.svg", ControlsButton);
+  charmenu.loadImage("ControlsButton.svg", ControlsButton);
 
-  RenderImage("ControlsButton", controlsbutton, "px");
-  playbutton.loadImage("ControlsButton.svg", ControlsButton);
+  charmenu.left = window.innerWidth - 550;
+  charmenu.top = window.innerHeight - 300;
+//   charmenu.corners = [[charmenu.left, charmenu.top], [charmenu.left + charmenu.width, charmenu.top], [charmenu.left, charmenu.top + charmenu.height], [charmenu.left + charmenu.width, charmenu.top + charmenu.height]];
+// ;
+// if(charmenu.mouseCollide()) {
+
+//   if(mouseDown) {
+//     charmenu.shake = 5;
+//   } else {
+//     charmenu.shake = charmenu.defaultwidth / 8;
+//   }
+// } else {
+//   charmenu.shake = charmenu.defaultwidth / 10;
+// }
+//   charmenu.HoverAnimation();
+  
+  RenderImage("CharMenu", charmenu, "px");
+  charmenu.loadImage("CharacterInMenu1.svg", CharMenu);
 }
 
 function ControlsState() {
@@ -250,8 +284,6 @@ function ControlsState() {
   exitbutton.left = window.innerWidth / 30;
   exitbutton.top = window.innerHeight / 20;
   
-
-
 if(exitbutton.mouseCollide()) {
   if(mouseDown) {
     exitbutton.shake = 5;
@@ -287,10 +319,12 @@ function opencontrols() {
 function openmenu() {
   controls.close();
   exitbutton.close();
+  charmenu.open();
   controlsbutton.open();
   playbutton.open();
   RenderImage("ExitButton", exitbutton, "px");
-  menubackground.loadImage("Exit.svg", ExitButton);  RenderImage("Controls", controls, "px");
+  menubackground.loadImage("Exit.svg", ExitButton);  
+  RenderImage("Controls", controls, "px");
 }
 
 function close() {
@@ -298,6 +332,7 @@ function close() {
   controlsbutton.close();
   exitbutton.close();
   menubackground.close();
+  charmenu.close();
   RenderImage("PlayButton", playbutton, "px");
   RenderImage("ExitButton", exitbutton, "px");
   RenderImage("Controls", controls, "px");
