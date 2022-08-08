@@ -185,9 +185,8 @@ var mouseY;
 var mouseDown = false;
 export var GameState = "menu";
   // menubackground.close();
-
+openmenu();
 export function tick() {
-  console.log(GameState);
   switch(GameState) {
     case "menu":
       MenuState();
@@ -215,6 +214,7 @@ function RenderImage(image, object, measurement) {
   document.getElementById(image).style.visibility = object.visibility;
 }
 
+let waitCharMation = 0;
 function MenuState() {
 if(playbutton.mouseCollide()) {
   if(mouseDown) {
@@ -233,8 +233,7 @@ if(playbutton.mouseCollide()) {
   RenderImage("PlayButton", playbutton, "px");
   playbutton.loadImage("PlaySign.svg", PlayButton);
 
-  controlsbutton.corners = [controlsbutton.left]
-  
+// charmenu.corners = [[charmenu.left, charmenu.top], [charmenu.left + charmenu.width, thcharmenuis.top], [charmenu.left, charmenu.top + charmenu.height], [charmenu.left + charmenu.width, charmenu.top + charmenu.height]];  
 if(controlsbutton.mouseCollide()) {
   if(mouseDown) {
     GameState = "controls";
@@ -267,11 +266,34 @@ if(controlsbutton.mouseCollide()) {
 //   charmenu.shake = charmenu.defaultwidth / 10;
 // }
 //   charmenu.HoverAnimation();
-  
-  RenderImage("CharMenu", charmenu, "px");
-  charmenu.loadImage("CharacterInMenu1.svg", CharMenu);
-}
 
+
+  RenderImage("CharMenu", charmenu, "px");
+  console.log(waitCharMation);
+  if(waitCharMation > 100) {
+    let pose = Math.floor(Math.random() * 3);
+    switch(pose) {
+      case 0:
+        charmenu.loadImage("CharacterInMenu1.svg", CharMenu);
+        break;
+      case 1:
+        charmenu.loadImage("CharacterInMenu2.svg", CharMenu);
+        break;
+      case 2:
+        charmenu.loadImage("CharacterInMenu3.svg", CharMenu);
+        break;
+      default:
+        charmenu.loadImage("CharacterInMenu1.svg", CharMenu);
+        break;    
+    }
+    waitCharMation = 0;
+  }
+  
+  
+  waitCharMation += Math.random(); // I have it as random because it is more fluid
+                                   // if the character changes poses randomly
+  // this should be at the end, it can get stuff out of sink
+}
 function ControlsState() {
   
   controls.width = window.innerWidth;
@@ -312,6 +334,7 @@ function opencontrols() {
   exitbutton.open();
   playbutton.close();
   controlsbutton.close();
+  charmenu.close();
   RenderImage("PlayButton", playbutton, "px");
   RenderImage("Controls", controls, "px");
 }
@@ -325,6 +348,7 @@ function openmenu() {
   RenderImage("ExitButton", exitbutton, "px");
   menubackground.loadImage("Exit.svg", ExitButton);  
   RenderImage("Controls", controls, "px");
+  charmenu.loadImage("CharacterInMenu1.svg", CharMenu);
 }
 
 function close() {
