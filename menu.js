@@ -70,6 +70,7 @@ const playbutton = new Button();
 const controlsbutton = new Button();
 const exitbutton = new Button();
 const charmenu = new Button();
+const menutitle = new MenuElement();
 const menubackground = new MenuElement();
 const controls = new MenuElement();
 
@@ -116,6 +117,17 @@ var CharMenu = new Image();
   CharMenu.id="CharMenu";
   document.body.appendChild(CharMenu); 
 
+var MenuTitle = new Image();
+  MenuTitle.style.position = "fixed";
+  MenuTitle.style.width;
+  MenuTitle.style.height;
+  MenuTitle.style.left; 
+  MenuTitle.style.top;
+  MenuTitle.style.zIndex;
+  MenuTitle.src="GameTitle.svg";
+  MenuTitle.id="MenuTitle";
+  document.body.appendChild(MenuTitle); 
+
 var Controls = new Image();
   Controls.style.position = "absolute";
   Controls.style.width;
@@ -141,11 +153,7 @@ var MenuBackground = new Image();
 
 let waitForMouseReleaseForMenu = false;
 
-playbutton.defaultwidth = playbutton.width = 200;
-playbutton.height = playbutton.width / 2;
-playbutton.left = playbutton.def_left = 50;
-playbutton.top = playbutton.def_top = 50;
-playbutton.zIndex = playbutton.zIndex = 1000;
+
 
 exitbutton.zIndex = exitbutton.def_zIndex = 990;
 exitbutton.left = exitbutton.def_left = 50;
@@ -175,6 +183,8 @@ export function tick() {
     case "controls":
       ControlsState();
       break;
+    default:
+      console.log("GameState is unrecongnized:", GameState, "does not exist")
   }
 
   // menubackground.left = 0 - window.innerWidth / 3;
@@ -199,6 +209,14 @@ function RenderImage(image, object, measurement) {
 
 let waitCharMation = 0;
 function MenuState() {
+  menutitle.width = window.innerWidth * 0.6;
+  menutitle.height = menutitle.width * 0.25;
+  menutitle.left =  window.innerWidth * 0.025;
+  menutitle.top = 20;
+    
+  RenderImage("MenuTitle", menutitle, "px");
+  menubackground.loadImage("GameTitle.svg", MenuTitle);
+
 if(playbutton.mouseCollide()) {
   if(mouseDown) {
     GameState = "gaming";
@@ -212,6 +230,9 @@ if(playbutton.mouseCollide()) {
 }
 
   playbutton.HoverAnimation();
+
+  playbutton.top = playbutton.def_top + menutitle.width * 0.25;
+
 
   RenderImage("PlayButton", playbutton, "px");
   playbutton.loadImage("PlaySign.svg", PlayButton);
@@ -229,6 +250,8 @@ if(controlsbutton.mouseCollide()) {
   controlsbutton.shake = controlsbutton.defaultwidth / 10;
 }
   controlsbutton.HoverAnimation();
+
+  controlsbutton.top = controlsbutton.def_top + menutitle.width * 0.25;
   
 
   RenderImage("ControlsButton", controlsbutton, "px");
@@ -318,8 +341,10 @@ function opencontrols() {
   playbutton.close();
   controlsbutton.close();
   charmenu.close();
+  menutitle.close();
   RenderImage("PlayButton", playbutton, "px");
   RenderImage("Controls", controls, "px");
+  RenderImage("MenuTitle", menutitle, "px");
 }
 
 function openmenu() {
@@ -329,10 +354,16 @@ menubackground.left = 0;
 menubackground.top = 0;
 menubackground.visibility = "visible";
 
+playbutton.defaultwidth = playbutton.width = window.innerWidth * 0.15;
+playbutton.height = playbutton.width / 2;
+playbutton.left = playbutton.def_left = window.innerWidth * 0.05;
+playbutton.top = playbutton.def_top = 50;
+playbutton.zIndex = playbutton.zIndex = 1000;
+
 controlsbutton.zIndex = controlsbutton.def_zIndex = 990;
-controlsbutton.left = controlsbutton.def_left = 300;
+controlsbutton.left = controlsbutton.def_left = window.innerWidth * 0.25;
 controlsbutton.top = controlsbutton.def_top = 50;
-controlsbutton.width = controlsbutton.defaultwidth = 200;
+controlsbutton.width = controlsbutton.defaultwidth = window.innerWidth * 0.15;
 controlsbutton.height = controlsbutton.width / 2;
 controlsbutton.visibility = "visible";
 
@@ -343,6 +374,13 @@ charmenu.height = charmenu.def_height = 300;
 charmenu.width = charmenu.def_width = 500;
 charmenu.visibility = "visible";
 
+menutitle.zIndex = menutitle.def_zIndex = 1001;
+menutitle.left = menutitle.def_left = 300;
+menutitle.top = menutitle.def_top = 50;
+menutitle.height = menutitle.def_height = 300;
+menutitle.width = menutitle.def_width = 500;
+menutitle.visibility = "visible";
+
 
   
   controls.close();
@@ -350,6 +388,7 @@ charmenu.visibility = "visible";
   charmenu.open();
   controlsbutton.open();
   playbutton.open();
+  menutitle.open();
   RenderImage("ExitButton", exitbutton, "px");
   menubackground.loadImage("Exit.svg", ExitButton);  
   RenderImage("Controls", controls, "px");
@@ -357,6 +396,7 @@ charmenu.visibility = "visible";
 }
 
 function close() {
+  menutitle.close();
   playbutton.close();
   controlsbutton.close();
   exitbutton.close();
@@ -366,6 +406,7 @@ function close() {
   RenderImage("ExitButton", exitbutton, "px");
   RenderImage("Controls", controls, "px");
   RenderImage("MenuBackground", menubackground, "px");
+  RenderImage("MenuTitle", menutitle, "px");
 }
 
 // from https://stackoverflow.com/questions/7790725/javascript-track-mouse-position
