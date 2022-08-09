@@ -251,8 +251,8 @@ if(controlsbutton.mouseCollide()) {
   RenderImage("ControlsButton", controlsbutton, "px");
   charmenu.loadImage("ControlsButton.svg", ControlsButton);
 
-  charmenu.left = window.innerWidth - 550;
-  charmenu.top = window.innerHeight - 300;
+  charmenu.left = window.innerWidth - 550 + mouseX / 15;
+  charmenu.top = window.innerHeight - 300 + mouseY / 15;
 //   charmenu.corners = [[charmenu.left, charmenu.top], [charmenu.left + charmenu.width, charmenu.top], [charmenu.left, charmenu.top + charmenu.height], [charmenu.left + charmenu.width, charmenu.top + charmenu.height]];
 // ;
 // if(charmenu.mouseCollide()) {
