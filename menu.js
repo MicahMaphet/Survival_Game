@@ -147,25 +147,6 @@ playbutton.left = playbutton.def_left = 50;
 playbutton.top = playbutton.def_top = 50;
 playbutton.zIndex = playbutton.zIndex = 1000;
 
-menubackground.zIndex = 900;
-menubackground.left = 0;
-menubackground.top = 0;
-menubackground.visibility = "visible";
-
-controlsbutton.zIndex = controlsbutton.def_zIndex = 990;
-controlsbutton.left = controlsbutton.def_left = 300;
-controlsbutton.top = controlsbutton.def_top = 50;
-controlsbutton.width = controlsbutton.defaultwidth = 200;
-controlsbutton.height = controlsbutton.width / 2;
-controlsbutton.visibility = "visible";
-
-charmenu.zIndex = charmenu.def_zIndex = 990;
-charmenu.left = charmenu.def_left = 300;
-charmenu.top = charmenu.def_top = 50;
-charmenu.height = charmenu.def_height = 300;
-charmenu.width = charmenu.def_width = 500;
-charmenu.visibility = "visible";
-
 exitbutton.zIndex = exitbutton.def_zIndex = 990;
 exitbutton.left = exitbutton.def_left = 50;
 exitbutton.top = exitbutton.def_top = 100;
@@ -197,8 +178,10 @@ export function tick() {
   }
 
   // menubackground.left = 0 - window.innerWidth / 3;
-    menubackground.width = window.innerWidth;
+    menubackground.width = window.innerWidth * 1.4;
     menubackground.height = menubackground.width * 0.75;
+    menubackground.left =  window.innerWidth * -0.1  - mouseX / 10;
+    menubackground.top =  window.innerHeight * -0.25 - mouseY / 10;
   
   RenderImage("MenuBackground", menubackground, "px");
   menubackground.loadImage("MenuBackground.png", MenuBackground);
@@ -340,6 +323,28 @@ function opencontrols() {
 }
 
 function openmenu() {
+
+menubackground.zIndex = 900;
+menubackground.left = 0;
+menubackground.top = 0;
+menubackground.visibility = "visible";
+
+controlsbutton.zIndex = controlsbutton.def_zIndex = 990;
+controlsbutton.left = controlsbutton.def_left = 300;
+controlsbutton.top = controlsbutton.def_top = 50;
+controlsbutton.width = controlsbutton.defaultwidth = 200;
+controlsbutton.height = controlsbutton.width / 2;
+controlsbutton.visibility = "visible";
+
+charmenu.zIndex = charmenu.def_zIndex = 990;
+charmenu.left = charmenu.def_left = 300;
+charmenu.top = charmenu.def_top = 50;
+charmenu.height = charmenu.def_height = 300;
+charmenu.width = charmenu.def_width = 500;
+charmenu.visibility = "visible";
+
+
+  
   controls.close();
   exitbutton.close();
   charmenu.open();
