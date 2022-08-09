@@ -174,7 +174,6 @@ var mouseY;
 var mouseDown = false;
 export var GameState = "menu";
   // menubackground.close();
-openmenu();
 export function tick() {
   switch(GameState) {
     case "menu":
@@ -275,7 +274,6 @@ if(controlsbutton.mouseCollide()) {
 
 
   RenderImage("CharMenu", charmenu, "px");
-  console.log(waitCharMation);
   if(waitCharMation > 100) {
     let pose = Math.floor(Math.random() * 3);
     switch(pose) {
@@ -447,3 +445,4 @@ document.body.onmouseup = () => {
   mouseDown = false;
 };
 
+window.addEventListener("load", () => { openmenu(); });
