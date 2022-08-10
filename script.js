@@ -56,7 +56,7 @@ document.body.appendChild(hurtbox);
 export var Goblins_x = [];
 export var Goblins_y = []; 
 let quadrant = 0;
-for(let i=0;i<10;i++){
+for(let i=0;i<100;i++){
       // Goblins_x[i] = Math.random() * 3000 - 1000;
       // Goblins_y[i] = Math.random() * 6000 - 1000;
   switch(quadrant) {

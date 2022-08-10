@@ -12,6 +12,9 @@ class MenuElement {
     this.def_top = top;
     this.visibility = visibility;
     this.corners = false;
+    /**It's usefull to have vairiables for all the image
+      *properties so they can be tested before they are rendered
+      *They can also have defaults and are easier to access and loop through */
   }
   loadImage(image, id) {
     if(id.src != image) {
@@ -32,8 +35,6 @@ class MenuElement {
 class Button extends MenuElement {
   constructor() {
     super();
-    // do no put anything in the super parenthasis
-
     this.vol_ = 0;
     this.shake = this.defaultwidth / 10;
   }
@@ -65,15 +66,22 @@ class Button extends MenuElement {
     return false;
   }
 }
-
+// objects from the button class have collision
 const playbutton = new Button();
 const controlsbutton = new Button();
 const exitbutton = new Button();
-const charmenu = new Button();
+
+// MenuElement are the basic cordanites and Image values
+const charmenu = new MenuElement();
 const menutitle = new MenuElement();
 const menubackground = new MenuElement();
 const controls = new MenuElement();
 
+/**
+ * Image setting starts here
+ * Declaring images takes a lot of lines
+ * Images end at the ------- dashes
+ */
 var button = new Image();
   button.style.position = "fixed";
   button.style.width;
@@ -153,8 +161,6 @@ var MenuBackground = new Image();
 
 let waitForMouseReleaseForMenu = false;
 
-
-
 exitbutton.zIndex = exitbutton.def_zIndex = 990;
 exitbutton.left = exitbutton.def_left = 50;
 exitbutton.top = exitbutton.def_top = 100;
@@ -169,11 +175,25 @@ controls.width = controls.defaultwidth = window.innerWidth;
 controls.height = controls.width * 0.69142857;
 controls.visibility = "hidden";
 
-var mouseX;
-var mouseY;
+/*-----------------------------------------
+------Image Declaration Ends Here----------
+-----------------------------------------*/
+
+var mouseX = window.innerWidth / 2;
+var mouseY = window.innerHeight / 2;
+// If the mouse as not interacted with the window
+// it defaults to the middle of the screen
+
 var mouseDown = false;
 export var GameState = "menu";
-  // menubackground.close();
+
+
+/*********************************************
+*** Above this is setting values and images***
+*** All the game loops are run below**********
+**********************************************/
+
+
 export function tick() {
   switch(GameState) {
     case "menu":
@@ -190,7 +210,7 @@ export function tick() {
     menubackground.width = window.innerWidth * 1.4;
     menubackground.height = menubackground.width * 0.75;
     menubackground.left =  window.innerWidth * -0.1  - mouseX / 10;
-    menubackground.top =  window.innerHeight * -0.25 - mouseY / 10;
+    menubackground.top =  window.innerHeight * -0.25 - mouseY / 3;
   
   RenderImage("MenuBackground", menubackground, "px");
   menubackground.loadImage("MenuBackground.png", MenuBackground);
@@ -205,6 +225,11 @@ function RenderImage(image, object, measurement) {
   document.getElementById(image).style.zIndex = object.zIndex;
   document.getElementById(image).style.visibility = object.visibility;
 }
+
+
+///////////////
+///MenuState///
+///////////////
 
 let waitCharMation = 0;
 function MenuState() {
@@ -391,6 +416,8 @@ menutitle.visibility = "visible";
   menubackground.loadImage("Exit.svg", ExitButton);  
   RenderImage("Controls", controls, "px");
   charmenu.loadImage("CharacterInMenu1.svg", CharMenu);
+  GameState = "menu";
+  // I have it where it changes to menu because it is the first state
 }
 
 function close() {
@@ -406,7 +433,6 @@ function close() {
   RenderImage("MenuBackground", menubackground, "px");
   RenderImage("MenuTitle", menutitle, "px");
 }
-
 // from https://stackoverflow.com/questions/7790725/javascript-track-mouse-position
 // credits to them for all the mouse posistion stuff, it is quite usefull
 (function() {
