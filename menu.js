@@ -12,9 +12,11 @@ class MenuElement {
     this.def_top = top;
     this.visibility = visibility;
     this.corners = false;
-    /**It's usefull to have vairiables for all the image
+    /**
+      *It's usefull to have vairiables for all the image
       *properties so they can be tested before they are rendered
-      *They can also have defaults and are easier to access and loop through */
+      *They can also have defaults and are easier to access and loop through
+      */
   }
   loadImage(image, id) {
     if(id.src != image) {
