@@ -48,7 +48,6 @@ class Button extends MenuElement {
     this.height = this.width / 2;
   }
 
-  
   Corner() {
     if(this.corners != false) {
       return this.corners;
@@ -233,13 +232,34 @@ function RenderImage(image, object, measurement) {
 ///MenuState///
 ///////////////
 
+let upDown = 0;
+let bobTo = 0;
 let waitCharMation = 0;
 function MenuState() {
   menutitle.width = window.innerWidth * 0.6;
   menutitle.height = menutitle.width * 0.25;
   menutitle.left =  window.innerWidth * 0.025;
-  menutitle.top = 20;
-    
+    if(upDown) {
+      if(bobTo < 30) {
+          bobTo += 1;
+      }
+    } else {
+      if(bobTo > 10) {
+          bobTo -= 1;
+      }
+    }
+    if(menutitle.top > 28) {
+      upDown = 0;
+    }
+    if(menutitle.top < 12) {
+      upDown = 1;
+    }
+
+  
+    menutitle.top += (bobTo - menutitle.top) * 0.1;
+    // menutitle.top = menutitle.top * 0.5;
+
+    console.log(menutitle.top, upDown, bobTo);
   RenderImage("MenuTitle", menutitle, "px");
   menubackground.loadImage("GameTitle.svg", MenuTitle);
 
@@ -254,6 +274,8 @@ if(playbutton.mouseCollide()) {
 } else {
   playbutton.shake = playbutton.defaultwidth / 10;
 }
+  document.getElementById("buttonstats").innerHtml="playbutton.width";
+  document.getElementById("buttonstats").style.zIndex=100000;
 
   playbutton.HoverAnimation();
 

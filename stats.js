@@ -12,7 +12,7 @@ var prehealth = 100;
 export function tick() {
 healthbar.style.left = x + "%";
   
-    vol +=  - x * 0.1;
+    vol += - x * 0.1;
     vol = vol * 0.9;
     x += vol;
     vol += player.health - prehealth;
