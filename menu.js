@@ -100,7 +100,7 @@ var ControlsButton = new Image();
   ControlsButton.style.left; 
   ControlsButton.style.top;
   ControlsButton.style.zIndex;
-  ControlsButton.src="ControlsButton.svg";
+  ControlsButton.src="images/ControlsButton.svg";
   ControlsButton.id="ControlsButton";
   document.body.appendChild(ControlsButton);  
 
@@ -111,7 +111,7 @@ var ExitButton = new Image();
   ExitButton.style.left; 
   ExitButton.style.top;
   ExitButton.style.zIndex;
-  ExitButton.src="Exit.svg";
+  ExitButton.src="images/Exit.svg";
   ExitButton.id="ExitButton";
   document.body.appendChild(ExitButton); 
 
@@ -122,7 +122,7 @@ var CharMenu = new Image();
   CharMenu.style.left; 
   CharMenu.style.top;
   CharMenu.style.zIndex;
-  CharMenu.src="CharacterInMenu.svg";
+  CharMenu.src="images/CharacterInMenu.svg";
   CharMenu.id="CharMenu";
   document.body.appendChild(CharMenu); 
 
@@ -133,7 +133,7 @@ var MenuTitle = new Image();
   MenuTitle.style.left; 
   MenuTitle.style.top;
   MenuTitle.style.zIndex;
-  MenuTitle.src="GameTitle.svg";
+  MenuTitle.src="images/GameTitle.svg";
   MenuTitle.id="MenuTitle";
   document.body.appendChild(MenuTitle); 
 
@@ -144,7 +144,7 @@ var Controls = new Image();
   Controls.style.left; 
   Controls.style.top;
   Controls.style.zIndex;
-  Controls.src="Controls.svg";
+  Controls.src="images/Controls.svg";
   Controls.id="Controls";
   document.body.appendChild(Controls);  
 
@@ -156,7 +156,7 @@ var MenuBackground = new Image();
   MenuBackground.style.top;
   MenuBackground.style.width;
   MenuBackground.style.zIndex;
-  MenuBackground.src="MenuBackground.png";
+  MenuBackground.src="images/MenuBackground.png";
   MenuBackground.id="MenuBackground";
   document.body.appendChild(MenuBackground); 
 
@@ -214,7 +214,7 @@ export function tick() {
     menubackground.top =  window.innerHeight * -0.25 - mouseY / 3;
   
   RenderImage("MenuBackground", menubackground, "px");
-  menubackground.loadImage("MenuBackground.png", MenuBackground);
+  menubackground.loadImage("images/MenuBackground.png", MenuBackground);
 }
 
 function RenderImage(image, object, measurement) {
@@ -261,7 +261,7 @@ function MenuState() {
 
     console.log(menutitle.top, upDown, bobTo);
   RenderImage("MenuTitle", menutitle, "px");
-  menubackground.loadImage("GameTitle.svg", MenuTitle);
+  menubackground.loadImage("images/GameTitle.svg", MenuTitle);
 
 if(playbutton.mouseCollide()) {
   if(mouseDown) {
@@ -283,7 +283,7 @@ if(playbutton.mouseCollide()) {
 
 
   RenderImage("PlayButton", playbutton, "px");
-  playbutton.loadImage("PlaySign.svg", PlayButton);
+  playbutton.loadImage("images/PlaySign.svg", PlayButton);
 
 // charmenu.corners = [[charmenu.left, charmenu.top], [charmenu.left + charmenu.width, thcharmenuis.top], [charmenu.left, charmenu.top + charmenu.height], [charmenu.left + charmenu.width, charmenu.top + charmenu.height]];  
 if(controlsbutton.mouseCollide()) {
@@ -303,7 +303,7 @@ if(controlsbutton.mouseCollide()) {
   
 
   RenderImage("ControlsButton", controlsbutton, "px");
-  charmenu.loadImage("ControlsButton.svg", ControlsButton);
+  charmenu.loadImage("images/ControlsButton.svg", ControlsButton);
 
   charmenu.left = window.innerWidth - 550 + mouseX / 15;
   charmenu.top = window.innerHeight - 300 + mouseY / 15;
@@ -327,16 +327,16 @@ if(controlsbutton.mouseCollide()) {
     let pose = Math.floor(Math.random() * 3);
     switch(pose) {
       case 0:
-        charmenu.loadImage("CharacterInMenu1.svg", CharMenu);
+        charmenu.loadImage("images/CharacterInMenu1.svg", CharMenu);
         break;
       case 1:
-        charmenu.loadImage("CharacterInMenu2.svg", CharMenu);
+        charmenu.loadImage("images/CharacterInMenu2.svg", CharMenu);
         break;
       case 2:
-        charmenu.loadImage("CharacterInMenu3.svg", CharMenu);
+        charmenu.loadImage("images/CharacterInMenu3.svg", CharMenu);
         break;
       default:
-        charmenu.loadImage("CharacterInMenu1.svg", CharMenu);
+        charmenu.loadImage("images/CharacterInMenu1.svg", CharMenu);
         break;    
     }
     waitCharMation = 0;
@@ -353,7 +353,7 @@ function ControlsState() {
   controls.height = controls.width * 0.69142857;
   
   RenderImage("Controls", controls, "px");
-  menubackground.loadImage("Controls.svg", Controls);
+  menubackground.loadImage("images/Controls.svg", Controls);
 
   exitbutton.defaultwidth = window.innerWidth / 5;
   exitbutton.left = window.innerWidth / 30;
@@ -377,7 +377,7 @@ if(exitbutton.mouseCollide()) {
   exitbutton.HoverAnimation();
   
   RenderImage("ExitButton", exitbutton, "px");
-  menubackground.loadImage("Exit.svg", ExitButton);
+  menubackground.loadImage("images/Exit.svg", ExitButton);
 }
 
 
@@ -437,9 +437,9 @@ menutitle.visibility = "visible";
   playbutton.open();
   menutitle.open();
   RenderImage("ExitButton", exitbutton, "px");
-  menubackground.loadImage("Exit.svg", ExitButton);  
+  menubackground.loadImage("images/Exit.svg", ExitButton);  
   RenderImage("Controls", controls, "px");
-  charmenu.loadImage("CharacterInMenu1.svg", CharMenu);
+  charmenu.loadImage("images/CharacterInMenu1.svg", CharMenu);
   GameState = "menu";
   // I have it where it changes to menu because it is the first state
 }

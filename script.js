@@ -157,14 +157,14 @@ run();
 // run() starts the infinited loop
 function panic() {
   if (panic_) {
-    document.querySelector("link[rel*='icon']").href = "Icon.svg";
+    document.querySelector("link[rel*='icon']").href = "images/Icon.svg";
     document.title = "Survival Game";
     Decoy.style.visibility="hidden";
     panic_ = false
     // turns the page into a google doc, however
     // it is not interactive
   } else {
-    document.querySelector("link[rel*='icon']").href = "heheheheha.png";
+    document.querySelector("link[rel*='icon']").href = "images/heheheheha.png";
     document.title = "Untitled document - Google Docs";
     Decoy.style.visibility="visible";
     panic_ = true;

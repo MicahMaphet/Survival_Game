@@ -17,14 +17,14 @@ var ArrowUp = false;
 var space = false;
 var ImageBufferX = -206;
 var ImageBufferY = -150;
-var IMG = "Player.svg";
+var IMG = "images/Player.svg";
 /*the ImageBuffer variables stop the player images from
 changing the viewed position of the character without
 other files perceiving the position of the player
 as changed */
 
 var Player_ = new Image();
-Player_.src = 'Player.svg';
+Player_.src = 'images/Player.svg';
 Player_.id="Playerimg";
 Player_.style.position = "fixed";
 Player_.style.zIndex = 10;
@@ -115,7 +115,7 @@ function ReadInputs() {
   if (ArrowRight === true) {
     if(slap) {
       if(slapframe < 1) {
-        IMG = "Player right slap1.svg";
+        IMG = "images/Player right slap1.svg";
       }      player.state = "right slap";
         slapframe++;
         if(slapframe >= SlapFrames) {
@@ -124,8 +124,8 @@ function ReadInputs() {
         }
     } else {
       move(player.speed, 0);
-      if (IMG >= "Player right slap1.svg") {
-        IMG = "Player.svg";
+      if (IMG >= "images/Player right slap1.svg") {
+        IMG = "images/Player.svg";
         player.state = "right";
       }
     }
@@ -133,7 +133,7 @@ function ReadInputs() {
   if (ArrowLeft === true) {
     if(slap) {
       if(slapframe < 1) {
-        IMG = "Player left slap1.svg";
+        IMG = "images/Player left slap1.svg";
       }
       player.state = "left slap";
         slapframe++;
@@ -144,8 +144,8 @@ function ReadInputs() {
     } else {
       move(player.speed * -1, 0);
   // I don't want the player to move if he is attacking
-    if (IMG === "Player left slap1.svg") {
-          IMG = "Player.svg";
+    if (IMG === "images/Player left slap1.svg") {
+          IMG = "images/Player.svg";
         player.state = "left";
       }
     }
@@ -280,7 +280,7 @@ document.addEventListener("keyup", event => {
     space = false;
   }
 });
-function renderIMG(IMG_ = "Player.svg") {
+function renderIMG(IMG_ = "images/Player.svg") {
       Playerimg.src = IMG_;
 /* having this script in a function stops this file 
 from getting out of sync with the image */  

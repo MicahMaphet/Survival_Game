@@ -122,7 +122,7 @@ function bounce(moveable, bounce, spread = 0) {
 function drawgoblins() {
 for(var i=0; i<goblin.length; i++) {
   var goblin_image = new Image();
-  goblin_image.src = "Goblin.svg";
+  goblin_image.src = "images/Goblin.svg";
   goblin_image.id="Goblin" + i;
   goblin_image.style.position = "fixed";
   goblin_image.style.width = "100px";
