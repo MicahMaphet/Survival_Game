@@ -208,11 +208,30 @@ export function tick() {
   }
 
   // menubackground.left = 0 - window.innerWidth / 3;
-    menubackground.width = window.innerWidth * 1.4;
+    // menubackground.width = window.innerWidth * 1.4;
+    // menubackground.height = menubackground.width * 0.75;
+    // menubackground.left =  window.innerWidth * -0.1  - mouseX / 10;
+    // menubackground.top =  window.innerHeight * -0.25 - mouseY / 3;
+  if(window.innerWidth * 0.75 > window.innerHeight) {
+    menubackground.width = window.innerWidth;
     menubackground.height = menubackground.width * 0.75;
-    menubackground.left =  window.innerWidth * -0.1  - mouseX / 10;
-    menubackground.top =  window.innerHeight * -0.25 - mouseY / 3;
+    if(window.innerHeight < menubackground.height) {
+      menubackground.top = (window.innerHeight - menubackground.height) / 2;
+    } else {
+      menubackground.top = 0;
+    }
+  } else {
+    menubackground.height = window.innerHeight;
+    menubackground.width = menubackground.height * 1.4;
+  }
+    if(window.innerWidth < menubackground.width) {
+      menubackground.left = (window.innerWidth - menubackground.width) / 2;
+    } else {
+      menubackground.left = 0;
+    }
+
   
+  console.log(MenuBackground.height, MenuBackground.width)
   RenderImage("MenuBackground", menubackground, "px");
   menubackground.loadImage("images/MenuScreen/MenuBackground.png", MenuBackground);
 }
