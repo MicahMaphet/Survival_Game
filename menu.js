@@ -122,7 +122,7 @@ var CharMenu = new Image();
   CharMenu.style.left; 
   CharMenu.style.top;
   CharMenu.style.zIndex;
-  CharMenu.src="images/MenuScreen/CharacterInMenu.svg";
+  CharMenu.src="images/MenuScreen/CharacterPoses/CharacterInMenu.svg";
   CharMenu.id="CharMenu";
   document.body.appendChild(CharMenu); 
 
@@ -235,6 +235,7 @@ function RenderImage(image, object, measurement) {
 let upDown = 0;
 let bobTo = 0;
 let waitCharMation = 0;
+
 function MenuState() {
   menutitle.width = window.innerWidth * 0.6;
   menutitle.height = menutitle.width * 0.25;
@@ -259,7 +260,6 @@ function MenuState() {
     menutitle.top += (bobTo - menutitle.top) * 0.1;
     // menutitle.top = menutitle.top * 0.5;
 
-    console.log(menutitle.top, upDown, bobTo);
   RenderImage("MenuTitle", menutitle, "px");
   menubackground.loadImage("images/MenuScreen/GameTitle.svg", MenuTitle);
 
@@ -323,25 +323,30 @@ if(controlsbutton.mouseCollide()) {
 
 
   RenderImage("CharMenu", charmenu, "px");
-  if(waitCharMation > 100) {
-    let pose = Math.floor(Math.random() * 3);
+  if(waitCharMation > 50) {
+    let pose = Math.floor(Math.random() * 4);
     switch(pose) {
       case 0:
-        charmenu.loadImage("images/MenuScreen/CharacterInMenu1.svg", CharMenu);
+        charmenu.loadImage("images/MenuScreen/CharacterPoses/CharacterInMenu1.svg", CharMenu);
         break;
       case 1:
-        charmenu.loadImage("images/MenuScreen/CharacterInMenu2.svg", CharMenu);
+        charmenu.loadImage("images/MenuScreen/CharacterPoses/CharacterInMenu2.svg", CharMenu);
         break;
       case 2:
-        charmenu.loadImage("images/MenuScreen/CharacterInMenu3.svg", CharMenu);
+        charmenu.loadImage("images/MenuScreen/CharacterPoses/CharacterInMenu3.svg", CharMenu);
+        break;
+      case 3:
+        charmenu.loadImage("images/MenuScreen/CharacterPoses/CharacterInMenu4.svg", CharMenu);
+        break;
+      case 4:
+        charmenu.loadImage("images/MenuScreen/CharacterPoses/CharacterInMenu5.svg", CharMenu);
         break;
       default:
-        charmenu.loadImage("images/MenuScreen/CharacterInMenu1.svg", CharMenu);
+        charmenu.loadImage("images/MenuScreen/CharacterPoses/CharacterInMenu1.svg", CharMenu);
         break;    
     }
     waitCharMation = 0;
   }
-  
   
   waitCharMation += Math.random(); // I have it as random because it is more fluid
                                    // if the character changes poses randomly
@@ -439,7 +444,7 @@ menutitle.visibility = "visible";
   RenderImage("ExitButton", exitbutton, "px");
   menubackground.loadImage("images/MenuScreen/Exit.svg", ExitButton);  
   RenderImage("Controls", controls, "px");
-  charmenu.loadImage("images/MenuScreen/CharacterInMenu1.svg", CharMenu);
+  charmenu.loadImage("images/MenuScreen/CharacterPoses/CharacterInMenu1.svg", CharMenu);
   GameState = "menu";
   // I have it where it changes to menu because it is the first state
 }

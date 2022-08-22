@@ -30,6 +30,12 @@ Player_.style.position = "fixed";
 Player_.style.zIndex = 10;
 document.body.appendChild(Player_);
 
+var FireBall = new Image();
+FireBall.src = 'images/FireBall.png';
+FireBall.id="FireBall";
+FireBall.style.position = "fixed";
+FireBall.style.zIndex = 10;
+document.body.appendChild(FireBall);
 
 var tracktick = "begin"; // if its begin, then it is 
 // the first tick loop

@@ -4,30 +4,33 @@ import { Ccollision } from "./Player.js";
 // moveable is called from script.js in the run function
 var tick_ = 0;
 
-
 export function tick() {
+  // This function is called continuesly in the script.js file
   if (tick_ < 1) {
   drawgoblins();
   }
+  
   Background.style.left = background.x + "px";
   Background.style.bottom = background.y + "px";
   Background.style.zIndex = -1000 - Math.abs(background.y);
-  MovementActions();
   
+  MovementActions();
   DetermineCorners();
   RenderGoblins();
-  
+
   tick_++;
+  // There shouldn't be any code here
 }
+
 function MovementActions() {
-/* this loops through all the goblins and moves them closer
-to the player and acts apon collsion, it is scalable. 
-commenting the twoardplayer() funciton will stop the 
-goblins from moving, but they will still move with the screen.
-When editing this code know that goblin[i] will refer
-to all goblins, their should be a condition for every
-action, under most circumstances all the goblins will
-be doing the same thing */
+  /* this loops through all the goblins and moves them closer
+  to the player and acts apon collsion, it is scalable. 
+  commenting the twoardplayer() funciton will stop the 
+  goblins from moving, but they will still move with the screen.
+  When editing this code know that goblin[i] will refer
+  to all goblins, their should be a condition for every
+  action, under most circumstances all the goblins will
+  be doing the same thing */
   for (var i = 0; i < goblin.length; i++) {
     if (goblin[i].health <= 0) {
       goblin[i].state = "inactive";
@@ -54,23 +57,25 @@ be doing the same thing */
     if(Ccollision(player, goblin[i])) {
         player.health -= 1;
         bounce(goblin[i], 20);      
-
     }
   }
+    
     if(Ccollision(player_hitbox[0], goblin[i])) {
       if (player.state === "left slap") {
         goblin[i].x -= goblin[i].speed * 100;
-        goblin[i].health -= 2;
+        goblin[i].health -= 10;
       }
     }
+    
     if(Ccollision(player_hitbox[1], goblin[i])) {
       if (player.state === "right slap") {
         goblin[i].x += goblin[i].speed * 100;
-        goblin[i].health -= 2;
+        goblin[i].health -= 10;
       }
     }
   }
 }
+
 function bounce(moveable, bounce, spread = 0) {
      if (moveable.state === "right") {
         moveable.x -= moveable.speed * bounce;

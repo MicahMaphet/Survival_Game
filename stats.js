@@ -66,5 +66,4 @@ healthbar.style.left = x + "%";
 
 window.addEventListener("load", event => {
     var isLoaded = healthbar.complete && healthbar.naturalHeight !== 0;
-    console.log(isLoaded);
 });
