@@ -324,7 +324,7 @@ if(controlsbutton.mouseCollide()) {
 
   RenderImage("CharMenu", charmenu, "px");
   if(waitCharMation > 50) {
-    let pose = Math.floor(Math.random() * 4);
+    let pose = Math.round(Math.random() * 4);
     switch(pose) {
       case 0:
         charmenu.loadImage("images/MenuScreen/CharacterPoses/CharacterInMenu1.svg", CharMenu);
