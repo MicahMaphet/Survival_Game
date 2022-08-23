@@ -30,13 +30,6 @@ Player_.style.position = "fixed";
 Player_.style.zIndex = 10;
 document.body.appendChild(Player_);
 
-var FireBall = new Image();
-FireBall.src = 'images/FireBall.png';
-FireBall.id="FireBall";
-FireBall.style.position = "fixed";
-FireBall.style.zIndex = 10;
-document.body.appendChild(FireBall);
-
 var tracktick = "begin"; // if its begin, then it is 
 // the first tick loop
 
@@ -54,7 +47,7 @@ export function tick() {
 
 document.getElementById("positions").innerHTML = player.health;
   
-  goblin[0].x < player.x - background.x + player.hurt_width
+  // goblin[0].x < player.x - background.x + player.hurt_width
 
   renderIMG(IMG);
 
@@ -64,6 +57,7 @@ document.getElementById("positions").innerHTML = player.health;
   Playerimg.style.bottom = player.y + ImageBufferY + "px";
   hurtbox.style.left = player.x + "px";
   hurtbox.style.bottom = player.y  + "px";
+
   collide();
   
   tracktick++; // this goes at the end of tick
@@ -118,7 +112,7 @@ function Ccheck(corner, moveable_) {
 }
 
 function ReadInputs() {
-  if (ArrowRight === true) {
+  if (ArrowRight) {
     if(slap) {
       if(slapframe < 1) {
         IMG = "images/PlayerImages/Player right slap1.svg";
@@ -132,11 +126,11 @@ function ReadInputs() {
       move(player.speed, 0);
       if (IMG >= "images/PlayerImages/Player right slap1.svg") {
         IMG = "images/PlayerImages/Player.svg";
-        player.state = "right";
       }
+      player.state = "right";
     }
   }
-  if (ArrowLeft === true) {
+  if(ArrowLeft) {
     if(slap) {
       if(slapframe < 1) {
         IMG = "images/PlayerImages/Player left slap1.svg";
@@ -149,20 +143,19 @@ function ReadInputs() {
         }
     } else {
       move(player.speed * -1, 0);
-  // I don't want the player to move if he is attacking
-    if (IMG === "images/PlayerImages/Player left slap1.svg") {
-          IMG = "images/PlayerImages/Player.svg";
-        player.state = "left";
+      // I don't want the player to move if he is attacking
+      if(IMG === "images/PlayerImages/Player left slap1.svg") {
+        IMG = "images/PlayerImages/Player.svg";
       }
+      player.state = "left";
     }
   }
-  if (ArrowDown === true) {
-  move(0, player.speed * -1);
-
+  
+  if (ArrowDown) {
+    move(0, player.speed * -1);
   }
-  if (ArrowUp === true) {
-  move(0, player.speed);
-    
+  if (ArrowUp) {
+    move(0, player.speed);
   }
 
 // the value of player.speed is in the script.js file, as well

@@ -231,7 +231,6 @@ export function tick() {
     }
 
   
-  console.log(MenuBackground.height, MenuBackground.width)
   RenderImage("MenuBackground", menubackground, "px");
   menubackground.loadImage("images/MenuScreen/MenuBackground.png", MenuBackground);
 }

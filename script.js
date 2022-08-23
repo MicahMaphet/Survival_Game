@@ -2,6 +2,7 @@ import {tick as Playertick} from "./Player.js";
 import {tick as Maptick} from "./Map.js";
 import {tick as Statstick} from "./stats.js";
 import {tick as Menutick, GameState} from "./menu.js";
+import {tick as Objectstick, DetermineCorners} from "./Objects.js";
 
 export class moveable {
   constructor(x = 0, y = 0, speed = 0, hurt_width = 50, hurt_height = 50, health = 20, state = "idle") {
@@ -52,6 +53,7 @@ document.body.appendChild(hurtbox);
 // export var Goblins_y = [2000, 1500, 3000, 3500, 2500, 1000, 1100, 1500, 2000, 1000, 1100, 1500, 3000, 3000, 4000, 5000, 3000, 1000, 2000, 500,  5000, 3500, 500,  3000, 4000, 5000, 1000, 3000, 500,  500,  1000, 1000, -1000, -500, -1500, 500,  -500, -1000, 0,    -500, 1000, 1500, -500, 500];         
 
 export const fireball = new moveable(0, 0, 5, 50, 50);
+DetermineCorners();
 
 export var Goblins_x = [];
 export var Goblins_y = []; 
@@ -131,9 +133,10 @@ var panic_ = false;
 function run() {
   if (!panic_) {
     if(GameState === "gaming") {
-       Playertick();
-       Maptick();
-       Statstick();
+      Playertick();
+      Maptick();
+      Statstick();
+      Objectstick();
     }
     if(GameState === "menu"||
        GameState === "controls") {
