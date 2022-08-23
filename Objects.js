@@ -8,7 +8,7 @@ FireBall.style.zIndex = 10;
 document.body.appendChild(FireBall);
 
 let space = false;
-export let fireDir = "none";
+export let fireDir = "ready";
 
 export function tick() {
   FireBall.style.left = fireball.x + background.x + "px";
@@ -16,7 +16,8 @@ export function tick() {
   FireBall.style.width = "100px";
   
   if(space &&
-     fireDir === "none") {
+     fireDir === "ready") {
+    // If space is pressed and the fireball has reacharged
     if(player.state === "right"||
        player.state === "right slap") {
       fireDir = "right";
@@ -31,7 +32,6 @@ export function tick() {
       fireball.health = fireball.maxhealth;
     }
   }
-  console.log(fireDir, player.state);
 
   if(fireDir === "right"&&
      fireball.health > 0) {
@@ -41,12 +41,27 @@ export function tick() {
             fireball.health > 0) {
     fireball.x -= 10;
     fireball.health--;
-  } else if(fireball.health <= 0) {
-    fireDir = "none";
-    fireball.health = 0;
+  }
+  if(fireDir !== "recharging"&&
+     fireball.health < 0) {
+     fireball.health = 0;
+  }
+  
+  if(fireDir === "recharging"&&
+     fireball.health < 0) {
+    fireball.health++;
+  } else if(fireDir === "recharging") {
+    fireball.health = fireball.maxhealth;
+    fireDir = "ready";
+  } else if(fireball.health === 0&&
+            fireDir !== "recharging"&&
+            fireDir !== "ready") {
+    fireDir = "recharging";
+    fireball.health = -20;
     fireball.x = -500 - background.x;
     fireball.y = -500 - background.y;
   }
+  console.log(fireDir, fireball.health);
   DetermineCorners();  
 }
 

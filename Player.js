@@ -7,7 +7,7 @@ import { player, background, goblin, hurtbox, player_hitbox } from "./script.js"
 
 var past_x;
 var past_y;
-var SlapFrames = 15;
+var SlapFrames = 10;
 var slapframe = SlapFrames;
 var slap = false;
 var ArrowRight = false;
