@@ -1,31 +1,37 @@
-import { background, player, Goblins_x, Goblins_y, goblin, player_hitbox } from "./script.js"
+import { background, player, Goblins_x, Goblins_y, goblin, player_hitbox, fireball } from "./script.js"
 import { Ccollision } from "./Player.js";
+import { fireDir } from "./Objects.js";
 
 // moveable is called from script.js in the run function
 var tick_ = 0;
+
 export function tick() {
+  // This function is called continuesly in the script.js file
   if (tick_ < 1) {
   drawgoblins();
   }
+  
   Background.style.left = background.x + "px";
   Background.style.bottom = background.y + "px";
   Background.style.zIndex = -1000 - Math.abs(background.y);
-  MovementActions();
   
+  MovementActions();
   DetermineCorners();
   RenderGoblins();
-  
+
   tick_++;
+  // There shouldn't be any code here
 }
+
 function MovementActions() {
-/* this loops through all the goblins and moves them closer
-to the player and acts apon collsion, it is scalable. 
-commenting the twoardplayer() funciton will stop the 
-goblins from moving, but they will still move with the screen.
-When editing this code know that goblin[i] will refer
-to all goblins, their should be a condition for every
-action, under most circumstances all the goblins will
-be doing the same thing */
+  /* this loops through all the goblins and moves them closer
+  to the player and acts apon collsion, it is scalable. 
+  commenting the twoardplayer() function will stop the 
+  goblins from moving, but they will still move with the screen.
+  When editing this code know that goblin[i] will refer
+  to all goblins, their should be a condition for every
+  action, under most circumstances all the goblins will
+  be doing the same thing */
   for (var i = 0; i < goblin.length; i++) {
     if (goblin[i].health <= 0) {
       goblin[i].state = "inactive";
@@ -52,23 +58,38 @@ be doing the same thing */
     if(Ccollision(player, goblin[i])) {
         player.health -= 1;
         bounce(goblin[i], 20);      
-
     }
   }
+    
     if(Ccollision(player_hitbox[0], goblin[i])) {
       if (player.state === "left slap") {
         goblin[i].x -= goblin[i].speed * 100;
-        goblin[i].health -= 5;
+        goblin[i].health -= 10;
       }
     }
+    
     if(Ccollision(player_hitbox[1], goblin[i])) {
       if (player.state === "right slap") {
         goblin[i].x += goblin[i].speed * 100;
-        goblin[i].health -= 5;
+        goblin[i].health -= 10;
       }
     }
+    if(fireDir === "right") {
+      if(Ccollision(fireball, goblin[i])) {
+          goblin[i].x += goblin[i].speed * 20;
+          goblin[i].health -= 5;
+          fireball.health -= 5;
+      }
+    } else {
+    if(Ccollision(fireball, goblin[i])) {
+        goblin[i].x -= goblin[i].speed * 20;
+        goblin[i].health -= 5;
+        fireball.health -= 5;
+    }
+  }
   }
 }
+
 function bounce(moveable, bounce, spread = 0) {
      if (moveable.state === "right") {
         moveable.x -= moveable.speed * bounce;
@@ -120,7 +141,7 @@ function bounce(moveable, bounce, spread = 0) {
 function drawgoblins() {
 for(var i=0; i<goblin.length; i++) {
   var goblin_image = new Image();
-  goblin_image.src = "Goblin.svg";
+  goblin_image.src = "images/Goblin.svg";
   goblin_image.id="Goblin" + i;
   goblin_image.style.position = "fixed";
   goblin_image.style.width = "100px";
@@ -180,8 +201,8 @@ if(moveable.state != "inactive") {
     moveable.state = "left down";
   }
 }
+}
 
-  }
 function twoardplayer(moveable) {
     if (moveable.x > player.x - background.x  + 10) {
       if(moveable.y < player.y - background.y - 10) {
@@ -247,9 +268,8 @@ function DetermineCorners() {
     goblin[i].corner3 = [goblin[i].x + 15, goblin[i].y + goblin[i].hurt_height];
     goblin[i].corner4 = [goblin[i].x + goblin[i].hurt_width + 15, goblin[i].y + goblin[i].hurt_width];
   }
-    background.corner1 = [2180, 1775];
-    background.corner2 = [4750, 1775];
-    background.corner3 = [2180, 3325];
-    background.corner4 = [4750, 3325];
-
+  background.corner1 = [2180, 1775];
+  background.corner2 = [4750, 1775];
+  background.corner3 = [2180, 3325];
+  background.corner4 = [4750, 3325];
 }

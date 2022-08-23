@@ -7,7 +7,7 @@ import { player, background, goblin, hurtbox, player_hitbox } from "./script.js"
 
 var past_x;
 var past_y;
-var SlapFrames = 30;
+var SlapFrames = 15;
 var slapframe = SlapFrames;
 var slap = false;
 var ArrowRight = false;
@@ -17,19 +17,18 @@ var ArrowUp = false;
 var space = false;
 var ImageBufferX = -206;
 var ImageBufferY = -150;
-var IMG = "Player.svg";
+var IMG = "images/PlayerImages/Player.svg";
 /*the ImageBuffer variables stop the player images from
 changing the viewed position of the character without
 other files perceiving the position of the player
 as changed */
 
 var Player_ = new Image();
-Player_.src = 'Player.svg';
+Player_.src = 'images/PlayerImages/Player.svg';
 Player_.id="Playerimg";
 Player_.style.position = "fixed";
 Player_.style.zIndex = 10;
 document.body.appendChild(Player_);
-
 
 var tracktick = "begin"; // if its begin, then it is 
 // the first tick loop
@@ -45,11 +44,10 @@ export function tick() {
 
     tracktick = 0;
   }
-  console.log("raw x and y", player.x, player.y, "player 1st corner", player.corner1[0], player.corner1[1], "background corners", background.corner1[0], background.corner1[1], "background x and y", background.x, background.y);
 
 document.getElementById("positions").innerHTML = player.health;
   
-  goblin[0].x < player.x - background.x + player.hurt_width
+  // goblin[0].x < player.x - background.x + player.hurt_width
 
   renderIMG(IMG);
 
@@ -59,11 +57,12 @@ document.getElementById("positions").innerHTML = player.health;
   Playerimg.style.bottom = player.y + ImageBufferY + "px";
   hurtbox.style.left = player.x + "px";
   hurtbox.style.bottom = player.y  + "px";
+
   collide();
   
   tracktick++; // this goes at the end of tick
 }
-var oxygen = 520;
+var oxygen = 500;
 function collide() {
   if (Ccollision(player, background)) {
     player.speed = player.maxspeed;
@@ -113,10 +112,10 @@ function Ccheck(corner, moveable_) {
 }
 
 function ReadInputs() {
-  if (ArrowRight === true) {
+  if (ArrowRight) {
     if(slap) {
       if(slapframe < 1) {
-        IMG = "Player right slap1.svg";
+        IMG = "images/PlayerImages/Player right slap1.svg";
       }      player.state = "right slap";
         slapframe++;
         if(slapframe >= SlapFrames) {
@@ -125,16 +124,16 @@ function ReadInputs() {
         }
     } else {
       move(player.speed, 0);
-      if (IMG >= "Player right slap1.svg") {
-        IMG = "Player.svg";
-        player.state = "right";
+      if (IMG >= "images/PlayerImages/Player right slap1.svg") {
+        IMG = "images/PlayerImages/Player.svg";
       }
+      player.state = "right";
     }
   }
-  if (ArrowLeft === true) {
+  if(ArrowLeft) {
     if(slap) {
       if(slapframe < 1) {
-        IMG = "Player left slap1.svg";
+        IMG = "images/PlayerImages/Player left slap1.svg";
       }
       player.state = "left slap";
         slapframe++;
@@ -144,20 +143,19 @@ function ReadInputs() {
         }
     } else {
       move(player.speed * -1, 0);
-  // I don't want the player to move if he is attacking
-    if (IMG === "Player left slap1.svg") {
-          IMG = "Player.svg";
-        player.state = "left";
+      // I don't want the player to move if he is attacking
+      if(IMG === "images/PlayerImages/Player left slap1.svg") {
+        IMG = "images/PlayerImages/Player.svg";
       }
+      player.state = "left";
     }
   }
-  if (ArrowDown === true) {
-  move(0, player.speed * -1);
-
+  
+  if (ArrowDown) {
+    move(0, player.speed * -1);
   }
-  if (ArrowUp === true) {
-  move(0, player.speed);
-    
+  if (ArrowUp) {
+    move(0, player.speed);
   }
 
 // the value of player.speed is in the script.js file, as well
@@ -236,16 +234,20 @@ function move(xc, yc) {
   past_y = player.y;
   }
 document.addEventListener("keydown", event => {
-  if (event.key === "ArrowRight") {
+  if (event.key === "ArrowRight" ||
+      event.key === "d") {
     ArrowRight = true;
   }  
-  if (event.key === "ArrowLeft") {
+  if (event.key === "ArrowLeft" ||
+      event.key === "a") {
     ArrowLeft = true;
   }
-  if (event.key === "ArrowDown") {
+  if (event.key === "ArrowDown" ||
+      event.key === "s") {
     ArrowDown = true;
   }  
-  if (event.key === "ArrowUp") {
+  if (event.key === "ArrowUp" ||
+      event.key === "w") {
     ArrowUp = true;
   }
   if (event.code === "Space") {
@@ -257,23 +259,27 @@ document.addEventListener("keydown", event => {
 });
 
 document.addEventListener("keyup", event => {
-  if (event.key === "ArrowRight") {
+  if (event.key === "ArrowRight" ||
+      event.key === "d") {
     ArrowRight = false;
   }  
-  if (event.key === "ArrowLeft") {
+  if (event.key === "ArrowLeft" ||
+      event.key === "a") {
     ArrowLeft = false;
   }
-  if (event.key === "ArrowDown") {
+  if (event.key === "ArrowDown" ||
+      event.key === "s") {
     ArrowDown = false;
   }  
-  if (event.key === "ArrowUp") {
+  if (event.key === "ArrowUp" ||
+      event.key === "w") {
     ArrowUp = false;
   }
   if (event.code === "Space") {
     space = false;
   }
 });
-function renderIMG(IMG_ = "Player.svg") {
+function renderIMG(IMG_ = "images/PlayerImages/Player.svg") {
       Playerimg.src = IMG_;
 /* having this script in a function stops this file 
 from getting out of sync with the image */  

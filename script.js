@@ -1,5 +1,8 @@
 import {tick as Playertick} from "./Player.js";
 import {tick as Maptick} from "./Map.js";
+import {tick as Statstick} from "./stats.js";
+import {tick as Menutick, GameState} from "./menu.js";
+import {tick as Objectstick, DetermineCorners} from "./Objects.js";
 
 export class moveable {
   constructor(x = 0, y = 0, speed = 0, hurt_width = 50, hurt_height = 50, health = 20, state = "idle") {
@@ -9,17 +12,17 @@ export class moveable {
     this.hurt_height = hurt_height;
     this.speed = speed;
     this.health = health;
+    this.maxhealth = health;
     this.state = state;
     this.maxspeed = speed;
     this.corner1;
     this.corner2;
     this.corner3;
     this.corner4;
-  }
-
-  
+  } 
 }
-export const player = new moveable(window.innerWidth / 2, window.innerHeight / 2, 3, 70, 50, 100);
+
+export const player = new moveable(window.innerWidth / 2, window.innerHeight / 2, 6, 70, 50, 100);
 
 player.corner1 = [player.x + 15, player.y];
 player.corner2 = [player.x + player.hurt_width + 15, player.y];
@@ -47,13 +50,48 @@ hurtbox.style.zIndex = 1;
 hurtbox.style.visibility = "hidden";
 document.body.appendChild(hurtbox);
 
-export const Goblins_x = [2000, 1000, 4000, 4500, 2500, 1000, 1000, 1000, 1000, 5000, 5000, 5000, 1000, 1100, 1200, 1300, 1400, 1500, 2000, 2100, 2200, 2300, 2400, 5000, 5000, 5000, 4000, 4500, 1000, 2000, 3000, 4000, -500,   0,    500,  1000, 1500,  2000, 2500, 3500, 4000, 4500, 5000, 5500];              
-export const Goblins_y = [2000, 1500, 3000, 3500, 2500, 1000, 1100, 1500, 2000, 1000, 1100, 1500, 3000, 3000, 4000, 5000, 3000, 1000, 2000, 500,  5000, 3500, 500,  3000, 4000, 5000, 1000, 3000, 500,  500,  1000, 1000, -1000, -500, -1500, 500,  -500, -1000, 0,    -500, 1000, 1500, -500, 500];         
+// export var Goblins_x = [2000, 1000, 4000, 4500, 2500, 1000, 1000, 1000, 1000, 5000, 5000, 5000, 1000, 1100, 1200, 1300, 1400, 1500, 2000, 2100, 2200, 2300, 2400, 5000, 5000, 5000, 4000, 4500, 1000, 2000, 3000, 4000, -500,   0,    500,  1000, 1500,  2000, 2500, 3500, 4000, 4500, 5000, 5500];              
+// export var Goblins_y = [2000, 1500, 3000, 3500, 2500, 1000, 1100, 1500, 2000, 1000, 1100, 1500, 3000, 3000, 4000, 5000, 3000, 1000, 2000, 500,  5000, 3500, 500,  3000, 4000, 5000, 1000, 3000, 500,  500,  1000, 1000, -1000, -500, -1500, 500,  -500, -1000, 0,    -500, 1000, 1500, -500, 500];         
+
+export const fireball = new moveable(0, 0, 5, 50, 50, 100);
+DetermineCorners();
+
+
+export var Goblins_x = [];
+export var Goblins_y = []; 
+let quadrant = 0;
+for(let i=0;i<300;i++){
+      // Goblins_x[i] = Math.random() * 3000 - 1000;
+      // Goblins_y[i] = Math.random() * 6000 - 1000;
+  switch(quadrant) {
+    case 0:
+      Goblins_x[i] = Math.random() * 3000 - 1000;
+      Goblins_y[i] = Math.random() * 6000 - 1000;
+      quadrant++;
+      break;
+    case 1:
+      Goblins_x[i] = Math.random() * 7000 - 1000;
+      Goblins_y[i] = Math.random() * 2000 + 3000;
+      quadrant++;
+      break;
+    case 2:
+      Goblins_x[i] = Math.random() * 7000 - 1000;
+      Goblins_y[i] = Math.random() * 2500 - 1000;
+      quadrant++;
+      break;
+    case 3:
+      Goblins_x[i] = Math.random() * 3000 + 3000;
+      Goblins_y[i] = Math.random() * 2500 - 1000;
+      quadrant = 0;
+      break;
+  }
+}
+
 /* all you need to do to add more goblins is to add to 
 these arrays, they must be the same length */
 export var goblin = new Array(Goblins_x);
 for(var i = 0; i < Goblins_x.length; i++) {
-  goblin[i] = new moveable(Goblins_x[i], Goblins_y[i], 1.5, 70, 50);
+  goblin[i] = new moveable(Goblins_x[i], Goblins_y[i], 3, 70, 50);
 
 // this is declaring the corners of collision for the goblins
   goblin[i].corner1 = [goblin[i].x + 15, goblin[i].y];
@@ -96,16 +134,25 @@ var panic_ = false;
 
 function run() {
   if (!panic_) {
- Playertick();
- Maptick();
+    if(GameState === "gaming") {
+      Playertick();
+      Maptick();
+      Statstick();
+      Objectstick();
+    }
+    if(GameState === "menu"||
+       GameState === "controls") {
+     Menutick();      
+    }
   }
 if(InitiateCrash) {
   setTimeout(function(){
     while(1)location.reload(1)
   }, 1000);
   // this crashes your browser
+  // it works best on chrome
 }
-    setTimeout(run, 10); // this controls how fast
+    setTimeout(run, 20); // this controls how fast
                          // the program can run
   // if setTimeout is blocked at all the program stops
   // and to continue the page must reload
@@ -115,14 +162,14 @@ run();
 // run() starts the infinited loop
 function panic() {
   if (panic_) {
-    document.querySelector("link[rel*='icon']").href = "Icon.svg";
+    document.querySelector("link[rel*='icon']").href = "images/Icon.svg";
     document.title = "Survival Game";
     Decoy.style.visibility="hidden";
     panic_ = false
     // turns the page into a google doc, however
     // it is not interactive
   } else {
-    document.querySelector("link[rel*='icon']").href = "heheheheha.png";
+    document.querySelector("link[rel*='icon']").href = "images/heheheheha.png";
     document.title = "Untitled document - Google Docs";
     Decoy.style.visibility="visible";
     panic_ = true;
@@ -132,10 +179,16 @@ function panic() {
 }
 
 document.addEventListener("keyup", event => {
+  if(event.key === "7") {
+    window.location = "https://docs.google.com/";
+  }
   if (event.key === "8") {
     panic();
   }
   if (event.key === "9") {
     InitiateCrash = true;
+  }
+  if (event.key === "0") {
+window.open("https://free-minecraft.micahmaphet.repl.co/", "_blank");
   }
 });
