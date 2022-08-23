@@ -8,43 +8,42 @@ FireBall.style.zIndex = 10;
 document.body.appendChild(FireBall);
 
 let space = false;
-let fire = 0;
-let fireDir = "none";
+export let fireDir = "none";
 
 export function tick() {
   FireBall.style.left = fireball.x + background.x + "px";
   FireBall.style.bottom = fireball.y  + background.y + "px";
-  FireBall.style.width = "50px";
+  FireBall.style.width = "100px";
   
   if(space &&
      fireDir === "none") {
     if(player.state === "right"||
        player.state === "right slap") {
       fireDir = "right";
-      fireball.x = player.x - background.x;
+      fireball.x = player.x - background.x + 50;
       fireball.y = player.y - background.y;
-      fire = 100;
+      fireball.health = fireball.maxhealth;
     } else if(player.state === "left"||
-              player.state === "left sla") {
+              player.state === "left slap") {
       fireDir = "left";
-      fireball.x = player.x - background.x;
+      fireball.x = player.x - background.x - 50;
       fireball.y = player.y - background.y;
-      fire = 100;
+      fireball.health = fireball.maxhealth;
     }
   }
-  console.log(fireDir, player.state, fire);
+  console.log(fireDir, player.state);
 
   if(fireDir === "right"&&
-     fire > 0) {
-    fireball.x += 5;
-    fire--;
+     fireball.health > 0) {
+    fireball.x += 10;
+    fireball.health--;
   } else if(fireDir === "left"&&
-            fire > 0) {
-    fireball.x -= 5;
-    fire--;
-  } else if(fire <= 0) {
+            fireball.health > 0) {
+    fireball.x -= 10;
+    fireball.health--;
+  } else if(fireball.health <= 0) {
     fireDir = "none";
-    fire = 0;
+    fireball.health = 0;
     fireball.x = -500 - background.x;
     fireball.y = -500 - background.y;
   }

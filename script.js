@@ -12,6 +12,7 @@ export class moveable {
     this.hurt_height = hurt_height;
     this.speed = speed;
     this.health = health;
+    this.maxhealth = health;
     this.state = state;
     this.maxspeed = speed;
     this.corner1;
@@ -52,13 +53,14 @@ document.body.appendChild(hurtbox);
 // export var Goblins_x = [2000, 1000, 4000, 4500, 2500, 1000, 1000, 1000, 1000, 5000, 5000, 5000, 1000, 1100, 1200, 1300, 1400, 1500, 2000, 2100, 2200, 2300, 2400, 5000, 5000, 5000, 4000, 4500, 1000, 2000, 3000, 4000, -500,   0,    500,  1000, 1500,  2000, 2500, 3500, 4000, 4500, 5000, 5500];              
 // export var Goblins_y = [2000, 1500, 3000, 3500, 2500, 1000, 1100, 1500, 2000, 1000, 1100, 1500, 3000, 3000, 4000, 5000, 3000, 1000, 2000, 500,  5000, 3500, 500,  3000, 4000, 5000, 1000, 3000, 500,  500,  1000, 1000, -1000, -500, -1500, 500,  -500, -1000, 0,    -500, 1000, 1500, -500, 500];         
 
-export const fireball = new moveable(0, 0, 5, 50, 50);
+export const fireball = new moveable(0, 0, 5, 50, 50, 100);
 DetermineCorners();
+
 
 export var Goblins_x = [];
 export var Goblins_y = []; 
 let quadrant = 0;
-for(let i=0;i<100;i++){
+for(let i=0;i<300;i++){
       // Goblins_x[i] = Math.random() * 3000 - 1000;
       // Goblins_y[i] = Math.random() * 6000 - 1000;
   switch(quadrant) {

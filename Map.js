@@ -1,5 +1,6 @@
 import { background, player, Goblins_x, Goblins_y, goblin, player_hitbox, fireball } from "./script.js"
 import { Ccollision } from "./Player.js";
+import { fireDir } from "./Objects.js";
 
 // moveable is called from script.js in the run function
 var tick_ = 0;
@@ -73,10 +74,19 @@ function MovementActions() {
         goblin[i].health -= 10;
       }
     }
+    if(fireDir === "right") {
+      if(Ccollision(fireball, goblin[i])) {
+          goblin[i].x += goblin[i].speed * 20;
+          goblin[i].health -= 5;
+          fireball.health -= 5;
+      }
+    } else {
     if(Ccollision(fireball, goblin[i])) {
         goblin[i].x -= goblin[i].speed * 20;
-        goblin[i].health -= 1;
+        goblin[i].health -= 5;
+        fireball.health -= 5;
     }
+  }
   }
 }
 

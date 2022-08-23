@@ -240,7 +240,7 @@ function RenderImage(image, object, measurement) {
   document.getElementById(image).style.width = object.width + measurement;
   document.getElementById(image).style.height = object.height + measurement;
   document.getElementById(image).style.left = object.left + measurement; 
-  document.getElementById(image).style.top = object.top + measurement
+  document.getElementById(image).style.top = object.top + measurement;
   document.getElementById(image).style.zIndex = object.zIndex;
   document.getElementById(image).style.visibility = object.visibility;
 }
@@ -287,7 +287,7 @@ if(playbutton.mouseCollide()) {
     playbutton.shake = 5;
     close();
   } else {
-    playbutton.shake = playbutton.defaultwidth / 8;
+    playbutton.shake = playbutton.defaultwidth / 9;
   }
 } else {
   playbutton.shake = playbutton.defaultwidth / 10;
@@ -310,7 +310,7 @@ if(controlsbutton.mouseCollide()) {
     opencontrols();
     controlsbutton.shake = 5;
   } else {
-    controlsbutton.shake = controlsbutton.defaultwidth / 8;
+    controlsbutton.shake = controlsbutton.defaultwidth / 9;
   }
 } else {
   controlsbutton.shake = controlsbutton.defaultwidth / 10;
@@ -342,22 +342,25 @@ if(controlsbutton.mouseCollide()) {
 
   RenderImage("CharMenu", charmenu, "px");
   if(waitCharMation > 50) {
-    let pose = Math.round(Math.random() * 4);
+    let pose = Math.round(Math.random() * 7);
     switch(pose) {
-      case 0:
+      case 0||1||2:
         charmenu.loadImage("images/MenuScreen/CharacterPoses/CharacterInMenu1.svg", CharMenu);
         break;
-      case 1:
+      case 3:
         charmenu.loadImage("images/MenuScreen/CharacterPoses/CharacterInMenu2.svg", CharMenu);
         break;
-      case 2:
+      case 4:
         charmenu.loadImage("images/MenuScreen/CharacterPoses/CharacterInMenu3.svg", CharMenu);
         break;
-      case 3:
+      case 5:
         charmenu.loadImage("images/MenuScreen/CharacterPoses/CharacterInMenu4.svg", CharMenu);
         break;
-      case 4:
+      case 6:
         charmenu.loadImage("images/MenuScreen/CharacterPoses/CharacterInMenu5.svg", CharMenu);
+        break;
+      case 7:
+        charmenu.loadImage("images/MenuScreen/CharacterPoses/CharacterInMenu6.svg", CharMenu);
         break;
       default:
         charmenu.loadImage("images/MenuScreen/CharacterPoses/CharacterInMenu1.svg", CharMenu);
