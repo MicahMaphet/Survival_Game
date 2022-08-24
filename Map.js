@@ -38,6 +38,9 @@ function MovementActions() {
   action, under most circumstances all the goblins will
   be doing the same thing */
   for (var i = 0; i < goblin.length; i++) {
+    if (goblin[i].state != "inactive") {
+
+    if(tick_ > goblin[i].spawndelay) {
     if (goblin[i].health <= 0) {
       goblin[i].state = "inactive";
     }
@@ -58,7 +61,6 @@ function MovementActions() {
     }
   }
     
-  if (goblin[i].state != "inactive") {
     twoardplayer(goblin[i]);
     if(Ccollision(player, goblin[i])) {
       player.health -= 1;
@@ -92,6 +94,7 @@ function MovementActions() {
         fireball.health -= 2;
       }
     }
+  }
   }
 }
 
