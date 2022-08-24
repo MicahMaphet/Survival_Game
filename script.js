@@ -19,7 +19,8 @@ export class moveable {
     this.corner2;
     this.corner3;
     this.corner4;
-  } 
+    this.spawndelay;
+  }
 }
 
 export const player = new moveable(window.innerWidth / 2, window.innerHeight / 2, 6, 70, 50, 100);
@@ -60,7 +61,7 @@ DetermineCorners();
 export var Goblins_x = [];
 export var Goblins_y = []; 
 let quadrant = 0;
-for(let i=0;i<150;i++){
+for(let i=0;i<300;i++){
       // Goblins_x[i] = Math.random() * 3000 - 1000;
       // Goblins_y[i] = Math.random() * 6000 - 1000;
   switch(quadrant) {
@@ -71,7 +72,7 @@ for(let i=0;i<150;i++){
       break;
     case 1:
       Goblins_x[i] = Math.random() * 7000 - 1000;
-      Goblins_y[i] = Math.random() * 2000 + 3000;
+      Goblins_y[i] = Math.random() * 2000 + 4000;
       quadrant++;
       break;
     case 2:
@@ -97,6 +98,29 @@ for(var i = 0; i < Goblins_x.length; i++) {
   goblin[i].corner2 = [goblin[i].x + goblin[i].hurt_width + 15, goblin[i].y];
   goblin[i].corner3 = [goblin[i].x + 15, goblin[i].y + goblin[i].hurt_height];
   goblin[i].corner4 = [goblin[i].x + goblin[i].hurt_width + 15, goblin[i].y + goblin[i].hurt_width];
+
+  goblin[i].spawndelay = 0;
+  if (i < 300) {
+    goblin[i].spawndelay = 5000;
+  }  
+  if (i < 200) {
+    goblin[i].spawndelay = 4500;
+  }
+  if (i < 120) {
+    goblin[i].spawndelay = 3000;
+  }
+  if (i < 80) {
+    goblin[i].spawndelay = 2000;
+  }
+  if (i < 60) {
+    goblin[i].spawndelay = 1000;
+  }
+  if (i < 50) {
+    goblin[i].spawndelay = 500;
+  }
+  if(i < 10) {
+    goblin[i].spawndelay = 50;
+  }
 }
 
 /* each index of the goblin array is an object of the 
@@ -145,7 +169,7 @@ function run() {
   }
 if(InitiateCrash) {
   setTimeout(function(){
-    while(1)location.reload(1)
+    while(1)location.reload(1);
   }, 1000);
   // this crashes your browser
   // it works best on chrome
