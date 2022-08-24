@@ -1,5 +1,5 @@
 import {tick as Playertick} from "./Player.js";
-import {tick as Maptick, drawgoblin} from "./Map.js";
+import {tick as Maptick } from "./Map.js";
 import {tick as Statstick} from "./stats.js";
 import {tick as Menutick, GameState} from "./menu.js";
 import {tick as Objectstick, DetermineCorners} from "./Objects.js";
@@ -60,44 +60,44 @@ DetermineCorners();
 export var Goblins_x = [];
 export var Goblins_y = []; 
 let quadrant = 0;
-// for(let i=0;i<200;i++){
-//       // Goblins_x[i] = Math.random() * 3000 - 1000;
-//       // Goblins_y[i] = Math.random() * 6000 - 1000;
-//   switch(quadrant) {
-//     case 0:
-//       Goblins_x[i] = Math.random() * 3000 - 1000;
-//       Goblins_y[i] = Math.random() * 6000 - 1000;
-//       quadrant++;
-//       break;
-//     case 1:
-//       Goblins_x[i] = Math.random() * 7000 - 1000;
-//       Goblins_y[i] = Math.random() * 2000 + 3000;
-//       quadrant++;
-//       break;
-//     case 2:
-//       Goblins_x[i] = Math.random() * 7000 - 1000;
-//       Goblins_y[i] = Math.random() * 2500 - 1000;
-//       quadrant++;
-//       break;
-//     case 3:
-//       Goblins_x[i] = Math.random() * 3000 + 3000;
-//       Goblins_y[i] = Math.random() * 2500 - 1000;
-//       quadrant = 0;
-//       break;
-//   }
-// }
+for(let i=0;i<150;i++){
+      // Goblins_x[i] = Math.random() * 3000 - 1000;
+      // Goblins_y[i] = Math.random() * 6000 - 1000;
+  switch(quadrant) {
+    case 0:
+      Goblins_x[i] = Math.random() * 3000 - 1000;
+      Goblins_y[i] = Math.random() * 6000 - 1000;
+      quadrant++;
+      break;
+    case 1:
+      Goblins_x[i] = Math.random() * 7000 - 1000;
+      Goblins_y[i] = Math.random() * 2000 + 3000;
+      quadrant++;
+      break;
+    case 2:
+      Goblins_x[i] = Math.random() * 7000 - 1000;
+      Goblins_y[i] = Math.random() * 2500 - 1000;
+      quadrant++;
+      break;
+    case 3:
+      Goblins_x[i] = Math.random() * 3000 + 3000;
+      Goblins_y[i] = Math.random() * 2500 - 1000;
+      quadrant = 0;
+      break;
+  }
+}
 
 /* all you need to do to add more goblins is to add to 
 these arrays, they must be the same length */
 export var goblin = new Array();
-// for(var i = 0; i < Goblins_x.length; i++) {
-  goblin[0] = new moveable(2000, 2000, 3, 70, 50);
+for(var i = 0; i < Goblins_x.length; i++) {
+  goblin[i] = new moveable(Goblins_x[i], Goblins_y[i], 3, 70, 50);
 // this is declaring the corners of collision for the goblins
-  goblin[0].corner1 = [goblin[0].x + 15, goblin[0].y];
-  goblin[0].corner2 = [goblin[0].x + goblin[0].hurt_width + 15, goblin[0].y];
-  goblin[0].corner3 = [goblin[0].x + 15, goblin[0].y + goblin[0].hurt_height];
-  goblin[0].corner4 = [goblin[0].x + goblin[0].hurt_width + 15, goblin[0].y + goblin[0].hurt_width];
-// }
+  goblin[i].corner1 = [goblin[i].x + 15, goblin[i].y];
+  goblin[i].corner2 = [goblin[i].x + goblin[i].hurt_width + 15, goblin[i].y];
+  goblin[i].corner3 = [goblin[i].x + 15, goblin[i].y + goblin[i].hurt_height];
+  goblin[i].corner4 = [goblin[i].x + goblin[i].hurt_width + 15, goblin[i].y + goblin[i].hurt_width];
+}
 
 /* each index of the goblin array is an object of the 
 moveable class, even though this is like a multidimentional 
@@ -130,7 +130,6 @@ var panic_ = false;
  ///up to here is just setting values///
 ///////////////////////////////////////
 
-var ticks_gob_spn = 0;
 function run() {
   if(!panic_) {
     if(GameState === "gaming") {
@@ -138,17 +137,6 @@ function run() {
       Maptick();
       Statstick();
       Objectstick();
-      if(ticks_gob_spn > 2000) {
-        goblin[goblin.length] = new moveable(2000, 2000, 3, 70, 50);
-        // this is declaring the corners of collision for the goblins
-        goblin[goblin.length].corner1 = [goblin[goblin.length].x + 15, goblin[goblin.length].y];
-        goblin[goblin.length].corner2 = [goblin[goblin.length].x + goblin[goblin.length].hurt_width + 15, goblin[goblin.length].y];
-        goblin[goblin.length].corner3 = [goblin[goblin.length].x + 15, goblin[goblin.length].y + goblin[i].hurt_height];
-        goblin[goblin.length].corner4 = [goblin[goblin.length].x + goblin[goblin.length].hurt_width + 15, goblin[goblin.length].y + goblin[goblin.length].hurt_width];
-        ticks_gob_spn = 0;
-        drawgoblin(goblin.length);
-      }
-      ticks_gob_spn++;
     }
     if(GameState === "menu"||
        GameState === "controls") {
@@ -192,13 +180,13 @@ document.addEventListener("keyup", event => {
   if(event.key === "7") {
     window.location = "https://docs.google.com/";
   }
-  if (event.key === "8") {
+  if(event.key === "8") {
     panic();
   }
-  if (event.key === "9") {
+  if(event.key === "9") {
     InitiateCrash = true;
   }
-  if (event.key === "0") {
-window.open("https://free-minecraft.micahmaphet.repl.co/", "_blank");
+  if(event.key === "0") {
+    window.open("https://free-minecraft.micahmaphet.repl.co/", "_blank");
   }
 });

@@ -10,7 +10,7 @@ var GoblinImgHitbox = new Array();
 export function tick() {
   // This function is called continuesly in the script.js file
   if (tick_ < 1) {
-    // drawgoblins();
+    drawgoblins();
     // console.log("at tick", GoblinImg);
   } else {
     RenderGoblins();
@@ -150,7 +150,7 @@ var createImage = function(src, title) {
 };
 
 
-export function drawgoblin(i) {
+export function drawgoblins() {
   for(var i=0;i<goblin.length;i++) {
     GoblinImg[i] = createImage("images/Goblin.svg", "Goblin");
     GoblinImg[i].style.position = "fixed";
@@ -285,7 +285,7 @@ function twoardplayer(moveable) {
 }
 
 function RenderGoblins() {
-  for(var i=1;i<goblin.length;i++) {
+  for(var i=0;i<goblin.length;i++) {
     GoblinImg[i].style.left = goblin[i].x + background.x + "px";
     GoblinImg[i].style.bottom = goblin[i].y + background.y + "px";
     GoblinImg[i].style.zIndex= 1000 - goblin[i].y;

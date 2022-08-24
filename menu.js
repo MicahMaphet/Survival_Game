@@ -395,7 +395,7 @@ if(exitbutton.mouseCollide()) {
       GameState = "menu";
       openmenu();
     }
-    exitbutton.shake = exitbutton.defaultwidth / 8;
+    exitbutton.shake = exitbutton.defaultwidth / 9;
   }
 } else {
   exitbutton.shake = exitbutton.defaultwidth / 10;
