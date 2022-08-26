@@ -189,7 +189,7 @@ var mouseDown = false;
 export var GameState = "menu";
 
 var sports_trap = new Audio("audio/Extreme-Sport-Trap-Music-PISTA.mp3");
-sports_trap.volume = 0.2;
+sports_trap.volume = 0.15;
 
 
 /*********************************************
@@ -209,8 +209,7 @@ export function tick() {
     default:
       console.log("GameState is unrecongnized:", GameState, "does not exist")
   }
-
-  // menubackground.left = 0 - window.innerWidth / 3;
+    // menubackground.left = 0 - window.innerWidth / 3;
     // menubackground.width = window.innerWidth * 1.4;
     // menubackground.height = menubackground.width * 0.75;
     // menubackground.left =  window.innerWidth * -0.1  - mouseX / 10;
@@ -239,7 +238,6 @@ export function tick() {
 }
 
 function RenderImage(image, object, measurement) {
-
   document.getElementById(image).style.width = object.width + measurement;
   document.getElementById(image).style.height = object.height + measurement;
   document.getElementById(image).style.left = object.left + measurement; 
@@ -247,7 +245,6 @@ function RenderImage(image, object, measurement) {
   document.getElementById(image).style.zIndex = object.zIndex;
   document.getElementById(image).style.visibility = object.visibility;
 }
-
 
 ///////////////
 ///MenuState///
@@ -277,7 +274,6 @@ function MenuState() {
       upDown = 1;
     }
 
-  
     menutitle.top += (bobTo - menutitle.top) * 0.1;
     // menutitle.top = menutitle.top * 0.5;
 

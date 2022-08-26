@@ -101,26 +101,42 @@ for(var i = 0; i < Goblins_x.length; i++) {
 
   goblin[i].spawndelay = 0;
   if (i < 300) {
-    goblin[i].spawndelay = 5000;
+    goblin[i].spawndelay = 13000;
+  }
+  if (i < 250) {
+    goblin[i].spawndelay = 12000;
+  }  
+  if (i < 225) {
+    goblin[i].spawndelay = 11000;
   }  
   if (i < 200) {
-    goblin[i].spawndelay = 4500;
+    goblin[i].spawndelay = 9000;
+  }
+  if (i < 160) {
+    goblin[i].spawndelay = 7000;
   }
   if (i < 120) {
-    goblin[i].spawndelay = 3000;
+    goblin[i].spawndelay = 6000;
+  }
+  if (i < 100) {
+    goblin[i].spawndelay = 6000;
   }
   if (i < 80) {
-    goblin[i].spawndelay = 2000;
+    goblin[i].spawndelay = 4000;
   }
   if (i < 60) {
-    goblin[i].spawndelay = 1000;
+    goblin[i].spawndelay = 2000;
   }
   if (i < 50) {
+    goblin[i].spawndelay = 1000;
+  }
+  if (i < 25) {
     goblin[i].spawndelay = 500;
   }
   if(i < 10) {
     goblin[i].spawndelay = 50;
   }
+  // console.log(goblin[i].spawndelay);
 }
 
 /* each index of the goblin array is an object of the 
