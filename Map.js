@@ -102,25 +102,24 @@ function MovementActions() {
           fireball.health -= 5;
           // Punch Sound is an array because it needs to play
           // Multiple
-          PunchSound[PSQI].play();
-          PSQI++;
-          if(PSQI > PunchSound.length - 1) {
-            PSQI = 0;
-          }
+          PlayPunchSound();
         }
       } else {
       if(Ccollision(fireball, goblin[i])) {
         goblin[i].x -= goblin[i].speed * 20;
         goblin[i].health -= 5;
         fireball.health -= 2;
-        PunchSound[PSQI].play();
-        PSQI++;
-        if(PSQI > PunchSound.length - 1) {
-          PSQI = 0;
-        }
+        PlayPunchSound();
       }
     }
   }
+  }
+}
+function PlayPunchSound() {
+  PunchSound[PSQI].play();
+  PSQI++;
+  if(PSQI > PunchSound.length - 1) {
+    PSQI = 0;
   }
 }
 

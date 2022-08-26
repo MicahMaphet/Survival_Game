@@ -133,10 +133,10 @@ for(var i = 0; i < Goblins_x.length; i++) {
   if (i < 25) {
     goblin[i].spawndelay = 500;
   }
-  if(i < 10) {
-    goblin[i].spawndelay = 50;
+  if(i < 1000) {
+    goblin[i].spawndelay = 5000 ** 2;
   }
-  // console.log(goblin[i].spawndelay);
+    goblin[i].spawndelay = 5000 ** 2;
 }
 
 /* each index of the goblin array is an object of the 
