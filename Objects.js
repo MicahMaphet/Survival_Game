@@ -65,7 +65,6 @@ export function tick() {
     fireball.x = -500 - background.x;
     fireball.y = -500 - background.y;
   }
-  console.log(fireDir, fireball.health);
   DetermineCorners();  
 }
 
