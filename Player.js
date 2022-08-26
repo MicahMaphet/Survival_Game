@@ -280,7 +280,9 @@ document.addEventListener("keyup", event => {
   }
 });
 function renderIMG(IMG_ = "images/PlayerImages/Player.svg") {
+  Playerimg.onload = function(){
       Playerimg.src = IMG_;
+};
 /* having this script in a function stops this file 
 from getting out of sync with the image */  
 }

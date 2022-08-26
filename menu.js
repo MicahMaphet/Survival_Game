@@ -188,6 +188,9 @@ var mouseY = window.innerHeight / 2;
 var mouseDown = false;
 export var GameState = "menu";
 
+var sports_trap = new Audio("audio/Extreme-Sport-Trap-Music-PISTA.mp3");
+sports_trap.volume = 0.2;
+
 
 /*********************************************
 *** Above this is setting values and images***
@@ -284,6 +287,7 @@ function MenuState() {
 if(playbutton.mouseCollide()) {
   if(mouseDown) {
     GameState = "gaming";
+    sports_trap.play();
     playbutton.shake = 5;
     close();
   } else {

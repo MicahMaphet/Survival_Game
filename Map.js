@@ -4,8 +4,22 @@ import { fireDir } from "./Objects.js";
 
 // moveable is called from script.js in the run function
 var tick_ = 0;
+
+//An array of images for the goblins
 var GoblinImg = new Array();
+// An array of images for the goblins' hitboxs
 var GoblinImgHitbox = new Array();
+
+// I have an array of audio so I can play multiple audio at once
+var PunchSound = new Array(5);
+for (var i = 0; i < PunchSound.length; i++) {
+  PunchSound[i] = new Audio("audio/Punch Sound Effect.wav");
+  console.log(i);
+}
+console.log(PunchSound, PunchSound[0])
+     
+// Punch Sound Query Index
+var PSQI = 0;
 
 export function tick() {
   // This function is called continuesly in the script.js file
@@ -86,12 +100,24 @@ function MovementActions() {
           goblin[i].x += goblin[i].speed * 20;
           goblin[i].health -= 5;
           fireball.health -= 5;
+          // Punch Sound is an array because it needs to play
+          // Multiple
+          PunchSound[PSQI].play();
+          PSQI++;
+          if(PSQI > PunchSound.length - 1) {
+            PSQI = 0;
+          }
         }
       } else {
       if(Ccollision(fireball, goblin[i])) {
         goblin[i].x -= goblin[i].speed * 20;
         goblin[i].health -= 5;
         fireball.health -= 2;
+        PunchSound[PSQI].play();
+        PSQI++;
+        if(PSQI > PunchSound.length - 1) {
+          PSQI = 0;
+        }
       }
     }
   }

@@ -1,5 +1,7 @@
 import { player, fireball, background } from "./script.js";
 
+var firesound = new Audio('audio/Fireball Sound Effect.mp3');
+
 var FireBall = new Image();
 FireBall.src = 'images/FireBall.png';
 FireBall.id="FireBall";
@@ -24,12 +26,14 @@ export function tick() {
       fireball.x = player.x - background.x + 50;
       fireball.y = player.y - background.y;
       fireball.health = fireball.maxhealth;
+      firesound.play();
     } else if(player.state === "left"||
               player.state === "left slap") {
       fireDir = "left";
       fireball.x = player.x - background.x - 50;
       fireball.y = player.y - background.y;
       fireball.health = fireball.maxhealth;
+      firesound.play();
     }
   }
 
