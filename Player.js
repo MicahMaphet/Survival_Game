@@ -175,7 +175,7 @@ function DetermineCorners() {
 /////////////////
   
 player_hitbox[0].x = player.corner1[0] - 50;
-player_hitbox[0].y = player.corner1[1] + 30;
+player_hitbox[0].y = player.corner1[1] - 50;
   
 player_hitbox[0].corner1 = [player_hitbox[0].x, player_hitbox[0].y];
 
@@ -190,7 +190,7 @@ player_hitbox[0].corner4 = [player_hitbox[0].x + player_hitbox[0].hurt_width, pl
 //////////////////
   
 player_hitbox[1].x = player.corner1[0] + 60;
-player_hitbox[1].y = player.corner1[1] + 30;
+player_hitbox[1].y = player.corner1[1] - 50;
   
 player_hitbox[1].corner1 = [player_hitbox[1].x, player_hitbox[1].y];
 

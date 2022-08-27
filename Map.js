@@ -86,6 +86,7 @@ function MovementActions() {
         if (player.state === "left slap") {
           goblin[i].x -= goblin[i].speed * 100;
           goblin[i].health -= 10;
+          PlayPunchSound();
         }
       }
       
@@ -93,6 +94,7 @@ function MovementActions() {
         if (player.state === "right slap") {
           goblin[i].x += goblin[i].speed * 100;
           goblin[i].health -= 10;
+          PlayPunchSound();
         }
       }
       if(fireDir === "right") {
@@ -102,14 +104,12 @@ function MovementActions() {
           fireball.health -= 5;
           // Punch Sound is an array because it needs to play
           // Multiple
-          PlayPunchSound();
         }
       } else {
       if(Ccollision(fireball, goblin[i])) {
         goblin[i].x -= goblin[i].speed * 20;
         goblin[i].health -= 5;
         fireball.health -= 2;
-        PlayPunchSound();
       }
     }
   }

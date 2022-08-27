@@ -34,10 +34,10 @@ player.corner4 = [player.x + player.hurt_width + 15, player.y + player.hurt_widt
 
 export var player_hitbox = new Array(2);
 
-player_hitbox[0] = new moveable(window.innerWidth / 2, window.innerHeight / 2, 3, 50, 50);
+player_hitbox[0] = new moveable(window.innerWidth / 2, window.innerHeight / 2, 3, 50, 140);
 
 
-player_hitbox[1] = new moveable(window.innerWidth / 2, window.innerHeight / 2, 3, 50, 50);
+player_hitbox[1] = new moveable(window.innerWidth / 2, window.innerHeight / 2, 3, 50, 140);
 
 
 
