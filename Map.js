@@ -14,12 +14,17 @@ var GoblinImgHitbox = new Array();
 var PunchSound = new Array(5);
 for (var i = 0; i < PunchSound.length; i++) {
   PunchSound[i] = new Audio("audio/Punch Sound Effect.wav");
-  console.log(i);
 }
-console.log(PunchSound, PunchSound[0])
-     
 // Punch Sound Query Index
 var PSQI = 0;
+var BigOofSound = new Array(5);
+for (var i = 0; i < BigOofSound.length; i++) {
+  BigOofSound[i] = new Audio("audio/BigOof.mp3");
+  BigOofSound[i].volume = 0.5;
+}
+     
+// Big Oof Query Index
+var BOQI = 0;
 
 export function tick() {
   // This function is called continuesly in the script.js file
@@ -43,14 +48,16 @@ export function tick() {
 }
 
 function MovementActions() {
-  /* this loops through all the goblins and moves them closer
-  to the player and acts apon collsion, it is scalable. 
-  commenting the twoardplayer() function will stop the 
-  goblins from moving, but they will still move with the screen.
-  When editing this code know that goblin[i] will refer
-  to all goblins, their should be a condition for every
-  action, under most circumstances all the goblins will
-  be doing the same thing */
+  /**
+    * This loops through all the goblins and moves them closer
+    * to the player and acts apon collsion, it is scalable. 
+    * commenting the twoardplayer() function will stop the 
+    * goblins from moving, but they will still move with the screen.
+    * When editing this code know that goblin[i] will refer
+    * to all goblins, their should be a condition for every
+    * action, under most circumstances all the goblins will
+    * be doing the same thing 
+    */
   for (var i = 0; i < goblin.length; i++) {
     if (goblin[i].state != "inactive") {
 
@@ -103,23 +110,36 @@ function MovementActions() {
           goblin[i].health -= 5;
           fireball.health -= 5;
           // Punch Sound is an array because it needs to play
-          // Multiple
+          // Multiple times at once
+          PlayBigOofSound()
         }
       } else {
       if(Ccollision(fireball, goblin[i])) {
         goblin[i].x -= goblin[i].speed * 20;
         goblin[i].health -= 5;
         fireball.health -= 2;
+        PlayBigOofSound()
       }
     }
   }
   }
 }
+
 function PlayPunchSound() {
+  // This script loops through an array of sound so a sound
+  // can be played more than once at a time
   PunchSound[PSQI].play();
   PSQI++;
   if(PSQI > PunchSound.length - 1) {
     PSQI = 0;
+  }
+}
+
+function PlayBigOofSound() {
+  BigOofSound[BOQI].play();
+  BOQI++;
+  if(BOQI > BigOofSound.length - 1) {
+    BOQI = 0;
   }
 }
 

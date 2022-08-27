@@ -13,9 +13,9 @@ class MenuElement {
     this.visibility = visibility;
     this.corners = false;
     /**
-      *It's usefull to have vairiables for all the image
-      *properties so they can be tested before they are rendered
-      *They can also have defaults and are easier to access and loop through
+      * It's usefull to have vairiables for all the image
+      * properties so they can be tested before they are rendered
+      * They can also have defaults and are easier to access and loop through
       */
   }
   loadImage(image, id) {
@@ -189,7 +189,7 @@ var mouseDown = false;
 export var GameState = "menu";
 
 var sports_trap = new Audio("audio/Extreme-Sport-Trap-Music-PISTA.mp3");
-sports_trap.volume = 0.15;
+sports_trap.volume = 0.075;
 
 
 /*********************************************
