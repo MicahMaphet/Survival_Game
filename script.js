@@ -30,17 +30,11 @@ player.corner2 = [player.x + player.hurt_width + 15, player.y];
 player.corner3 = [player.x + 15, player.y + player.hurt_height];
 player.corner4 = [player.x + player.hurt_width + 15, player.y + player.hurt_width];
 
-
-
 export var player_hitbox = new Array(2);
 
 player_hitbox[0] = new moveable(window.innerWidth / 2, window.innerHeight / 2, 3, 50, 140);
 
-
 player_hitbox[1] = new moveable(window.innerWidth / 2, window.innerHeight / 2, 3, 50, 140);
-
-
-
 
 export var hurtbox = document.createElement("div");
 hurtbox.style.position = "fixed";
@@ -149,6 +143,15 @@ multiple moveable objects, try console.log(goblin)
 never reset the value of goblin[i], it will destroy the 
 program Having the data of every single goblin in the 
 array goblin is very unforgiving*/
+export var stoneblock = new Array();
+for(var i=0;i<500;i++) {
+  stoneblock[i] = new moveable();
+  stoneblock[i].x = 2500;
+  console.log((i * 50) + 2000);
+  stoneblock[i].y = 2500;
+  stoneblock[i].width = 500;
+  stoneblock[i].height = 50;
+}
 
 var InitiateCrash = false;
 

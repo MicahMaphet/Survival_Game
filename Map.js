@@ -1,4 +1,4 @@
-import { background, player, Goblins_x, Goblins_y, goblin, player_hitbox, fireball } from "./script.js"
+import { background, player, Goblins_x, Goblins_y, goblin, player_hitbox, fireball, stoneblock } from "./script.js"
 import { Ccollision } from "./Player.js";
 import { fireDir } from "./Objects.js";
 
@@ -9,6 +9,8 @@ var tick_ = 0;
 var GoblinImg = new Array();
 // An array of images for the goblins' hitboxs
 var GoblinImgHitbox = new Array();
+// An array of stone blocks
+var StoneBlock = new Array();
 
 // I have an array of audio so I can play multiple audio at once
 var PunchSound = new Array(5);
@@ -17,12 +19,17 @@ for (var i = 0; i < PunchSound.length; i++) {
 }
 // Punch Sound Query Index
 var PSQI = 0;
+// Annother array of audio
 var BigOofSound = new Array(5);
 for (var i = 0; i < BigOofSound.length; i++) {
   BigOofSound[i] = new Audio("audio/BigOof.mp3");
   BigOofSound[i].volume = 0.5;
 }
-     
+
+
+
+
+
 // Big Oof Query Index
 var BOQI = 0;
 
@@ -218,7 +225,6 @@ export function drawgoblins() {
     GoblinImgHitbox[i].style.visibility = "hidden";
     document.body.appendChild(GoblinImgHitbox[i]);
     
-
     // GoblinImgHitbox[i] = createImage("images/Goblin.svg", "Goblin");
     // GoblinImgHitbox[i].style.position = "fixed";
     // GoblinImgHitbox[i].style.backgroundColor = "rgb(200, 0, 0)";
@@ -227,7 +233,17 @@ export function drawgoblins() {
     // GoblinImgHitbox[i].style.zIndex = 0;
     // GoblinImgHitbox[i].style.visibility = "hidden";
   }
-
+  
+for(var i = 0; i < stoneblock.length; i++) {
+  StoneBlock[i] = new Image();
+  StoneBlock[i].style.position = "fixed";
+  StoneBlock[i].style.width;
+  StoneBlock[i].style.height;
+  StoneBlock[i].style.left; 
+  StoneBlock[i].style.top;
+  StoneBlock[i].src="images/MapBlocks/StoneBlock.png";
+  StoneBlock[i].style.zIndex = 100;
+}
 
   // for(var i=0;i<goblin.length;i++) {
     // var goblin_image = new Image();
@@ -348,6 +364,13 @@ function RenderGoblins() {
     // document.getElementById("GoblinImgHitbox[" + i + "]").style.left=goblin[i].x + 15 + background.x + "px";
     // document.getElementById("GoblinImgHitbox[" + i + "]").style.bottom=goblin[i].y + background.y + "px";
   }
+  for(var i=0;i<stoneblock.length;i++) {
+    StoneBlock[i].style.left = stoneblock[i].x + background.x + "px";
+    StoneBlock[i].style.bottom = stoneblock[i].y + background.y + "px";
+    StoneBlock[i].style.width = stoneblock[i].width + "px";
+    StoneBlock[i].style.zIndex= 1000;
+  }
+  console.log(StoneBlock[100], StoneBlock);
   
 /* This places all the goblin images everything else is just a lot
 of math determining where to place the images, it is scaleable,

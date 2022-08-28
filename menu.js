@@ -292,13 +292,14 @@ if(playbutton.mouseCollide()) {
 } else {
   playbutton.shake = playbutton.defaultwidth / 10;
 }
+  playbutton.defaultwidth = window.innerWidth * 0.15
   document.getElementById("buttonstats").innerHtml="playbutton.width";
   document.getElementById("buttonstats").style.zIndex=100000;
 
   playbutton.HoverAnimation();
 
   playbutton.top = playbutton.def_top + menutitle.width * 0.25;
-
+  playbutton.left = playbutton.def_left = window.innerWidth * 0.05
 
   RenderImage("PlayButton", playbutton, "px");
   playbutton.loadImage("images/MenuScreen/PlaySign.svg", PlayButton);
@@ -315,6 +316,9 @@ if(controlsbutton.mouseCollide()) {
 } else {
   controlsbutton.shake = controlsbutton.defaultwidth / 10;
 }
+  controlsbutton.defaultwidth = window.innerWidth * 0.15;
+  controlsbutton.left = controlsbutton.def_left = window.innerWidth * 0.25;
+  
   controlsbutton.HoverAnimation();
 
   controlsbutton.top = controlsbutton.def_top + menutitle.width * 0.25;
@@ -338,7 +342,6 @@ if(controlsbutton.mouseCollide()) {
 //   charmenu.shake = charmenu.defaultwidth / 10;
 // }
 //   charmenu.HoverAnimation();
-
 
   RenderImage("CharMenu", charmenu, "px");
   if(waitCharMation > 50) {
