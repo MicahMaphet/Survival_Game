@@ -5,8 +5,7 @@ import { fireDir } from "./Objects.js";
 // moveable is called from script.js in the run function
 var tick_ = 0;
 
-//An array of images for the goblins
-var GoblinImg = new Array();
+
 // An array of images for the goblins' hitboxs
 var GoblinImgHitbox = new Array();
 // An array of stone blocks
@@ -207,13 +206,13 @@ var createImage = function(src, title) {
 
 export function drawgoblins() {
   for(var i=0;i<goblin.length;i++) {
-    GoblinImg[i] = createImage("images/Goblin.svg", "Goblin");
-    GoblinImg[i].style.position = "fixed";
-    // GoblinImg[i].style.id = "GoblinImg[" + i + "]";
-    GoblinImg[i].style.width = "100px";
-    GoblinImg[i].style.left = Goblins_y[i] + "px"; 
-    GoblinImg[i].style.bottom = Goblins_x[i] + "px";
-    GoblinImg[i].style.zIndex = 1;
+    goblin[i].IMG = createImage("images/Goblin.svg", "Goblin");
+    goblin[i].IMG.style.position = "fixed";
+    // goblin[i].IMG.style.id = "GoblinImg[" + i + "]";
+    goblin[i].IMG.style.width = "100px";
+    goblin[i].IMG.style.left = Goblins_y[i] + "px"; 
+    goblin[i].IMG.style.bottom = Goblins_x[i] + "px";
+    goblin[i].IMG.style.zIndex = 1;
 
     GoblinImgHitbox[i] = document.createElement("div");
     GoblinImgHitbox[i].style.position = "fixed";
@@ -350,9 +349,9 @@ function twoardplayer(moveable) {
 
 function RenderGoblins() {
   for(var i=0;i<goblin.length;i++) {
-    GoblinImg[i].style.left = goblin[i].x + background.x + "px";
-    GoblinImg[i].style.bottom = goblin[i].y + background.y + "px";
-    GoblinImg[i].style.zIndex= 1000 - goblin[i].y;
+    goblin[i].IMG.style.left = goblin[i].x + background.x + "px";
+    goblin[i].IMG.style.bottom = goblin[i].y + background.y + "px";
+    goblin[i].IMG.style.zIndex= 1000 - goblin[i].y;
 
     document.getElementById("Playerimg").style.zIndex= 1000 - player.y / 5;
 0  
@@ -370,7 +369,6 @@ function RenderGoblins() {
     StoneBlock[i].style.width = stoneblock[i].width + "px";
     StoneBlock[i].style.zIndex= 1000;
   }
-  console.log(StoneBlock[100], StoneBlock);
   
 /* This places all the goblin images everything else is just a lot
 of math determining where to place the images, it is scaleable,

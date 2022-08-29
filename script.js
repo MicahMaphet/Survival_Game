@@ -22,7 +22,20 @@ export class moveable {
     this.spawndelay;
   }
 }
-
+export class Goblin extends moveable {
+  constructor() {
+    super();
+    this.hurt_height = 50;
+    this.hurt_width = 70;
+    this.corner1 = [this.x + 15, this.y];
+    this.corner2 = [this.x + this.hurt_width + 15, this.y];
+    this.corner3 = [this.x + 15, this.y + this.hurt_height];
+    this.corner4 = [this.x + this.hurt_width + 15, this.y + this.hurt_width];
+    this.spawndelay = 0;
+    this.speed = 3;
+    this.IMG;
+  }
+}
 export const player = new moveable(window.innerWidth / 2, window.innerHeight / 2, 6, 70, 50, 100);
 
 player.corner1 = [player.x + 15, player.y];
@@ -55,7 +68,7 @@ DetermineCorners();
 export var Goblins_x = [];
 export var Goblins_y = []; 
 let quadrant = 0;
-for(let i=0;i<300;i++){
+for(let i=0;i<500;i++){
       // Goblins_x[i] = Math.random() * 3000 - 1000;
       // Goblins_y[i] = Math.random() * 6000 - 1000;
   switch(quadrant) {
@@ -94,29 +107,35 @@ for(var i = 0; i < Goblins_x.length; i++) {
   goblin[i].corner4 = [goblin[i].x + goblin[i].hurt_width + 15, goblin[i].y + goblin[i].hurt_width];
 
   goblin[i].spawndelay = 0;
+  if (i < 500) {
+    goblin[i].spawndelay = 14000;
+  }
+  if (i < 375) {
+    goblin[i].spawndelay = 12500;
+  }
   if (i < 300) {
-    goblin[i].spawndelay = 13000;
+    goblin[i].spawndelay = 11000;
   }
   if (i < 250) {
-    goblin[i].spawndelay = 12000;
+    goblin[i].spawndelay = 10000;
   }  
   if (i < 225) {
-    goblin[i].spawndelay = 11000;
+    goblin[i].spawndelay = 8000;
   }  
   if (i < 200) {
-    goblin[i].spawndelay = 9000;
-  }
-  if (i < 160) {
     goblin[i].spawndelay = 7000;
   }
-  if (i < 120) {
+  if (i < 160) {
     goblin[i].spawndelay = 6000;
+  }
+  if (i < 120) {
+    goblin[i].spawndelay = 5000;
   }
   if (i < 100) {
-    goblin[i].spawndelay = 6000;
+    goblin[i].spawndelay = 4000;
   }
   if (i < 80) {
-    goblin[i].spawndelay = 4000;
+    goblin[i].spawndelay = 3000;
   }
   if (i < 60) {
     goblin[i].spawndelay = 2000;
@@ -147,7 +166,6 @@ export var stoneblock = new Array();
 for(var i=0;i<500;i++) {
   stoneblock[i] = new moveable();
   stoneblock[i].x = 2500;
-  console.log((i * 50) + 2000);
   stoneblock[i].y = 2500;
   stoneblock[i].width = 500;
   stoneblock[i].height = 50;
