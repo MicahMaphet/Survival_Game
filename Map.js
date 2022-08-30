@@ -24,11 +24,6 @@ for (var i = 0; i < BigOofSound.length; i++) {
   BigOofSound[i] = new Audio("audio/BigOof.mp3");
   BigOofSound[i].volume = 0.5;
 }
-
-
-
-
-
 // Big Oof Query Index
 var BOQI = 0;
 
@@ -64,19 +59,34 @@ function MovementActions() {
     * action, under most circumstances all the goblins will
     * be doing the same thing 
     */
-  for (var i = 0; i < goblin.length; i++) {
-    if (goblin[i].state != "inactive") {
-
-    if(tick_ > goblin[i].spawndelay) {
-    if (goblin[i].health <= 0) {
-      goblin[i].state = "inactive";
+  console.log(goblin[1].state);
+  for(var i = 0; i < goblin.length; i++) {
+    if(goblin[i].health <= 0) {
+      goblin[i].state = "dead";
     }
-    
+    if(goblin[i].state === "inactive"||
+       goblin[i].state === "dead") {
+      goblin[i].IMG.style.visibility="hidden";
+    } else {
+      goblin[i].IMG.style.visibility="visible";
+    }
+   
+    if(tick_ < goblin[i].spawndelay) {
+      goblin[i].state = "inactive";
+    } else if(tick_ > goblin[i].spawndelay &&
+              goblin[i].state === "inactive") {
+      goblin[i].state = "idle";
+    }
+
+    if(goblin[i].state !== "inactive"&&
+       goblin[i].state !== "dead") {
+ 
     for(var j=0;j<goblin.length;j++) {
       if(goblin[i] != goblin[j]) {
         for (var k = 0; k < 5; k++) {
         if(Ccollision(goblin[i],goblin[j])&&
-           goblin[j].state != "inactive") {
+           goblin[j].state !== "inactive"&&
+           goblin[j].state !== "dead") {
         bounce(goblin[i], 1, 5);      
         bounce(goblin[j], -1, 5);  
         } else {
@@ -93,7 +103,6 @@ function MovementActions() {
       player.health -= 1;
       bounce(goblin[i], 20);      
     }
-  }
     
       if(Ccollision(player_hitbox[0], goblin[i])) {
         if (player.state === "left slap") {

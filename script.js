@@ -19,7 +19,6 @@ export class moveable {
     this.corner2;
     this.corner3;
     this.corner4;
-    this.spawndelay;
   }
 }
 export class Goblin extends moveable {
