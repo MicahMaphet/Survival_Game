@@ -88,7 +88,7 @@ for(let i=0;i<500;i++){
       break;
     case 3:
       Goblins_x[i] = Math.random() * 3000 + 3000;
-      Goblins_y[i] = Math.random() * 2500 - 1000;
+      Goblins_y[i] = Math.random() * 1500 - 2000;
       quadrant = 0;
       break;
   }
