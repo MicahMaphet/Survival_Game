@@ -23,6 +23,14 @@ changing the viewed position of the character without
 other files perceiving the position of the player
 as changed */
 
+var SwipeSwoosh = new Array(3);
+for (var i = 0; i < SwipeSwoosh.length; i++) {
+  SwipeSwoosh[i] = new Audio("audio/SwipeSwoosh.mp3");
+  SwipeSwoosh[i].volume = 0.5;
+}
+// Swipe Swoosh Query Index
+var SSQI = 0;
+
 var Player_ = new Image();
 Player_.src = 'images/PlayerImages/Player.svg';
 Player_.id="Playerimg";
@@ -83,6 +91,14 @@ function collide() {
   }
 }
 
+function PlaySwipeSwooshSound() {
+  SwipeSwoosh[SSQI].play();
+  SSQI++;
+  if(SSQI > SwipeSwoosh.length - 1) {
+    SSQI = 0;
+  }
+}
+
 export function Ccollision(moveable1, moveable2) {
   if(Ccheck(moveable1.corner1, moveable2)||
      Ccheck(moveable1.corner2, moveable2)||
@@ -115,6 +131,7 @@ function ReadInputs() {
   if (ArrowRight) {
     if(slap) {
       if(slapframe < 1) {
+        PlaySwipeSwooshSound();
         IMG = "images/PlayerImages/Player right slap1.svg";
       }      player.state = "right slap";
         slapframe++;
@@ -133,6 +150,7 @@ function ReadInputs() {
   if(ArrowLeft) {
     if(slap) {
       if(slapframe < 1) {
+        PlaySwipeSwooshSound();
         IMG = "images/PlayerImages/Player left slap1.svg";
       }
       player.state = "left slap";

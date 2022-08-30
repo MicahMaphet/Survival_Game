@@ -5,7 +5,6 @@ import { fireDir } from "./Objects.js";
 // moveable is called from script.js in the run function
 var tick_ = 0;
 
-
 // An array of images for the goblins' hitboxs
 var GoblinImgHitbox = new Array();
 // An array of stone blocks
@@ -18,6 +17,7 @@ for (var i = 0; i < PunchSound.length; i++) {
 }
 // Punch Sound Query Index
 var PSQI = 0;
+
 // Annother array of audio
 var BigOofSound = new Array(5);
 for (var i = 0; i < BigOofSound.length; i++) {
@@ -26,6 +26,14 @@ for (var i = 0; i < BigOofSound.length; i++) {
 }
 // Big Oof Query Index
 var BOQI = 0;
+
+var GoblinDie = new Array(5);
+for (var i = 0; i < GoblinDie.length; i++) {
+  GoblinDie[i] = new Audio("audio/GoblinDie.mp3");
+  GoblinDie[i].volume = 0.3;
+}
+// Goblin Die Query Index
+var GDQI = 0;
 
 export function tick() {
   // This function is called continuesly in the script.js file
@@ -61,7 +69,9 @@ function MovementActions() {
     */
   console.log(goblin[1].state);
   for(var i = 0; i < goblin.length; i++) {
-    if(goblin[i].health <= 0) {
+    if(goblin[i].health <= 0&&
+       goblin[i].state != "dead") {
+      PlayGoblinDieSound();
       goblin[i].state = "dead";
     }
     if(goblin[i].state === "inactive"||
@@ -155,6 +165,14 @@ function PlayBigOofSound() {
   BOQI++;
   if(BOQI > BigOofSound.length - 1) {
     BOQI = 0;
+  }
+}
+
+function PlayGoblinDieSound() {
+  GoblinDie[GDQI].play();
+  GDQI++;
+  if(GDQI > GoblinDie.length - 1) {
+    GDQI = 0;
   }
 }
 
