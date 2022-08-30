@@ -5,8 +5,7 @@ import { fireDir } from "./Objects.js";
 // moveable is called from script.js in the run function
 var tick_ = 0;
 
-//An array of images for the goblins
-var GoblinImg = new Array();
+
 // An array of images for the goblins' hitboxs
 var GoblinImgHitbox = new Array();
 // An array of stone blocks
@@ -25,11 +24,6 @@ for (var i = 0; i < BigOofSound.length; i++) {
   BigOofSound[i] = new Audio("audio/BigOof.mp3");
   BigOofSound[i].volume = 0.5;
 }
-
-
-
-
-
 // Big Oof Query Index
 var BOQI = 0;
 
@@ -65,19 +59,34 @@ function MovementActions() {
     * action, under most circumstances all the goblins will
     * be doing the same thing 
     */
-  for (var i = 0; i < goblin.length; i++) {
-    if (goblin[i].state != "inactive") {
-
-    if(tick_ > goblin[i].spawndelay) {
-    if (goblin[i].health <= 0) {
-      goblin[i].state = "inactive";
+  console.log(goblin[1].state);
+  for(var i = 0; i < goblin.length; i++) {
+    if(goblin[i].health <= 0) {
+      goblin[i].state = "dead";
     }
-    
+    if(goblin[i].state === "inactive"||
+       goblin[i].state === "dead") {
+      goblin[i].IMG.style.visibility="hidden";
+    } else {
+      goblin[i].IMG.style.visibility="visible";
+    }
+   
+    if(tick_ < goblin[i].spawndelay) {
+      goblin[i].state = "inactive";
+    } else if(tick_ > goblin[i].spawndelay &&
+              goblin[i].state === "inactive") {
+      goblin[i].state = "idle";
+    }
+
+    if(goblin[i].state !== "inactive"&&
+       goblin[i].state !== "dead") {
+ 
     for(var j=0;j<goblin.length;j++) {
       if(goblin[i] != goblin[j]) {
         for (var k = 0; k < 5; k++) {
         if(Ccollision(goblin[i],goblin[j])&&
-           goblin[j].state != "inactive") {
+           goblin[j].state !== "inactive"&&
+           goblin[j].state !== "dead") {
         bounce(goblin[i], 1, 5);      
         bounce(goblin[j], -1, 5);  
         } else {
@@ -94,7 +103,6 @@ function MovementActions() {
       player.health -= 1;
       bounce(goblin[i], 20);      
     }
-  }
     
       if(Ccollision(player_hitbox[0], goblin[i])) {
         if (player.state === "left slap") {
@@ -207,13 +215,13 @@ var createImage = function(src, title) {
 
 export function drawgoblins() {
   for(var i=0;i<goblin.length;i++) {
-    GoblinImg[i] = createImage("images/Goblin.svg", "Goblin");
-    GoblinImg[i].style.position = "fixed";
-    // GoblinImg[i].style.id = "GoblinImg[" + i + "]";
-    GoblinImg[i].style.width = "100px";
-    GoblinImg[i].style.left = Goblins_y[i] + "px"; 
-    GoblinImg[i].style.bottom = Goblins_x[i] + "px";
-    GoblinImg[i].style.zIndex = 1;
+    goblin[i].IMG = createImage("images/Goblin.svg", "Goblin");
+    goblin[i].IMG.style.position = "fixed";
+    // goblin[i].IMG.style.id = "GoblinImg[" + i + "]";
+    goblin[i].IMG.style.width = "100px";
+    goblin[i].IMG.style.left = Goblins_y[i] + "px"; 
+    goblin[i].IMG.style.bottom = Goblins_x[i] + "px";
+    goblin[i].IMG.style.zIndex = 1;
 
     GoblinImgHitbox[i] = document.createElement("div");
     GoblinImgHitbox[i].style.position = "fixed";
@@ -350,9 +358,9 @@ function twoardplayer(moveable) {
 
 function RenderGoblins() {
   for(var i=0;i<goblin.length;i++) {
-    GoblinImg[i].style.left = goblin[i].x + background.x + "px";
-    GoblinImg[i].style.bottom = goblin[i].y + background.y + "px";
-    GoblinImg[i].style.zIndex= 1000 - goblin[i].y;
+    goblin[i].IMG.style.left = goblin[i].x + background.x + "px";
+    goblin[i].IMG.style.bottom = goblin[i].y + background.y + "px";
+    goblin[i].IMG.style.zIndex= 1000 - goblin[i].y;
 
     document.getElementById("Playerimg").style.zIndex= 1000 - player.y / 5;
 0  
@@ -370,7 +378,6 @@ function RenderGoblins() {
     StoneBlock[i].style.width = stoneblock[i].width + "px";
     StoneBlock[i].style.zIndex= 1000;
   }
-  console.log(StoneBlock[100], StoneBlock);
   
 /* This places all the goblin images everything else is just a lot
 of math determining where to place the images, it is scaleable,
