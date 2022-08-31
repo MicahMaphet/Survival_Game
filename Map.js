@@ -47,7 +47,7 @@ export function tick() {
   Background.style.left = background.x + "px";
   Background.style.bottom = background.y + "px";
   Background.style.zIndex = -1000 - Math.abs(background.y);
-  
+  Background.style.visibility = "hidden";
   MovementActions();
   DetermineCorners();
   RenderGoblins();
@@ -143,7 +143,7 @@ function MovementActions() {
         goblin[i].x -= goblin[i].speed * 20;
         goblin[i].health -= 5;
         fireball.health -= 2;
-        PlayBigOofSound()
+        PlayBigOofSound();
       }
     }
   }
