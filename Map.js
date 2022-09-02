@@ -27,6 +27,9 @@ for (var i = 0; i < BigOofSound.length; i++) {
 // Big Oof Query Index
 var BOQI = 0;
 
+const test = new Image();
+test.src="images/MapBlocks/GrassBlock.png";
+
 var GoblinDie = new Array(5);
 for (var i = 0; i < GoblinDie.length; i++) {
   GoblinDie[i] = new Audio("audio/GoblinDie.mp3");
@@ -47,7 +50,6 @@ export function tick() {
   Background.style.left = background.x + "px";
   Background.style.bottom = background.y + "px";
   Background.style.zIndex = -1000 - Math.abs(background.y);
-  Background.style.visibility = "hidden";
   MovementActions();
   DetermineCorners();
   RenderGoblins();
@@ -266,7 +268,8 @@ for(var i = 0; i < stoneblock.length; i++) {
   StoneBlock[i].style.width;
   StoneBlock[i].style.height;
   StoneBlock[i].style.left; 
-  StoneBlock[i].style.top;
+  StoneBlock[i].style.botton;
+  StoneBlock[i].style.visibility = "visible";
   StoneBlock[i].src="images/MapBlocks/StoneBlock.png";
   StoneBlock[i].style.zIndex = 100;
 }
@@ -391,11 +394,15 @@ function RenderGoblins() {
     // document.getElementById("GoblinImgHitbox[" + i + "]").style.bottom=goblin[i].y + background.y + "px";
   }
   for(var i=0;i<stoneblock.length;i++) {
-    StoneBlock[i].style.left = stoneblock[i].x + background.x + "px";
-    StoneBlock[i].style.bottom = stoneblock[i].y + background.y + "px";
-    StoneBlock[i].style.width = stoneblock[i].width + "px";
+    StoneBlock[i].style.left = 100 + "px";
+    StoneBlock[i].style.bottom = 100 + "px";
+    StoneBlock[i].style.width = 50 + "px";
+    StoneBlock[i].style.height = 50 + "px";
+    // StoneBlock[i].style.visibility = "visible";
     StoneBlock[i].style.zIndex= 1000;
+    // console.log(StoneBlock[i]);
   }
+  console.log(StoneBlock[50]);
   
 /* This places all the goblin images everything else is just a lot
 of math determining where to place the images, it is scaleable,
