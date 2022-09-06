@@ -12,15 +12,16 @@ class MenuElement {
     this.def_top = top;
     this.visibility = visibility;
     this.corners = false;
+    this.IMG;
     /**
       * It's usefull to have vairiables for all the image
       * properties so they can be tested before they are rendered
       * They can also have defaults and are easier to access and loop through
       */
   }
-  loadImage(image, id) {
-    if(id.src != image) {
-      id.src=image;
+  loadImage(image) {
+    if(this.IMG.src != image) {
+      this.IMG.src = image;
     }
   }
   close() {
@@ -83,82 +84,82 @@ const controls = new MenuElement();
  * Declaring images takes a lot of lines
  * Images end at the ------- dashes
  */
-var button = new Image();
-  button.style.position = "fixed";
-  button.style.width;
-  button.style.height;
-  button.style.left; 
-  button.style.top;
-  button.style.zIndex;
-  button.id="PlayButton";
-  document.body.appendChild(button); 
+  playbutton.IMG = new Image();
+  playbutton.IMG.style.position = "fixed";
+  playbutton.IMG.style.width;
+  playbutton.IMG.style.height;
+  playbutton.IMG.style.left; 
+  playbutton.IMG.style.top;
+  playbutton.IMG.style.zIndex;
+  playbutton.IMG.id="PlayButton";
+  document.body.appendChild(playbutton.IMG); 
 
-var ControlsButton = new Image();
-  ControlsButton.style.position = "fixed";
-  ControlsButton.style.width;
-  ControlsButton.style.height;
-  ControlsButton.style.left; 
-  ControlsButton.style.top;
-  ControlsButton.style.zIndex;
-  ControlsButton.src="images/MenuScreen/ControlsButton.svg";
-  ControlsButton.id="ControlsButton";
-  document.body.appendChild(ControlsButton);  
+  controlsbutton.IMG = new Image();
+  controlsbutton.IMG.style.position = "fixed";
+  controlsbutton.IMG.style.width;
+  controlsbutton.IMG.style.height;
+  controlsbutton.IMG.style.left; 
+  controlsbutton.IMG.style.top;
+  controlsbutton.IMG.style.zIndex;
+  controlsbutton.IMG.src="images/MenuScreen/ControlsButton.svg";
+  controlsbutton.IMG.id="ControlsButton";
+  document.body.appendChild(controlsbutton.IMG);  
 
-var ExitButton = new Image();
-  ExitButton.style.position = "fixed";
-  ExitButton.style.width;
-  ExitButton.style.height;
-  ExitButton.style.left; 
-  ExitButton.style.top;
-  ExitButton.style.zIndex;
-  ExitButton.src="images/MenuScreen/Exit.svg";
-  ExitButton.id="ExitButton";
-  document.body.appendChild(ExitButton); 
+  exitbutton.IMG = new Image();
+  exitbutton.IMG.style.position = "fixed";
+  exitbutton.IMG.style.width;
+  exitbutton.IMG.style.height;
+  exitbutton.IMG.style.left; 
+  exitbutton.IMG.style.top;
+  exitbutton.IMG.style.zIndex;
+  exitbutton.IMG.src="images/MenuScreen/Exit.svg";
+  exitbutton.IMG.id="ExitButton";
+  document.body.appendChild(exitbutton.IMG); 
 
-var CharMenu = new Image();
-  CharMenu.style.position = "fixed";
-  CharMenu.style.width;
-  CharMenu.style.height;
-  CharMenu.style.left; 
-  CharMenu.style.top;
-  CharMenu.style.zIndex;
-  CharMenu.src="images/MenuScreen/CharacterPoses/CharacterInMenu.svg";
-  CharMenu.id="CharMenu";
-  document.body.appendChild(CharMenu); 
+  charmenu.IMG = new Image();
+  charmenu.IMG.style.position = "fixed";
+  charmenu.IMG.style.width;
+  charmenu.IMG.style.height;
+  charmenu.IMG.style.left; 
+  charmenu.IMG.style.top;
+  charmenu.IMG.style.zIndex;
+  charmenu.IMG.src="images/MenuScreen/CharacterPoses/CharacterInMenu.svg";
+  charmenu.IMG.id="CharMenu";
+  document.body.appendChild(charmenu.IMG); 
 
-var MenuTitle = new Image();
-  MenuTitle.style.position = "fixed";
-  MenuTitle.style.width;
-  MenuTitle.style.height;
-  MenuTitle.style.left; 
-  MenuTitle.style.top;
-  MenuTitle.style.zIndex;
-  MenuTitle.src="images/GameTitle.svg";
-  MenuTitle.id="MenuTitle";
-  document.body.appendChild(MenuTitle); 
+  menutitle.IMG = new Image();
+  menutitle.IMG.style.position = "fixed";
+  menutitle.IMG.style.width;
+  menutitle.IMG.style.height;
+  menutitle.IMG.style.left; 
+  menutitle.IMG.style.top;
+  menutitle.IMG.style.zIndex;
+  menutitle.IMG.src="images/GameTitle.svg";
+  menutitle.IMG.id="MenuTitle";
+  document.body.appendChild(menutitle.IMG); 
 
-var Controls = new Image();
-  Controls.style.position = "absolute";
-  Controls.style.width;
-  Controls.style.height;
-  Controls.style.left; 
-  Controls.style.top;
-  Controls.style.zIndex;
-  Controls.src="images/MenuScreen/Controls.svg";
-  Controls.id="Controls";
-  document.body.appendChild(Controls);  
+  controls.IMG = new Image();
+  controls.IMG.style.position = "absolute";
+  controls.IMG.style.width;
+  controls.IMG.style.height;
+  controls.IMG.style.left; 
+  controls.IMG.style.top;
+  controls.IMG.style.zIndex;
+  controls.IMG.src="images/MenuScreen/Controls.svg";
+  controls.IMG.id="Controls";
+  document.body.appendChild(controls.IMG);  
 
-var MenuBackground = new Image();
-  MenuBackground.style.position = "fixed";
-  MenuBackground.style.width;
-  MenuBackground.style.height;
-  MenuBackground.style.left; 
-  MenuBackground.style.top;
-  MenuBackground.style.width;
-  MenuBackground.style.zIndex;
-  MenuBackground.src="images/MenuBackground.png";
-  MenuBackground.id="MenuBackground";
-  document.body.appendChild(MenuBackground); 
+  menubackground.IMG = new Image();
+  menubackground.IMG.style.position = "fixed";
+  menubackground.IMG.style.width;
+  menubackground.IMG.style.height;
+  menubackground.IMG.style.left; 
+  menubackground.IMG.style.top;
+  menubackground.IMG.style.width;
+  menubackground.IMG.style.zIndex;
+  menubackground.IMG.src="images/MenuBackground.png";
+  menubackground.IMG.id="MenuBackground";
+  document.body.appendChild(menubackground.IMG); 
 
 let waitForMouseReleaseForMenu = false;
 
@@ -233,17 +234,17 @@ export function tick() {
     }
 
   
-  RenderImage("MenuBackground", menubackground, "px");
-  menubackground.loadImage("images/MenuScreen/MenuBackground.png", MenuBackground);
+  RenderImage(menubackground, "px");
+  menubackground.loadImage("images/MenuScreen/MenuBackground.png");
 }
 
-function RenderImage(image, object, measurement) {
-  document.getElementById(image).style.width = object.width + measurement;
-  document.getElementById(image).style.height = object.height + measurement;
-  document.getElementById(image).style.left = object.left + measurement; 
-  document.getElementById(image).style.top = object.top + measurement;
-  document.getElementById(image).style.zIndex = object.zIndex;
-  document.getElementById(image).style.visibility = object.visibility;
+function RenderImage(object, measurement) {
+  object.IMG.style.width = object.width + measurement;
+  object.IMG.style.height = object.height + measurement;
+  object.IMG.style.left = object.left + measurement; 
+  object.IMG.style.top = object.top + measurement;
+  object.IMG.style.zIndex = object.zIndex;
+  object.IMG.style.visibility = object.visibility;
 }
 
 ///////////////
@@ -277,8 +278,8 @@ function MenuState() {
     menutitle.top += (bobTo - menutitle.top) * 0.1;
     // menutitle.top = menutitle.top * 0.5;
 
-  RenderImage("MenuTitle", menutitle, "px");
-  menubackground.loadImage("images/MenuScreen/GameTitle.svg", MenuTitle);
+  RenderImage(menutitle, "px");
+  menutitle.loadImage("images/MenuScreen/GameTitle.svg");
 
 if(playbutton.mouseCollide()) {
   if(mouseDown) {
@@ -293,16 +294,16 @@ if(playbutton.mouseCollide()) {
   playbutton.shake = playbutton.defaultwidth / 10;
 }
   playbutton.defaultwidth = window.innerWidth * 0.15
-  document.getElementById("buttonstats").innerHtml="playbutton.width";
-  document.getElementById("buttonstats").style.zIndex=100000;
+  // document.getElementById("buttonstats").innerHtml="playbutton.width";
+  // document.getElementById("buttonstats").style.zIndex=100000;
 
   playbutton.HoverAnimation();
 
   playbutton.top = playbutton.def_top + menutitle.width * 0.25;
   playbutton.left = playbutton.def_left = window.innerWidth * 0.05
 
-  RenderImage("PlayButton", playbutton, "px");
-  playbutton.loadImage("images/MenuScreen/PlaySign.svg", PlayButton);
+  RenderImage(playbutton, "px");
+  playbutton.loadImage("images/MenuScreen/PlaySign.svg");
 
 // charmenu.corners = [[charmenu.left, charmenu.top], [charmenu.left + charmenu.width, thcharmenuis.top], [charmenu.left, charmenu.top + charmenu.height], [charmenu.left + charmenu.width, charmenu.top + charmenu.height]];  
 if(controlsbutton.mouseCollide()) {
@@ -324,8 +325,8 @@ if(controlsbutton.mouseCollide()) {
   controlsbutton.top = controlsbutton.def_top + menutitle.width * 0.25;
   
 
-  RenderImage("ControlsButton", controlsbutton, "px");
-  charmenu.loadImage("images/MenuScreen/ControlsButton.svg", ControlsButton);
+  RenderImage(controlsbutton, "px");
+  controlsbutton.loadImage("images/MenuScreen/ControlsButton.svg");
 
   charmenu.left = window.innerWidth - 550 + mouseX / 15;
   charmenu.top = window.innerHeight - 300 + mouseY / 15;
@@ -343,30 +344,30 @@ if(controlsbutton.mouseCollide()) {
 // }
 //   charmenu.HoverAnimation();
 
-  RenderImage("CharMenu", charmenu, "px");
+  RenderImage(charmenu, "px");
   if(waitCharMation > 50) {
     let pose = Math.round(Math.random() * 7);
     switch(pose) {
       case 0||1||2:
-        charmenu.loadImage("images/MenuScreen/CharacterPoses/CharacterInMenu1.svg", CharMenu);
+        charmenu.loadImage("images/MenuScreen/CharacterPoses/CharacterInMenu1.svg");
         break;
       case 3:
-        charmenu.loadImage("images/MenuScreen/CharacterPoses/CharacterInMenu2.svg", CharMenu);
+        charmenu.loadImage("images/MenuScreen/CharacterPoses/CharacterInMenu2.svg");
         break;
       case 4:
-        charmenu.loadImage("images/MenuScreen/CharacterPoses/CharacterInMenu3.svg", CharMenu);
+        charmenu.loadImage("images/MenuScreen/CharacterPoses/CharacterInMenu3.svg");
         break;
       case 5:
-        charmenu.loadImage("images/MenuScreen/CharacterPoses/CharacterInMenu4.svg", CharMenu);
+        charmenu.loadImage("images/MenuScreen/CharacterPoses/CharacterInMenu4.svg");
         break;
       case 6:
-        charmenu.loadImage("images/MenuScreen/CharacterPoses/CharacterInMenu5.svg", CharMenu);
+        charmenu.loadImage("images/MenuScreen/CharacterPoses/CharacterInMenu5.svg");
         break;
       case 7:
-        charmenu.loadImage("images/MenuScreen/CharacterPoses/CharacterInMenu6.svg", CharMenu);
+        charmenu.loadImage("images/MenuScreen/CharacterPoses/CharacterInMenu6.svg");
         break;
       default:
-        charmenu.loadImage("images/MenuScreen/CharacterPoses/CharacterInMenu1.svg", CharMenu);
+        charmenu.loadImage("images/MenuScreen/CharacterPoses/CharacterInMenu1.svg");
         break;    
     }
     waitCharMation = 0;
@@ -381,8 +382,8 @@ function ControlsState() {
   controls.width = window.innerWidth;
   controls.height = controls.width * 0.69142857;
   
-  RenderImage("Controls", controls, "px");
-  menubackground.loadImage("images/MenuScreen/Controls.svg", Controls);
+  RenderImage(controls, "px");
+  controls.loadImage("images/MenuScreen/Controls.svg");
 
   exitbutton.defaultwidth = window.innerWidth / 5;
   exitbutton.left = window.innerWidth / 30;
@@ -405,10 +406,9 @@ if(exitbutton.mouseCollide()) {
 }
   exitbutton.HoverAnimation();
   
-  RenderImage("ExitButton", exitbutton, "px");
-  menubackground.loadImage("images/MenuScreen/Exit.svg", ExitButton);
+  RenderImage(exitbutton.IMG, exitbutton, "px");
+  exitbutton.loadImage("images/MenuScreen/Exit.svg");
 }
-
 
 function opencontrols() {
   exitbutton.defaultwidth = exitbutton.width = window.innerWidth / 5;
@@ -418,9 +418,9 @@ function opencontrols() {
   controlsbutton.close();
   charmenu.close();
   menutitle.close();
-  RenderImage("PlayButton", playbutton, "px");
-  RenderImage("Controls", controls, "px");
-  RenderImage("MenuTitle", menutitle, "px");
+  RenderImage(playbutton.IMG, playbutton, "px");
+  RenderImage(controls.IMG, controls, "px");
+  RenderImage(menutitle.IMG, menutitle, "px");
 }
 
 function openmenu() {
@@ -465,10 +465,10 @@ menutitle.visibility = "visible";
   controlsbutton.open();
   playbutton.open();
   menutitle.open();
-  RenderImage("ExitButton", exitbutton, "px");
-  menubackground.loadImage("images/MenuScreen/Exit.svg", ExitButton);  
-  RenderImage("Controls", controls, "px");
-  charmenu.loadImage("images/MenuScreen/CharacterPoses/CharacterInMenu1.svg", CharMenu);
+  RenderImage(exitbutton, "px");
+  exitbutton.loadImage("images/MenuScreen/Exit.svg");  
+  RenderImage(controls, "px");
+  charmenu.loadImage("images/MenuScreen/CharacterPoses/CharacterInMenu1.svg");
   GameState = "menu";
   // I have it where it changes to menu because it is the first state
 }
@@ -480,11 +480,11 @@ function close() {
   exitbutton.close();
   menubackground.close();
   charmenu.close();
-  RenderImage("PlayButton", playbutton, "px");
-  RenderImage("ExitButton", exitbutton, "px");
-  RenderImage("Controls", controls, "px");
-  RenderImage("MenuBackground", menubackground, "px");
-  RenderImage("MenuTitle", menutitle, "px");
+  RenderImage(playbutton, "px");
+  RenderImage(exitbutton, "px");
+  RenderImage(controls, "px");
+  RenderImage(menubackground, "px");
+  RenderImage(menutitle, "px");
 }
 // from https://stackoverflow.com/questions/7790725/javascript-track-mouse-position
 // credits to them for all the mouse posistion stuff, it is quite usefull

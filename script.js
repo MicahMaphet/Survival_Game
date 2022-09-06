@@ -19,6 +19,7 @@ export class moveable {
     this.corner2;
     this.corner3;
     this.corner4;
+    this.IMG;
   }
 }
 export class Goblin extends moveable {
@@ -32,7 +33,6 @@ export class Goblin extends moveable {
     this.corner4 = [this.x + this.hurt_width + 15, this.y + this.hurt_width];
     this.spawndelay = 0;
     this.speed = 3;
-    this.IMG;
   }
 }
 export const player = new moveable(window.innerWidth / 2, window.innerHeight / 2, 6, 70, 50, 100);
@@ -149,6 +149,8 @@ for(var i = 0; i < Goblins_x.length; i++) {
     goblin[i].spawndelay = 50;
   }
 }
+goblin[50].weight = 50;
+console.log(goblin[50].weight);
 
 /* each index of the goblin array is an object of the 
 moveable class, even though this is like a multidimentional 

@@ -5,7 +5,8 @@ import { fireDir } from "./Objects.js";
 // moveable is called from script.js in the run function
 var tick_ = 0;
 
-// An array of images for the goblins' hitboxs
+// An array of images for the goblins' hitboxs, this is for
+// visualising the hitboxes for testing
 var GoblinImgHitbox = new Array();
 // An array of stone blocks
 var StoneBlock = new Array();
@@ -237,12 +238,13 @@ export function drawgoblins() {
   for(var i=0;i<goblin.length;i++) {
     goblin[i].IMG = createImage("images/Goblin.svg", "Goblin");
     goblin[i].IMG.style.position = "fixed";
-    // goblin[i].IMG.style.id = "GoblinImg[" + i + "]";
     goblin[i].IMG.style.width = "100px";
     goblin[i].IMG.style.left = Goblins_y[i] + "px"; 
     goblin[i].IMG.style.bottom = Goblins_x[i] + "px";
     goblin[i].IMG.style.zIndex = 1;
 
+    // these are just images connected to a goblin object, their is not an
+    // object for the goblin hitboxes.
     GoblinImgHitbox[i] = document.createElement("div");
     GoblinImgHitbox[i].style.position = "fixed";
     GoblinImgHitbox[i].style.backgroundColor = "rgb(200, 0, 0)";
@@ -252,14 +254,6 @@ export function drawgoblins() {
     GoblinImgHitbox[i].id="hurtbox" + i;
     GoblinImgHitbox[i].style.visibility = "hidden";
     document.body.appendChild(GoblinImgHitbox[i]);
-    
-    // GoblinImgHitbox[i] = createImage("images/Goblin.svg", "Goblin");
-    // GoblinImgHitbox[i].style.position = "fixed";
-    // GoblinImgHitbox[i].style.backgroundColor = "rgb(200, 0, 0)";
-    // GoblinImgHitbox[i].style.width = goblin[0].hurt_width + "px";
-    // GoblinImgHitbox[i].style.height = "60px";
-    // GoblinImgHitbox[i].style.zIndex = 0;
-    // GoblinImgHitbox[i].style.visibility = "hidden";
   }
   
 for(var i = 0; i < stoneblock.length; i++) {
@@ -273,28 +267,6 @@ for(var i = 0; i < stoneblock.length; i++) {
   StoneBlock[i].src="images/MapBlocks/StoneBlock.png";
   StoneBlock[i].style.zIndex = 100;
 }
-
-  // for(var i=0;i<goblin.length;i++) {
-    // var goblin_image = new Image();
-    // goblin_image.src = "images/Goblin.svg";
-    // goblin_image.id="Goblin" + i;
-    // goblin_image.style.position = "fixed";
-    // goblin_image.style.width = "100px";
-    // goblin_image.style.left = Goblins_y[i] + "px"; 
-    // goblin_image.style.bottom = Goblins_x[i] + "px";
-    // goblin_image.style.zIndex = 1;
-    // document.body.appendChild(goblin_image);  
-  
-    // var hurtbox = document.createElement("div");
-    // hurtbox.style.position = "fixed";
-    // hurtbox.style.backgroundColor = "rgb(200, 0, 0)";
-    // hurtbox.style.width = goblin[0].hurt_width + "px";
-    // hurtbox.style.height = "60px";
-    // hurtbox.style.zIndex = 0;
-    // hurtbox.id="hurtbox" + i;
-    // hurtbox.style.visibility = "hidden";
-    // document.body.appendChild(hurtbox);
-  // }
 /* This creates all the goblin images, it only draws them 
 one time the RenderGoblins() function places them as the 
 program advances. The images are just a bunch of variables,
@@ -381,26 +353,14 @@ function RenderGoblins() {
   for(var i=0;i<goblin.length;i++) {
     goblin[i].IMG.style.left = goblin[i].x + background.x + "px";
     goblin[i].IMG.style.bottom = goblin[i].y + background.y + "px";
-    goblin[i].IMG.style.zIndex= 1000 - goblin[i].y;
-
-    document.getElementById("Playerimg").style.zIndex= 1000 - player.y / 5;
-0  
-    // document.getElementById("GoblinImg[" + i + "]").style.left=goblin[i].x + background.x + "px";
-    // document.getElementById("GoblinImg[" + i + "]").style.bottom=goblin[i].y + background.y + "px";
-    // document.getElementById("GoblinImg[" + i + "]").style.zIndex= 1000 - goblin[i].y;
-    // document.getElementById("Playerimg").style.zIndex= 1000 - player.y / 5;
-  
-    // document.getElementById("GoblinImgHitbox[" + i + "]").style.left=goblin[i].x + 15 + background.x + "px";
-    // document.getElementById("GoblinImgHitbox[" + i + "]").style.bottom=goblin[i].y + background.y + "px";
+    goblin[i].IMG.style.zIndex= 1000 - goblin[i].y;0  
   }
   for(var i=0;i<stoneblock.length;i++) {
     StoneBlock[i].style.left = 100 + "px";
     StoneBlock[i].style.bottom = 100 + "px";
     StoneBlock[i].style.width = 50 + "px";
     StoneBlock[i].style.height = 50 + "px";
-    // StoneBlock[i].style.visibility = "visible";
     StoneBlock[i].style.zIndex= 1000;
-    // console.log(StoneBlock[i]);
   }
   console.log(StoneBlock[50]);
   
