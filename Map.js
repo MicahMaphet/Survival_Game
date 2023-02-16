@@ -236,9 +236,9 @@ var createImage = function(src, title) {
 
 export function drawgoblins() {
   for(var i=0;i<goblin.length;i++) {
-    goblin[i].IMG = createImage("images/Goblin.svg", "Goblin");
+    goblin[i].IMG = createImage("images/Goblin.png", "Goblin");
     goblin[i].IMG.style.position = "fixed";
-    goblin[i].IMG.style.width = "100px";
+    goblin[i].IMG.style.width = "120px";
     goblin[i].IMG.style.left = Goblins_y[i] + "px"; 
     goblin[i].IMG.style.bottom = Goblins_x[i] + "px";
     goblin[i].IMG.style.zIndex = 1;

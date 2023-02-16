@@ -1,5 +1,5 @@
 import { player, fireball, background } from "./script.js";
-
+// the sound played when fire ball are activated
 var firesound = new Audio('audio/Fireball Sound Effect.mp3');
 
 var FireBall = new Image();
